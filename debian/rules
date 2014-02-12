@@ -16,24 +16,34 @@ endif
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_MULTIARCH  ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 CFG_CROSS = --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
-CFG_PATHS = --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info
+CFG_PATHS = --prefix=/usr --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info
 CFG_VERS = `dpkg-parsechangelog|grep ^Version:|cut -d\  -f2`
-CFG_DEBP = --with-packager=Debian --with-packager-version=$(CFG_VERS) --with-packager-bug-reports=http://bugs.debian.org/
+CFG_DEBP = --with-packager=Debian --with-packager-version=$(CFG_VERS) --with-packager-bug-reports=http://bugs.debian.org/ --disable-silent-rules
+
+# http://wiki.debian.org/Hardening
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 config.status: configure
 	dh_testdir
 	# Add here commands to configure the package.
 	./configure $(CFG_CROSS) $(CFG_PATHS) $(CFG_DEBP) $(ENABLE_JAVA) \
-		CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
+		CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" \
+		LDFLAGS="$(LDFLAGS) -Wl,-z,defs"
 
-build: build-stamp
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
 build-stamp:  config.status
 	dh_testdir
 
 	# Add here commands to compile the package.
-	$(MAKE)
+	$(MAKE) all check
 
 	touch $@
 
@@ -50,7 +60,7 @@ clean:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k  --exclude ./contrib/doxygen/Doxyfile.orig
+	dh_prep --exclude ./contrib/doxygen/Doxyfile.orig
 	dh_installdirs
 
 	# Add here commands to install the package into debian/tmp
@@ -77,6 +87,7 @@ binary-arch: build install
 	dh_strip
 	dh_compress -X.png
 	dh_fixperms
+	dh_makeshlibs -- -c4
 	dh_installdeb
 	dh_shlibdeps
 	dh_gencontrol

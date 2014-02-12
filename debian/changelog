@@ -1,3 +1,118 @@
+libidn (1.25-2) unstable; urgency=low
+
+  * Fix copyright format.  Use https for upstream homepage.
+  * Use dpkg-buildflags to provide, e.g., hardening flags.
+
+ -- Simon Josefsson <simon@josefsson.org>  Wed, 30 May 2012 13:27:25 +0200
+
+libidn (1.25-1) unstable; urgency=low
+
+  * New upstream release.
+  * Disable silent rules (to get more info in build logs).
+
+ -- Simon Josefsson <simon@josefsson.org>  Thu, 24 May 2012 15:52:07 +0200
+
+libidn (1.24-2) unstable; urgency=low
+
+  * Moved from experimental to unstable after testing.
+  * Bump Standards-Version to 3.9.3.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 06 Mar 2012 20:06:11 +0100
+
+libidn (1.24-1) experimental; urgency=low
+
+  * New upstream release.
+    - License changes, see updated copyright file.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 10 Jan 2012 22:26:22 +0100
+
+libidn (1.23-2) unstable; urgency=low
+
+  * Change Maintainer: field to point at mailing list.
+  * Use dh_prep instead of dh_clean -k.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 06 Dec 2011 18:38:35 +0100
+
+libidn (1.23-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Simon Josefsson <simon@josefsson.org>  Fri, 25 Nov 2011 12:10:04 +0100
+
+libidn (1.22-3) unstable; urgency=low
+
+  * Really bump Standards-Version to 3.9.2 this time.
+  * Provide 'build-arch' and 'build-indep' rules to silence lintian.
+
+ -- Simon Josefsson <simon@josefsson.org>  Mon, 15 Aug 2011 21:05:49 +0200
+
+libidn (1.22-2) unstable; urgency=low
+
+  [ Steve Langasek ]
+  * Multiarch support.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 19 Jul 2011 10:06:09 +0200
+
+libidn (1.22-1) unstable; urgency=low
+
+  * New upstream release.
+    - Handles uppercase XN--. (Closes: #610617)
+    - Be less verbose.  (Closes: #615947)
+  * Standards-Version: 3.9.2
+
+ -- Simon Josefsson <simon@josefsson.org>  Mon, 20 Jun 2011 10:31:01 +0200
+
+libidn (1.20-1) unstable; urgency=low
+
+  * New upstream release.
+  * Moved from experimental to unstable after testing.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 01 Mar 2011 16:14:24 +0100
+
+libidn (1.19-3) experimental; urgency=low
+
+  * Re-enable self checks on mips(el) since #519006 has been fixed.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 07 Dec 2010 12:53:07 +0100
+
+libidn (1.19-2) experimental; urgency=low
+
+  * Upgrade to standards version 3.9.1.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 07 Dec 2010 08:35:12 +0100
+
+libidn (1.19-1) experimental; urgency=low
+
+  * New upstream version.
+  * Switch to dpkg-source 3.0 (quilt) format.
+  * Disable self checks on mips(el) due to #519006.
+  * Upload to experimental to test mips(el) patch pending Anibal approval.
+
+ -- Simon Josefsson <simon@josefsson.org>  Tue, 25 May 2010 07:43:14 +0200
+
+libidn (1.18-1) unstable; urgency=low
+
+  [ Simon Josefsson ]
+  * New upstream version.
+  * libidn11.symbols: Fix based on upstream changes.
+  * Moved from experimental to unstable after testing.
+
+ -- Simon Josefsson <simon@josefsson.org>  Mon, 15 Feb 2010 13:36:58 +0100
+
+libidn (1.17-1) experimental; urgency=low
+
+  [ Simon Josefsson ]
+  * New upstream version.
+  * Upgrade to standards version 3.8.4.
+  * Run 'make check' when building libidn to make sure the build is sane.
+  * Use 'gcj-jdk' instead of 'jdk' as build-depends.
+
+  [ Marco d'Itri  ]
+  * Added a .symbols file. (Closes: #561291)
+  * Don't build-depend on fastjar on architectures without gcj.
+
+ -- Simon Josefsson <simon@josefsson.org>  Fri, 22 Jan 2010 08:28:34 +0100
+
 libidn (1.15-2) unstable; urgency=low
 
   [ Simon Josefsson ]

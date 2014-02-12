@@ -1,23 +1,31 @@
 /* pr29.h --- Detect strings that are non-idempotent under NFKC in Unicode 3.2.
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009  Simon Josefsson.
- *
- * This file is part of GNU Libidn.
- *
- * GNU Libidn is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * GNU Libidn is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with GNU Libidn; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
- *
- */
+   Copyright (C) 2004-2012 Simon Josefsson
+
+   This file is part of GNU Libidn.
+
+   GNU Libidn is free software: you can redistribute it and/or
+   modify it under the terms of either:
+
+     * the GNU Lesser General Public License as published by the Free
+       Software Foundation; either version 3 of the License, or (at
+       your option) any later version.
+
+   or
+
+     * the GNU General Public License as published by the Free
+       Software Foundation; either version 2 of the License, or (at
+       your option) any later version.
+
+   or both in parallel, as here.
+
+   GNU Libidn is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received copies of the GNU General Public License and
+   the GNU Lesser General Public License along with this program.  If
+   not, see <http://www.gnu.org/licenses/>. */
 
 #include <config.h>
 
@@ -1222,7 +1230,7 @@ combinationclass (uint32_t c)
 }
 
 /**
- * pr29_4 - check if input trigger Unicode normalization bugs
+ * pr29_4:
  * @in: input array with unicode code points.
  * @len: length of input array with unicode code points.
  *
@@ -1256,7 +1264,7 @@ pr29_4 (const uint32_t * in, size_t len)
     if ((row = first_column (in[i])) > 0)
       for (j = i + 1; j < len; j++)
 	if (combinationclass (in[j]))
-	  for (k = j + 1; k < len; j++)
+	  for (k = j + 1; k < len; k++)
 	    if (in_last_column_row (in[k], row))
 	      return PR29_PROBLEM;
 
@@ -1264,7 +1272,7 @@ pr29_4 (const uint32_t * in, size_t len)
 }
 
 /**
- * pr29_4z - check if input trigger Unicode normalization bugs
+ * pr29_4z:
  * @in: zero terminated array of Unicode code points.
  *
  * Check the input to see if it may be normalized into different
@@ -1288,7 +1296,7 @@ pr29_4z (const uint32_t * in)
 }
 
 /**
- * pr29_8z - check if input trigger Unicode normalization bugs
+ * pr29_8z:
  * @in: zero terminated input UTF-8 string.
  *
  * Check the input to see if it may be normalized into different
@@ -1325,7 +1333,7 @@ pr29_8z (const char *in)
  *   non-zero values, for logical comparison purposes.
  * @PR29_PROBLEM: A problem sequence was encountered.
  * @PR29_STRINGPREP_ERROR: The character set conversion failed (only
- *   for pr29_8() and pr29_8z()).
+ *   for pr29_8z()).
  *
  * Enumerated return codes for pr29_4(), pr29_4z(), pr29_8z().  The
  * value 0 is guaranteed to always correspond to success.

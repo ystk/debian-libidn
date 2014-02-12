@@ -17,7 +17,6 @@ to UTF-8. The result will be terminated with a 0 byte.
 
 @strong{Return value:} a pointer to a newly allocated UTF-8 string.
 This value must be deallocated by the caller.
-If an error occurs, @code{NULL} will be returned and @code{error}
-set.
+If an error occurs, @code{NULL} will be returned.
 @end deftypefun
 

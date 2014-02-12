@@ -1,5 +1,5 @@
 /* example3.c --- Example ToASCII() code showing how to use Libidn.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -50,10 +50,11 @@ main (void)
 
   printf ("Input domain encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %d): ", strlen (buf));
+  printf ("Read string (length %ld): ", strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -62,10 +63,10 @@ main (void)
   if (rc != IDNA_SUCCESS)
     {
       printf ("ToASCII() failed (%d): %s\n", rc, idna_strerror (rc));
-      exit (1);
+      return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %d): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
   for (i = 0; i < strlen (p); i++)
     printf ("%02x ", p[i] & 0xFF);
   printf ("\n");

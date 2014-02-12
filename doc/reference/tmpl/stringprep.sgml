@@ -19,7 +19,17 @@ stringprep
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO IDNAPI ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO STRINGPREP_MAX_MAP_CHARS ##### -->
 <para>
 
 </para>
@@ -33,23 +43,11 @@ stringprep
 
 
 
-<!-- ##### ENUM Stringprep_rc ##### -->
+<!-- ##### TYPEDEF Stringprep_profile ##### -->
 <para>
 
 </para>
 
-@STRINGPREP_OK: 
-@STRINGPREP_CONTAINS_UNASSIGNED: 
-@STRINGPREP_CONTAINS_PROHIBITED: 
-@STRINGPREP_BIDI_BOTH_L_AND_RAL: 
-@STRINGPREP_BIDI_LEADTRAIL_NOT_RAL: 
-@STRINGPREP_BIDI_CONTAINS_PROHIBITED: 
-@STRINGPREP_TOO_SMALL_BUFFER: 
-@STRINGPREP_PROFILE_ERROR: 
-@STRINGPREP_FLAG_ERROR: 
-@STRINGPREP_UNKNOWN_PROFILE: 
-@STRINGPREP_NFKC_FAILED: 
-@STRINGPREP_MALLOC_ERROR: 
 
 <!-- ##### ENUM Stringprep_profile_flags ##### -->
 <para>
@@ -74,12 +72,29 @@ stringprep
 @STRINGPREP_BIDI_RAL_TABLE: 
 @STRINGPREP_BIDI_L_TABLE: 
 
-<!-- ##### MACRO STRINGPREP_MAX_MAP_CHARS ##### -->
+<!-- ##### TYPEDEF Stringprep_profiles ##### -->
 <para>
 
 </para>
 
 
+<!-- ##### ENUM Stringprep_rc ##### -->
+<para>
+
+</para>
+
+@STRINGPREP_OK: 
+@STRINGPREP_CONTAINS_UNASSIGNED: 
+@STRINGPREP_CONTAINS_PROHIBITED: 
+@STRINGPREP_BIDI_BOTH_L_AND_RAL: 
+@STRINGPREP_BIDI_LEADTRAIL_NOT_RAL: 
+@STRINGPREP_BIDI_CONTAINS_PROHIBITED: 
+@STRINGPREP_TOO_SMALL_BUFFER: 
+@STRINGPREP_PROFILE_ERROR: 
+@STRINGPREP_FLAG_ERROR: 
+@STRINGPREP_UNKNOWN_PROFILE: 
+@STRINGPREP_NFKC_FAILED: 
+@STRINGPREP_MALLOC_ERROR: 
 
 <!-- ##### TYPEDEF Stringprep_table_element ##### -->
 <para>
@@ -87,16 +102,97 @@ stringprep
 </para>
 
 
-<!-- ##### TYPEDEF Stringprep_profile ##### -->
+<!-- ##### FUNCTION stringprep ##### -->
 <para>
 
 </para>
 
+@in: 
+@maxlen: 
+@flags: 
+@profile: 
+@Returns: 
 
-<!-- ##### TYPEDEF Stringprep_profiles ##### -->
+
+<!-- ##### FUNCTION stringprep_4i ##### -->
 <para>
 
 </para>
+
+@ucs4: 
+@len: 
+@maxucs4len: 
+@flags: 
+@profile: 
+@Returns: 
+
+
+<!-- ##### FUNCTION stringprep_4zi ##### -->
+<para>
+
+</para>
+
+@ucs4: 
+@maxucs4len: 
+@flags: 
+@profile: 
+@Returns: 
+
+
+<!-- ##### FUNCTION stringprep_check_version ##### -->
+<para>
+
+</para>
+
+@req_version: 
+@Returns: 
+
+
+<!-- ##### FUNCTION stringprep_convert ##### -->
+<para>
+
+</para>
+
+@str: 
+@to_codeset: 
+@from_codeset: 
+@Returns: 
+
+
+<!-- ##### MACRO stringprep_iscsi ##### -->
+<para>
+
+</para>
+
+@in: 
+@maxlen: 
+
+
+<!-- ##### MACRO stringprep_kerberos5 ##### -->
+<para>
+
+</para>
+
+@in: 
+@maxlen: 
+
+
+<!-- ##### FUNCTION stringprep_locale_charset ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION stringprep_locale_to_utf8 ##### -->
+<para>
+
+</para>
+
+@str: 
+@Returns: 
 
 
 <!-- ##### MACRO stringprep_nameprep ##### -->
@@ -126,79 +222,6 @@ stringprep
 @maxlen: 
 
 
-<!-- ##### MACRO stringprep_kerberos5 ##### -->
-<para>
-
-</para>
-
-@in: 
-@maxlen: 
-
-
-<!-- ##### MACRO stringprep_xmpp_nodeprep ##### -->
-<para>
-
-</para>
-
-@in: 
-@maxlen: 
-
-
-<!-- ##### MACRO stringprep_xmpp_resourceprep ##### -->
-<para>
-
-</para>
-
-@in: 
-@maxlen: 
-
-
-<!-- ##### MACRO stringprep_iscsi ##### -->
-<para>
-
-</para>
-
-@in: 
-@maxlen: 
-
-
-<!-- ##### FUNCTION stringprep_4i ##### -->
-<para>
-
-</para>
-
-@ucs4: 
-@len: 
-@maxucs4len: 
-@flags: 
-@profile: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_4zi ##### -->
-<para>
-
-</para>
-
-@ucs4: 
-@maxucs4len: 
-@flags: 
-@profile: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep ##### -->
-<para>
-
-</para>
-
-@in: 
-@maxlen: 
-@flags: 
-@profile: 
-@Returns: 
-
-
 <!-- ##### FUNCTION stringprep_profile ##### -->
 <para>
 
@@ -220,42 +243,13 @@ stringprep
 @Returns: 
 
 
-<!-- ##### FUNCTION stringprep_check_version ##### -->
-<para>
-
-</para>
-
-@req_version: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_unichar_to_utf8 ##### -->
-<para>
-
-</para>
-
-@c: 
-@outbuf: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_utf8_to_unichar ##### -->
-<para>
-
-</para>
-
-@p: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_utf8_to_ucs4 ##### -->
+<!-- ##### FUNCTION stringprep_ucs4_nfkc_normalize ##### -->
 <para>
 
 </para>
 
 @str: 
 @len: 
-@items_written: 
 @Returns: 
 
 
@@ -271,6 +265,16 @@ stringprep
 @Returns: 
 
 
+<!-- ##### FUNCTION stringprep_unichar_to_utf8 ##### -->
+<para>
+
+</para>
+
+@c: 
+@outbuf: 
+@Returns: 
+
+
 <!-- ##### FUNCTION stringprep_utf8_nfkc_normalize ##### -->
 <para>
 
@@ -281,44 +285,6 @@ stringprep
 @Returns: 
 
 
-<!-- ##### FUNCTION stringprep_ucs4_nfkc_normalize ##### -->
-<para>
-
-</para>
-
-@str: 
-@len: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_locale_charset ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_convert ##### -->
-<para>
-
-</para>
-
-@str: 
-@to_codeset: 
-@from_codeset: 
-@Returns: 
-
-
-<!-- ##### FUNCTION stringprep_locale_to_utf8 ##### -->
-<para>
-
-</para>
-
-@str: 
-@Returns: 
-
-
 <!-- ##### FUNCTION stringprep_utf8_to_locale ##### -->
 <para>
 
@@ -326,5 +292,43 @@ stringprep
 
 @str: 
 @Returns: 
+
+
+<!-- ##### FUNCTION stringprep_utf8_to_ucs4 ##### -->
+<para>
+
+</para>
+
+@str: 
+@len: 
+@items_written: 
+@Returns: 
+
+
+<!-- ##### FUNCTION stringprep_utf8_to_unichar ##### -->
+<para>
+
+</para>
+
+@p: 
+@Returns: 
+
+
+<!-- ##### MACRO stringprep_xmpp_nodeprep ##### -->
+<para>
+
+</para>
+
+@in: 
+@maxlen: 
+
+
+<!-- ##### MACRO stringprep_xmpp_resourceprep ##### -->
+<para>
+
+</para>
+
+@in: 
+@maxlen: 
 
 

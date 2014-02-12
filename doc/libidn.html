@@ -1,16 +1,16 @@
 <html lang="en">
 <head>
-<title>GNU Libidn</title>
+<title>GNU Libidn 1.25</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="GNU Libidn">
+<meta name="description" content="GNU Libidn 1.25">
 <meta name="generator" content="makeinfo 4.13">
 <link title="Top" rel="top" href="#Top">
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
-This manual is last updated 28 May 2009 for version
-1.15 of GNU Libidn.
+This manual is last updated 27 April 2012 for version
+1.25 of GNU Libidn.
 
-Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.
+Copyright (C) 2002-2012 Simon Josefsson.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.
   span.sc    { font-variant:small-caps }
   span.roman { font-family:serif; font-weight:normal; } 
   span.sansserif { font-family:sans-serif; font-weight:normal; } 
-body { 
+body {
 	margin: 2%;
 	padding: 0 5%;
 	background: #ffffff;
@@ -77,7 +77,7 @@ dd, li {
 --></style>
 </head>
 <body>
-<h1 class="settitle">GNU Libidn</h1>
+<h1 class="settitle">GNU Libidn 1.25</h1>
    <div class="contents">
 <h2>Table of Contents</h2>
 <ul>
@@ -202,8 +202,6 @@ dd, li {
 <li><a name="toc_Copying-Information" href="#Copying-Information">Appendix C Copying Information</a>
 <ul>
 <li><a href="#GNU-Free-Documentation-License">C.1 GNU Free Documentation License</a>
-<li><a href="#GNU-LGPL">C.2 GNU Lesser General Public License</a>
-<li><a href="#GNU-GPL">C.3 GNU General Public License</a>
 </li></ul>
 <li><a name="toc_Function-and-Variable-Index" href="#Function-and-Variable-Index">Function and Variable Index</a>
 <li><a name="toc_Concept-Index" href="#Concept-Index">Concept Index</a>
@@ -222,10 +220,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 <h2 class="unnumbered">GNU Libidn</h2>
 
-<p>This manual is last updated 28 May 2009 for version
-1.15 of GNU Libidn.
+<p>This manual is last updated 27 April 2012 for version
+1.25 of GNU Libidn.
 
-   <p>Copyright &copy; 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.
+   <p>Copyright &copy; 2002-2012 Simon Josefsson.
 
    <blockquote>
 Permission is granted to copy, distribute and/or modify this document
@@ -260,7 +258,7 @@ Documentation License&rdquo;.
 <ul class="menu">
 <li><a href="#PR29-discussion">PR29 discussion</a>:              Implementation aspects of the PR29 flaw. 
 <li><a href="#On-Label-Separators">On Label Separators</a>:          Discussions of a flaw in the IDNA spec. 
-<li><a href="#Copying-Information">Copying Information</a>: 		License text covering the Libidn library.
+<li><a href="#Copying-Information">Copying Information</a>: 		License texts.
 
 </li></ul>
 <p>Indices
@@ -285,11 +283,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>GNU Libidn is a fully documented implementation of the Stringprep,
 Punycode and IDNA specifications.  Libidn's purpose is to encode and
-decode internationalized domain names.  The native C, C# and Java
-libraries are available under the GNU Lesser General Public License
-version 2.1 or later (see <a href="#GNU-LGPL">GNU LGPL</a>).
+decode internationalized domain name strings.  There are native C, C#
+and Java libraries.
 
-   <p>The library contains a generic Stringprep implementation.  Profiles
+   <p>The C library contains a generic Stringprep implementation.  Profiles
 for Nameprep, iSCSI, SASL, XMPP and Kerberos V5 are included. 
 Punycode and ASCII Compatible Encoding (ACE) via IDNA are supported. 
 A mechanism to define Top-Level Domain (TLD) specific validation
@@ -321,8 +318,7 @@ C++, Emacs Lisp, Python and Java.  A native Java and C# port is
 included.
 
    <p>Also included is a command line tool, several self tests, code
-examples, and more, all licensed under the GNU General Public License
-version 3.0 or later (see <a href="#GNU-GPL">GNU GPL</a>).
+examples, and more.
 
 <ul class="menu">
 <li><a accesskey="1" href="#Getting-Started">Getting Started</a>
@@ -379,10 +375,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Introduction">Introduction</a>
 doing a similar job.
 
      <dl>
-<dt>It's Free Software<dd>Anybody can use, modify, and redistribute it under the terms of the
-GNU Lesser General Public License version 2.1 or later (see <a href="#GNU-LGPL">GNU LGPL</a>).
+<dt>It's Free Software<dd>Anybody can use, modify, and redistribute it under the terms of a free
+software license.
 
-     <br><dt>It's thread-safe<dd>No global state is kept in the library.  All functions are reentrant.
+     <br><dt>It's thread-safe<dd>No global state is kept in the library.  All functions are re-entrant.
 
      <br><dt>It's portable<dd>The code is intended to be written in pure ANSI C89.  It has been
 tested on many Unix like operating systems, and Windows.
@@ -438,8 +434,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Introduction">Introduction</a>
 <h3 class="section">1.4 Supported Platforms</h3>
 
 <p>Libidn has at some point in time been tested on the following
-platforms.  Online build reports for each platforms and Libidn version
-is available at <a href="http://autobuild.josefsson.org/libidn/">http://autobuild.josefsson.org/libidn/</a>.
+platforms.  Build reports for each platforms and Libidn version is
+available at <a href="http://autobuild.josefsson.org/libidn/">http://autobuild.josefsson.org/libidn/</a>.
 
      <ol type=1 start=1>
 
@@ -569,6 +565,10 @@ GCC 2.95 and GNU Make <code>arm-linux</code>.
 <a name="index-Windows-30"></a><a name="index-Microsoft-31"></a><a name="index-mingw32-32"></a>
 GCC 3.4.4 and GNU Make <code>i586-mingw32msvc</code>.
 
+     <li>OS/2
+<a name="index-OS_002f2-33"></a><a name="index-IBM-34"></a>
+GCC.
+
         </ol>
 
    <p>If you use Libidn on, or port Libidn to, a new platform please report
@@ -622,7 +622,7 @@ need memory or size optimization.
 
    <p>If you are interested, please write to:
 
-<pre class="verbatim">Simon Josefsson Datakonsult
+<pre class="verbatim">Simon Josefsson Datakonsult AB
 Hagagatan 24
 113 47 Stockholm
 Sweden
@@ -630,7 +630,7 @@ Sweden
 E-mail: simon@josefsson.org
 </pre>
 
-   <p>If your company provide support related to GNU Libidn and would like
+   <p>If your company provides support related to GNU Libidn and would like
 to be mentioned here, contact the author (see <a href="#Bug-Reports">Bug Reports</a>).
 
 <div class="node">
@@ -644,13 +644,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Introduction">Introduction</a>
 
 <h3 class="section">1.7 Downloading and Installing</h3>
 
-<p><a name="index-Installation-33"></a><a name="index-Download-34"></a>
+<p><a name="index-Installation-35"></a><a name="index-Download-36"></a>
 The package can be downloaded from several places, including:
 
    <p><a href="ftp://alpha.gnu.org/pub/gnu/libidn/">ftp://alpha.gnu.org/pub/gnu/libidn/</a>
 
    <p>The latest version is stored in a file, e.g.,
-&lsquo;<samp><span class="samp">libidn-1.15.tar.gz</span></samp>&rsquo; where the &lsquo;<samp><span class="samp">1.15</span></samp>&rsquo;
+&lsquo;<samp><span class="samp">libidn-1.25.tar.gz</span></samp>&rsquo; where the &lsquo;<samp><span class="samp">1.25</span></samp>&rsquo;
 value is the highest version number in the directory.
 
    <p>The package is then extracted, configured and built like many other
@@ -662,9 +662,9 @@ distribution archive.
 and install the package.  You will need a few basic tools, such as
 &lsquo;<samp><span class="samp">sh</span></samp>&rsquo;, &lsquo;<samp><span class="samp">make</span></samp>&rsquo; and &lsquo;<samp><span class="samp">cc</span></samp>&rsquo;.
 
-<pre class="example">     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.15.tar.gz
-     $ tar xfz libidn-1.15.tar.gz
-     $ cd libidn-1.15/
+<pre class="example">     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.25.tar.gz
+     $ tar xfz libidn-1.25.tar.gz
+     $ cd libidn-1.25/
      $ ./configure
      ...
      $ make
@@ -689,6 +689,13 @@ for more information.
 more information.  Here, <code>IMPL</code> is <code>pnet</code> or <code>mono</code>,
 indicating whether the PNET <samp><span class="command">cscc</span></samp> compiler or the Mono
 <samp><span class="command">mcs</span></samp> compiler should be used, respectively.
+
+     <br><dt><code>--disable-valgrind-tests</code><dd>Disable running the self-checks under Valgrind
+(<a href="http://valgrind.org/">http://valgrind.org/</a>).  Normally Valgrind does not cause
+problems and can detect some severe memory errors.  If you are getting
+errors from Valgrind that are caused by the compiler or libc (possibly
+as a result of special optimization flags), you may use this option to
+disable the use of Valgrind.
 
    </dl>
 
@@ -745,7 +752,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Introduction">Introduction</a>
 
 <h3 class="section">1.8 Bug Reports</h3>
 
-<p><a name="index-Reporting-Bugs-35"></a>
+<p><a name="index-Reporting-Bugs-37"></a>
 If you think you have found a bug in Libidn, please investigate it and
 report it.
 
@@ -792,7 +799,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Introduction">Introduction</a>
 
 <h3 class="section">1.9 Contributing</h3>
 
-<p><a name="index-Contributing-36"></a><a name="index-Hacking-37"></a>
+<p><a name="index-Contributing-38"></a><a name="index-Hacking-39"></a>
 If you want to submit a patch for inclusion &ndash; from solve a typo you
 discovered, up to adding support for a new feature &ndash; you should
 submit it as a bug report (see <a href="#Bug-Reports">Bug Reports</a>).  There are some
@@ -990,7 +997,7 @@ want to check that the version is okay right after program startup.
 <p><a name="stringprep_005fcheck_005fversion"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>stringprep_check_version</b> (<var>const char * req_version</var>)<var><a name="index-stringprep_005fcheck_005fversion-38"></a></var><br>
+&mdash; Function: const char * <b>stringprep_check_version</b> (<var>const char * req_version</var>)<var><a name="index-stringprep_005fcheck_005fversion-40"></a></var><br>
 <blockquote><p><var>req_version</var>: Required version number, or NULL.
 
         <p>Check that the version of the library is at minimum the requested one
@@ -1011,7 +1018,7 @@ following first in your <code>main</code>:
          {
            printf ("stringprep_check_version() failed:\n"
                    "Header file incompatible with shared library.\n");
-           exit(1);
+           exit(EXIT_FAILURE);
          }
 </pre>
    <div class="node">
@@ -1025,7 +1032,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Preparation">Preparation</a>
 
 <h3 class="section">2.4 Building the source</h3>
 
-<p><a name="index-Compiling-your-application-39"></a>
+<p><a name="index-Compiling-your-application-41"></a>
 If you want to compile a source file including e.g. the `idna.h' header
 file, you must make sure that the compiler can find it in the
 directory hierarchy.  This is accomplished by adding the path to the
@@ -1052,7 +1059,7 @@ the path to the library files has to be added to the library search
 path (via the <samp><span class="option">-L</span></samp> option).  For this, the option
 <samp><span class="option">--libs</span></samp> to <samp><span class="command">pkg-config libidn</span></samp> can be used.  For
 convenience, this option also outputs all other options that are
-required to link the program with the `libidn' libarary.  The example
+required to link the program with the `libidn' library.  The example
 shows how to link <samp><span class="file">foo.o</span></samp> with the `libidn' library to a program
 <samp><span class="command">foo</span></samp>.
 
@@ -1074,19 +1081,19 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Preparation">Preparation</a>
 
 <h3 class="section">2.5 Autoconf tests</h3>
 
-<p><a name="index-Autoconf-tests-40"></a><a name="index-Configure-tests-41"></a>
+<p><a name="index-Autoconf-tests-42"></a><a name="index-Configure-tests-43"></a>
 If your project uses Autoconf (see <a href="autoconf.html#Top">GNU Autoconf</a>)
 to check for installed libraries, you might find the following snippet
 illustrative.  It add a new <samp><span class="file">configure</span></samp> parameter
 <code>--with-libidn</code>, and check for <samp><span class="file">idna.h</span></samp> and &lsquo;<samp><span class="samp">-lidn</span></samp>&rsquo;
 (possibly below the directory specified as the optional argument to
-<code>--with-libidn</code>), and define the <acronym>CPP</acronym> symbol
-<code>LIBIDN</code> if the library is found.  The default behaviour is to
-search for the library and enable the functionality (that is, define
-the symbol) when the library is found, but if you wish to make the
-default behaviour of your package be that Libidn is not used (even if
-it is installed on the system), change &lsquo;<samp><span class="samp">libidn=yes</span></samp>&rsquo; to
-&lsquo;<samp><span class="samp">libidn=no</span></samp>&rsquo; on the third line.
+<code>--with-libidn</code>), and define the CPP symbol <code>LIBIDN</code> if the
+library is found.  The default behaviour is to search for the library
+and enable the functionality (that is, define the symbol) when the
+library is found, but if you wish to make the default behaviour of
+your package be that Libidn is not used (even if it is installed on
+the system), change &lsquo;<samp><span class="samp">libidn=yes</span></samp>&rsquo; to &lsquo;<samp><span class="samp">libidn=no</span></samp>&rsquo; on the third
+line.
 
 <pre class="example">     AC_ARG_WITH(libidn, AC_HELP_STRING([--with-libidn=[DIR]],
                                      [Support IDN (needs GNU Libidn)]),
@@ -1139,7 +1146,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Preparation">Preparation</a>
 
 <h3 class="section">2.6 Memory handling under Windows</h3>
 
-<p><a name="index-free-42"></a><a name="index-Memory-handling-43"></a><a name="index-de_002dallocation-44"></a><a name="index-heap-memory-45"></a>
+<p><a name="index-free-44"></a><a name="index-Memory-handling-45"></a><a name="index-de_002dallocation-46"></a><a name="index-heap-memory-47"></a>
 Several functions in the library allocates memory.  The memory is
 expected to be de-allocated using the <code>free</code> function.  Under
 Windows, it is sometimes necessary to de-allocate memory in the same
@@ -1164,7 +1171,7 @@ file <samp><span class="file">idn-free.h</span></samp> using:
 <p><a name="idn_005ffree"></a>
 
 <div class="defun">
-&mdash; Function: void <b>idn_free</b> (<var>void * ptr</var>)<var><a name="index-idn_005ffree-46"></a></var><br>
+&mdash; Function: void <b>idn_free</b> (<var>void * ptr</var>)<var><a name="index-idn_005ffree-48"></a></var><br>
 <blockquote><p><var>ptr</var>: memory region to deallocate, or <code>NULL</code>.
 
         <p>Deallocates memory region by calling <code>free()</code>.  If <code>ptr</code> is <code>NULL</code> no
@@ -1191,7 +1198,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">3 Utility Functions</h2>
 
-<p><a name="index-Utility-Functions-47"></a>
+<p><a name="index-Utility-Functions-49"></a>
 The rest of this library makes extensive use of Unicode characters. 
 In order to interface this library with the outside world, your
 application may need to make various Unicode transformations.
@@ -1210,7 +1217,7 @@ the file <samp><span class="file">stringprep.h</span></samp> using:
 <p><a name="stringprep_005funichar_005fto_005futf8"></a>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_unichar_to_utf8</b> (<var>uint32_t c, char * outbuf</var>)<var><a name="index-stringprep_005funichar_005fto_005futf8-48"></a></var><br>
+&mdash; Function: int <b>stringprep_unichar_to_utf8</b> (<var>uint32_t c, char * outbuf</var>)<var><a name="index-stringprep_005funichar_005fto_005futf8-50"></a></var><br>
 <blockquote><p><var>c</var>: a ISO10646 character code
 
         <p><var>outbuf</var>: output buffer, must have at least 6 bytes of space. 
@@ -1227,7 +1234,7 @@ and nothing will be written to <code>outbuf</code>.
 <p><a name="stringprep_005futf8_005fto_005funichar"></a>
 
 <div class="defun">
-&mdash; Function: uint32_t <b>stringprep_utf8_to_unichar</b> (<var>const char * p</var>)<var><a name="index-stringprep_005futf8_005fto_005funichar-49"></a></var><br>
+&mdash; Function: uint32_t <b>stringprep_utf8_to_unichar</b> (<var>const char * p</var>)<var><a name="index-stringprep_005futf8_005fto_005funichar-51"></a></var><br>
 <blockquote><p><var>p</var>: a pointer to Unicode character encoded as UTF-8
 
         <p>Converts a sequence of bytes encoded as UTF-8 to a Unicode character. 
@@ -1242,7 +1249,7 @@ undefined.
 <p><a name="stringprep_005fucs4_005fto_005futf8"></a>
 
 <div class="defun">
-&mdash; Function: char * <b>stringprep_ucs4_to_utf8</b> (<var>const uint32_t * str, ssize_t len, size_t * items_read, size_t * items_written</var>)<var><a name="index-stringprep_005fucs4_005fto_005futf8-50"></a></var><br>
+&mdash; Function: char * <b>stringprep_ucs4_to_utf8</b> (<var>const uint32_t * str, ssize_t len, size_t * items_read, size_t * items_written</var>)<var><a name="index-stringprep_005fucs4_005fto_005futf8-52"></a></var><br>
 <blockquote><p><var>str</var>: a UCS-4 encoded string
 
         <p><var>len</var>: the maximum length of <code>str</code> to use. If <code>len</code> &lt; 0, then
@@ -1259,8 +1266,7 @@ to UTF-8. The result will be terminated with a 0 byte.
 
         <p><strong>Return value:</strong> a pointer to a newly allocated UTF-8 string. 
 This value must be deallocated by the caller. 
-If an error occurs, <code>NULL</code> will be returned and <code>error</code>
-set. 
+If an error occurs, <code>NULL</code> will be returned. 
 </p></blockquote></div>
 
 <h4 class="subheading">stringprep_utf8_to_ucs4</h4>
@@ -1268,7 +1274,7 @@ set.
 <p><a name="stringprep_005futf8_005fto_005fucs4"></a>
 
 <div class="defun">
-&mdash; Function: uint32_t * <b>stringprep_utf8_to_ucs4</b> (<var>const char * str, ssize_t len, size_t * items_written</var>)<var><a name="index-stringprep_005futf8_005fto_005fucs4-51"></a></var><br>
+&mdash; Function: uint32_t * <b>stringprep_utf8_to_ucs4</b> (<var>const char * str, ssize_t len, size_t * items_written</var>)<var><a name="index-stringprep_005futf8_005fto_005fucs4-53"></a></var><br>
 <blockquote><p><var>str</var>: a UTF-8 encoded string
 
         <p><var>len</var>: the maximum length of <code>str</code> to use. If <code>len</code> &lt; 0, then
@@ -1292,13 +1298,13 @@ This value must be deallocated by the caller.
 <p><a name="stringprep_005fucs4_005fnfkc_005fnormalize"></a>
 
 <div class="defun">
-&mdash; Function: uint32_t * <b>stringprep_ucs4_nfkc_normalize</b> (<var>uint32_t * str, ssize_t len</var>)<var><a name="index-stringprep_005fucs4_005fnfkc_005fnormalize-52"></a></var><br>
+&mdash; Function: uint32_t * <b>stringprep_ucs4_nfkc_normalize</b> (<var>const uint32_t * str, ssize_t len</var>)<var><a name="index-stringprep_005fucs4_005fnfkc_005fnormalize-54"></a></var><br>
 <blockquote><p><var>str</var>: a Unicode string.
 
         <p><var>len</var>: length of <code>str</code> array, or -1 if <code>str</code> is nul-terminated.
 
-        <p>Converts UCS4 string into UTF-8 and runs
-<code>stringprep_utf8_nfkc_normalize()</code>.
+        <p>Converts a UCS4 string into canonical form, see
+<code>stringprep_utf8_nfkc_normalize()</code> for more information.
 
         <p><strong>Return value:</strong> a newly allocated Unicode string, that is the NFKC
 normalized form of <code>str</code>. 
@@ -1309,7 +1315,7 @@ normalized form of <code>str</code>.
 <p><a name="stringprep_005futf8_005fnfkc_005fnormalize"></a>
 
 <div class="defun">
-&mdash; Function: char * <b>stringprep_utf8_nfkc_normalize</b> (<var>const char * str, ssize_t len</var>)<var><a name="index-stringprep_005futf8_005fnfkc_005fnormalize-53"></a></var><br>
+&mdash; Function: char * <b>stringprep_utf8_nfkc_normalize</b> (<var>const char * str, ssize_t len</var>)<var><a name="index-stringprep_005futf8_005fnfkc_005fnormalize-55"></a></var><br>
 <blockquote><p><var>str</var>: a UTF-8 encoded string.
 
         <p><var>len</var>: length of <code>str</code>, in bytes, or -1 if <code>str</code> is nul-terminated.
@@ -1339,7 +1345,7 @@ NFKC normalized form of <code>str</code>.
 <p><a name="stringprep_005flocale_005fcharset"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>stringprep_locale_charset</b> (<var> void</var>)<var><a name="index-stringprep_005flocale_005fcharset-54"></a></var><br>
+&mdash; Function: const char * <b>stringprep_locale_charset</b> (<var> void</var>)<var><a name="index-stringprep_005flocale_005fcharset-56"></a></var><br>
 <blockquote>
         <p>Find out current locale charset.  The function respect the CHARSET
 environment variable, but typically uses nl_langinfo(CODESET) when
@@ -1364,7 +1370,7 @@ It will never return NULL, but use "ASCII" as a fallback.
 <p><a name="stringprep_005fconvert"></a>
 
 <div class="defun">
-&mdash; Function: char * <b>stringprep_convert</b> (<var>const char * str, const char * to_codeset, const char * from_codeset</var>)<var><a name="index-stringprep_005fconvert-55"></a></var><br>
+&mdash; Function: char * <b>stringprep_convert</b> (<var>const char * str, const char * to_codeset, const char * from_codeset</var>)<var><a name="index-stringprep_005fconvert-57"></a></var><br>
 <blockquote><p><var>str</var>: input zero-terminated string.
 
         <p><var>to_codeset</var>: name of destination character set.
@@ -1383,7 +1389,7 @@ is <code>str</code> transcoded into to_codeset.
 <p><a name="stringprep_005flocale_005fto_005futf8"></a>
 
 <div class="defun">
-&mdash; Function: char * <b>stringprep_locale_to_utf8</b> (<var>const char * str</var>)<var><a name="index-stringprep_005flocale_005fto_005futf8-56"></a></var><br>
+&mdash; Function: char * <b>stringprep_locale_to_utf8</b> (<var>const char * str</var>)<var><a name="index-stringprep_005flocale_005fto_005futf8-58"></a></var><br>
 <blockquote><p><var>str</var>: input zero terminated string.
 
         <p>Convert string encoded in the locale's character set into UTF-8 by
@@ -1398,7 +1404,7 @@ is <code>str</code> transcoded into UTF-8.
 <p><a name="stringprep_005futf8_005fto_005flocale"></a>
 
 <div class="defun">
-&mdash; Function: char * <b>stringprep_utf8_to_locale</b> (<var>const char * str</var>)<var><a name="index-stringprep_005futf8_005fto_005flocale-57"></a></var><br>
+&mdash; Function: char * <b>stringprep_utf8_to_locale</b> (<var>const char * str</var>)<var><a name="index-stringprep_005futf8_005fto_005flocale-59"></a></var><br>
 <blockquote><p><var>str</var>: input zero terminated string.
 
         <p>Convert string encoded in UTF-8 into the locale's character set by
@@ -1422,7 +1428,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">4 Stringprep Functions</h2>
 
-<p><a name="index-Stringprep-Functions-58"></a>
+<p><a name="index-Stringprep-Functions-60"></a>
 Stringprep describes a framework for preparing Unicode text strings in
 order to increase the likelihood that string input and string
 comparison work in ways that make sense for typical users throughout
@@ -1448,21 +1454,21 @@ here.  Look into the <samp><span class="file">stringprep.h</span></samp> header 
 <h3 class="section">4.3 Control Flags</h3>
 
 <div class="defun">
-&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_NFKC</b><var><a name="index-STRINGPREP_005fNO_005fNFKC-59"></a></var><br>
+&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_NFKC</b><var><a name="index-STRINGPREP_005fNO_005fNFKC-61"></a></var><br>
 <blockquote><p>Disable the NFKC normalization, as well as selecting the non-NFKC case
 folding tables.  Usually the profile specifies BIDI and NFKC settings,
 and applications should not override it unless in special situations. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_BIDI</b><var><a name="index-STRINGPREP_005fNO_005fBIDI-60"></a></var><br>
+&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_BIDI</b><var><a name="index-STRINGPREP_005fNO_005fBIDI-62"></a></var><br>
 <blockquote><p>Disable the BIDI step.  Usually the profile specifies BIDI and NFKC
 settings, and applications should not override it unless in special
 situations. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_UNASSIGNED</b><var><a name="index-STRINGPREP_005fNO_005fUNASSIGNED-61"></a></var><br>
+&mdash; Stringprep flags: Stringprep_profile_flags <b>STRINGPREP_NO_UNASSIGNED</b><var><a name="index-STRINGPREP_005fNO_005fUNASSIGNED-63"></a></var><br>
 <blockquote><p>Make the library return with an error if string contains unassigned
 characters according to profile. 
 </p></blockquote></div>
@@ -1474,7 +1480,7 @@ characters according to profile.
 <p><a name="stringprep_005f4i"></a>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_4i</b> (<var>uint32_t * ucs4, size_t * len, size_t maxucs4len, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep_005f4i-62"></a></var><br>
+&mdash; Function: int <b>stringprep_4i</b> (<var>uint32_t * ucs4, size_t * len, size_t maxucs4len, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep_005f4i-64"></a></var><br>
 <blockquote><p><var>ucs4</var>: input/output array with string to prepare.
 
         <p><var>len</var>: on input, length of input array with Unicode code points,
@@ -1514,7 +1520,7 @@ the library, or use one of the currently supported profiles.
 <p><a name="stringprep_005f4zi"></a>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_4zi</b> (<var>uint32_t * ucs4, size_t maxucs4len, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep_005f4zi-63"></a></var><br>
+&mdash; Function: int <b>stringprep_4zi</b> (<var>uint32_t * ucs4, size_t maxucs4len, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep_005f4zi-65"></a></var><br>
 <blockquote><p><var>ucs4</var>: input/output array with zero terminated string to prepare.
 
         <p><var>maxucs4len</var>: maximum length of input/output array.
@@ -1546,7 +1552,7 @@ the library, or use one of the currently supported profiles.
 <p><a name="stringprep"></a>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep</b> (<var>char * in, size_t maxlen, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep-64"></a></var><br>
+&mdash; Function: int <b>stringprep</b> (<var>char * in, size_t maxlen, Stringprep_profile_flags flags, const Stringprep_profile * profile</var>)<var><a name="index-stringprep-66"></a></var><br>
 <blockquote><p><var>in</var>: input/ouput array with string to prepare.
 
         <p><var>maxlen</var>: maximum length of input/output array.
@@ -1581,7 +1587,7 @@ the library, or use one of the currently supported profiles.
 <p><a name="stringprep_005fprofile"></a>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_profile</b> (<var>const char * in, char ** out, const char * profile, Stringprep_profile_flags flags</var>)<var><a name="index-stringprep_005fprofile-65"></a></var><br>
+&mdash; Function: int <b>stringprep_profile</b> (<var>const char * in, char ** out, const char * profile, Stringprep_profile_flags flags</var>)<var><a name="index-stringprep_005fprofile-67"></a></var><br>
 <blockquote><p><var>in</var>: input array with UTF-8 string to prepare.
 
         <p><var>out</var>: output variable with pointer to newly allocate string.
@@ -1615,7 +1621,7 @@ It must be one of the internally supported stringprep profiles.
 <p><a name="stringprep_005fstrerror"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>stringprep_strerror</b> (<var>Stringprep_rc rc</var>)<var><a name="index-stringprep_005fstrerror-66"></a></var><br>
+&mdash; Function: const char * <b>stringprep_strerror</b> (<var>Stringprep_rc rc</var>)<var><a name="index-stringprep_005fstrerror-68"></a></var><br>
 <blockquote><p><var>rc</var>: a <code>Stringprep_rc</code> return code.
 
         <p>Convert a return code integer to a text string.  This string can be
@@ -1666,7 +1672,7 @@ containing a description of the error with the return code <code>rc</code>.
 <h3 class="section">4.6 Stringprep Profile Macros</h3>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_nameprep_no_unassigned</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fnameprep_005fno_005funassigned-67"></a></var><br>
+&mdash; Function: int <b>stringprep_nameprep_no_unassigned</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fnameprep_005fno_005funassigned-69"></a></var><br>
 <blockquote>
         <p><var>in</var>: input/ouput array with string to prepare.
 
@@ -1678,7 +1684,7 @@ true AllowUnassigned.  Returns 0 iff successful, or an error code.
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_iscsi</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fiscsi-68"></a></var><br>
+&mdash; Function: int <b>stringprep_iscsi</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fiscsi-70"></a></var><br>
 <blockquote>
         <p><var>in</var>: input/ouput array with string to prepare.
 
@@ -1689,7 +1695,7 @@ profile.  Returns 0 iff successful, or an error code.
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_plain</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fplain-69"></a></var><br>
+&mdash; Function: int <b>stringprep_plain</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fplain-71"></a></var><br>
 <blockquote>
         <p><var>in</var>: input/ouput array with string to prepare.
 
@@ -1700,7 +1706,7 @@ profile.  Returns 0 iff successful, or an error code.
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_xmpp_nodeprep</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fxmpp_005fnodeprep-70"></a></var><br>
+&mdash; Function: int <b>stringprep_xmpp_nodeprep</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fxmpp_005fnodeprep-72"></a></var><br>
 <blockquote>
         <p><var>in</var>: input/ouput array with string to prepare.
 
@@ -1711,7 +1717,7 @@ identifier profile.  Returns 0 iff successful, or an error code.
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: int <b>stringprep_xmpp_resourceprep</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fxmpp_005fresourceprep-71"></a></var><br>
+&mdash; Function: int <b>stringprep_xmpp_resourceprep</b> (<var>char * in, int maxlen</var>)<var><a name="index-stringprep_005fxmpp_005fresourceprep-73"></a></var><br>
 <blockquote>
         <p><var>in</var>: input/ouput array with string to prepare.
 
@@ -1735,7 +1741,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">5 Punycode Functions</h2>
 
-<p><a name="index-Punycode-Functions-72"></a>
+<p><a name="index-Punycode-Functions-74"></a>
 Punycode is a simple and efficient transfer encoding syntax designed
 for use with Internationalized Domain Names in Applications. It
 uniquely and reversibly transforms a Unicode string into an ASCII
@@ -1760,7 +1766,7 @@ the file <samp><span class="file">punycode.h</span></samp> using:
 points.  It is guaranteed to always be a 32 bit unsigned integer.
 
 <div class="defun">
-&mdash; Punycode Unicode code point: uint32_t <b>punycode_uint</b><var><a name="index-punycode_005fuint-73"></a></var><br>
+&mdash; Punycode Unicode code point: uint32_t <b>punycode_uint</b><var><a name="index-punycode_005fuint-75"></a></var><br>
 <blockquote><p>A unsigned integer that hold Unicode code points. 
 </p></blockquote></div>
 
@@ -1780,7 +1786,7 @@ and use <code>sizeof</code> to initialize <code>input_length</code> and
 <p><a name="punycode_005fencode"></a>
 
 <div class="defun">
-&mdash; Function: int <b>punycode_encode</b> (<var>size_t input_length, const punycode_uint </var>[]<var> input, const unsigned char </var>[]<var> case_flags, size_t * output_length, char </var>[]<var> output</var>)<var><a name="index-punycode_005fencode-74"></a></var><br>
+&mdash; Function: int <b>punycode_encode</b> (<var>size_t input_length, const punycode_uint </var>[]<var> input, const unsigned char </var>[]<var> case_flags, size_t * output_length, char </var>[]<var> output</var>)<var><a name="index-punycode_005fencode-76"></a></var><br>
 <blockquote><p><var>input_length</var>: The number of code points in the <code>input</code> array and
 the number of flags in the <code>case_flags</code> array.
 
@@ -1826,7 +1832,7 @@ garbage.
 <p><a name="punycode_005fdecode"></a>
 
 <div class="defun">
-&mdash; Function: int <b>punycode_decode</b> (<var>size_t input_length, const char </var>[]<var> input, size_t * output_length, punycode_uint </var>[]<var> output, unsigned char </var>[]<var> case_flags</var>)<var><a name="index-punycode_005fdecode-75"></a></var><br>
+&mdash; Function: int <b>punycode_decode</b> (<var>size_t input_length, const char </var>[]<var> input, size_t * output_length, punycode_uint </var>[]<var> output, unsigned char </var>[]<var> case_flags</var>)<var><a name="index-punycode_005fdecode-77"></a></var><br>
 <blockquote><p><var>input_length</var>: The number of ASCII code points in the <code>input</code> array.
 
         <p><var>input</var>: An array of ASCII code points (0..7F).
@@ -1871,7 +1877,7 @@ values defined above.  If not <code>PUNYCODE_SUCCESS</code>, then
 <p><a name="punycode_005fstrerror"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>punycode_strerror</b> (<var>Punycode_status rc</var>)<var><a name="index-punycode_005fstrerror-76"></a></var><br>
+&mdash; Function: const char * <b>punycode_strerror</b> (<var>Punycode_status rc</var>)<var><a name="index-punycode_005fstrerror-78"></a></var><br>
 <blockquote><p><var>rc</var>: an <code>Punycode_status</code> return code.
 
         <p>Convert a return code integer to a text string.  This string can be
@@ -1905,7 +1911,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">6 IDNA Functions</h2>
 
-<p><a name="index-IDNA-Functions-77"></a>
+<p><a name="index-IDNA-Functions-79"></a>
 Until now, there has been no standard method for domain names to use
 characters outside the ASCII repertoire. The IDNA document defines
 internationalized domain names (IDNs) and a mechanism called IDNA for
@@ -1930,19 +1936,19 @@ the file <samp><span class="file">idna.h</span></samp> using:
 bit-wise inclusive or of any subset of the parameters:
 
 <div class="defun">
-&mdash; Return code: Idna_flags <b>IDNA_ALLOW_UNASSIGNED</b><var><a name="index-IDNA_005fALLOW_005fUNASSIGNED-78"></a></var><br>
+&mdash; Return code: Idna_flags <b>IDNA_ALLOW_UNASSIGNED</b><var><a name="index-IDNA_005fALLOW_005fUNASSIGNED-80"></a></var><br>
 <blockquote><p>Allow unassigned Unicode code points. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Return code: Idna_flags <b>IDNA_USE_STD3_ASCII_RULES</b><var><a name="index-IDNA_005fUSE_005fSTD3_005fASCII_005fRULES-79"></a></var><br>
+&mdash; Return code: Idna_flags <b>IDNA_USE_STD3_ASCII_RULES</b><var><a name="index-IDNA_005fUSE_005fSTD3_005fASCII_005fRULES-81"></a></var><br>
 <blockquote><p>Check output to make sure it is a STD3 conforming host name. 
 </p></blockquote></div>
 
 <h3 class="section">6.3 Prefix String</h3>
 
 <div class="defun">
-&mdash; Macro: #define <b>IDNA_ACE_PREFIX</b><var><a name="index-IDNA_005fACE_005fPREFIX-80"></a></var><br>
+&mdash; Macro: #define <b>IDNA_ACE_PREFIX</b><var><a name="index-IDNA_005fACE_005fPREFIX-82"></a></var><br>
 <blockquote><p>String with the official IDNA prefix, <code>xn--</code>. 
 </p></blockquote></div>
 
@@ -1954,12 +1960,12 @@ the core IDNA primitives.  The <code>4</code> indicate that the function
 takes UCS-4 strings (i.e., Unicode code points encoded in a 32-bit
 unsigned integer type) of the specified length.  The <code>i</code> indicate
 that the data is written &ldquo;inline&rdquo; into the buffer.  This means the
-caller is responsible for allocating (and deallocating) the string,
+caller is responsible for allocating (and de-allocating) the string,
 and providing the library with the allocated length of the string. 
 The output length is written in the output length variable.  The
 remaining functions all contain the <code>z</code> indicator, which means
 the strings are zero terminated.  All output strings are allocated by
-the library, and must be deallocated by the caller.  The <code>4</code>
+the library, and must be de-allocated by the caller.  The <code>4</code>
 indicator again means that the string is UCS-4, the <code>8</code> means the
 strings are UTF-8 and the <code>l</code> indicator means the strings are
 encoded in the encoding used by the current locale.
@@ -1971,7 +1977,7 @@ encoded in the encoding used by the current locale.
 <p><a name="idna_005fto_005fascii_005f4i"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_ascii_4i</b> (<var>const uint32_t * in, size_t inlen, char * out, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f4i-81"></a></var><br>
+&mdash; Function: int <b>idna_to_ascii_4i</b> (<var>const uint32_t * in, size_t inlen, char * out, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f4i-83"></a></var><br>
 <blockquote><p><var>in</var>: input array with unicode code points.
 
         <p><var>inlen</var>: length of input array with unicode code points.
@@ -2010,7 +2016,7 @@ once.
 <p><a name="idna_005fto_005funicode_005f44i"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_44i</b> (<var>const uint32_t * in, size_t inlen, uint32_t * out, size_t * outlen, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f44i-82"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_44i</b> (<var>const uint32_t * in, size_t inlen, uint32_t * out, size_t * outlen, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f44i-84"></a></var><br>
 <blockquote><p><var>in</var>: input array with unicode code points.
 
         <p><var>inlen</var>: length of input array with unicode code points.
@@ -2056,7 +2062,7 @@ checking it means breaking the standard.
 <p><a name="idna_005fto_005fascii_005f4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_ascii_4z</b> (<var>const uint32_t * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f4z-83"></a></var><br>
+&mdash; Function: int <b>idna_to_ascii_4z</b> (<var>const uint32_t * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f4z-85"></a></var><br>
 <blockquote><p><var>input</var>: zero terminated input Unicode string.
 
         <p><var>output</var>: pointer to newly allocated output string.
@@ -2076,7 +2082,7 @@ be deallocated by the caller.
 <p><a name="idna_005fto_005fascii_005f8z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_ascii_8z</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f8z-84"></a></var><br>
+&mdash; Function: int <b>idna_to_ascii_8z</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005f8z-86"></a></var><br>
 <blockquote><p><var>input</var>: zero terminated input UTF-8 string.
 
         <p><var>output</var>: pointer to newly allocated output string.
@@ -2096,7 +2102,7 @@ be deallocated by the caller.
 <p><a name="idna_005fto_005fascii_005flz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_ascii_lz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005flz-85"></a></var><br>
+&mdash; Function: int <b>idna_to_ascii_lz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005fascii_005flz-87"></a></var><br>
 <blockquote><p><var>input</var>: zero terminated input string encoded in the current locale's
 character set.
 
@@ -2119,7 +2125,7 @@ output buffer must be deallocated by the caller.
 <p><a name="idna_005fto_005funicode_005f4z4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_4z4z</b> (<var>const uint32_t * input, uint32_t ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f4z4z-86"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_4z4z</b> (<var>const uint32_t * input, uint32_t ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f4z4z-88"></a></var><br>
 <blockquote><p><var>input</var>: zero-terminated Unicode string.
 
         <p><var>output</var>: pointer to newly allocated output Unicode string.
@@ -2140,7 +2146,7 @@ caller.
 <p><a name="idna_005fto_005funicode_005f8z4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_8z4z</b> (<var>const char * input, uint32_t ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8z4z-87"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_8z4z</b> (<var>const char * input, uint32_t ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8z4z-89"></a></var><br>
 <blockquote><p><var>input</var>: zero-terminated UTF-8 string.
 
         <p><var>output</var>: pointer to newly allocated output Unicode string.
@@ -2161,7 +2167,7 @@ caller.
 <p><a name="idna_005fto_005funicode_005f8z8z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_8z8z</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8z8z-88"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_8z8z</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8z8z-90"></a></var><br>
 <blockquote><p><var>input</var>: zero-terminated UTF-8 string.
 
         <p><var>output</var>: pointer to newly allocated output UTF-8 string.
@@ -2182,7 +2188,7 @@ caller.
 <p><a name="idna_005fto_005funicode_005f8zlz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_8zlz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8zlz-89"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_8zlz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005f8zlz-91"></a></var><br>
 <blockquote><p><var>input</var>: zero-terminated UTF-8 string.
 
         <p><var>output</var>: pointer to newly allocated output string encoded in the
@@ -2204,7 +2210,7 @@ buffer must be deallocated by the caller.
 <p><a name="idna_005fto_005funicode_005flzlz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>idna_to_unicode_lzlz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005flzlz-90"></a></var><br>
+&mdash; Function: int <b>idna_to_unicode_lzlz</b> (<var>const char * input, char ** output, int flags</var>)<var><a name="index-idna_005fto_005funicode_005flzlz-92"></a></var><br>
 <blockquote><p><var>input</var>: zero-terminated string encoded in the current locale's
 character set.
 
@@ -2229,7 +2235,7 @@ output buffer must be deallocated by the caller.
 <p><a name="idna_005fstrerror"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>idna_strerror</b> (<var>Idna_rc rc</var>)<var><a name="index-idna_005fstrerror-91"></a></var><br>
+&mdash; Function: const char * <b>idna_strerror</b> (<var>Idna_rc rc</var>)<var><a name="index-idna_005fstrerror-93"></a></var><br>
 <blockquote><p><var>rc</var>: an <code>Idna_rc</code> return code.
 
         <p>Convert a return code integer to a text string.  This string can be
@@ -2287,29 +2293,29 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">7 TLD Functions</h2>
 
-<p><a name="index-TLD-Functions-92"></a>
-Organizations that manage some Top Level Domains (<acronym>TLD</acronym>s) have
-published tables with characters they accept within the domain.  The
-reason may be to reduce complexity that come from using the full
-Unicode range, and to protect themselves from future (backwards
-incompatible) changes in the IDN or Unicode specifications.  Libidn
-implement an infrastructure for defining and checking strings against
-such tables.  Libidn also ship some tables from <acronym>TLD</acronym>s that we
-have managed to get permission to use them from.  Because these tables
-are even less static than Unicode or StringPrep tables, it is likely
-that they will be updated from time to time (even in backwards
-incompatibe ways).  The Libidn interface provide a &ldquo;version&rdquo; field
-for each <acronym>TLD</acronym> table, which can be compared for equality to
-guarantee the same operation over time.
+<p><a name="index-TLD-Functions-94"></a>
+Organizations that manage some Top Level Domains (TLDs) have published
+tables with characters they accept within the domain.  The reason may
+be to reduce complexity that come from using the full Unicode range,
+and to protect themselves from future (backwards incompatible) changes
+in the IDN or Unicode specifications.  Libidn implement an
+infrastructure for defining and checking strings against such tables. 
+Libidn also ship some tables from TLDs that we have managed to get
+permission to use them from.  Because these tables are even less
+static than Unicode or StringPrep tables, it is likely that they will
+be updated from time to time (even in backwards incompatible ways). 
+The Libidn interface provide a &ldquo;version&rdquo; field for each TLD table,
+which can be compared for equality to guarantee the same operation
+over time.
 
-   <p>From a design point of view, you can regard the <acronym>TLD</acronym> tables
-for IDN as the &ldquo;localization&rdquo; step that come after the
-&ldquo;internationalization&rdquo; step provided by the IETF standards.
+   <p>From a design point of view, you can regard the TLD tables for IDN as
+the &ldquo;localization&rdquo; step that come after the &ldquo;internationalization&rdquo;
+step provided by the IETF standards.
 
    <p>The TLD functionality rely on up-to-date tables.  The latest version
 of Libidn aim to provide these, but tables with unclear copying
 conditions, or generally experimental tables, are not included.  Some
-such tables can be found at <a href="http://tldchk.berlios.de">http://tldchk.berlios.de</a>.
+such tables can be found at <a href="https://github.com/gnuthor/tldchk">https://github.com/gnuthor/tldchk</a>.
 
 <h3 class="section">7.1 Header file <code>tld.h</code></h3>
 
@@ -2362,7 +2368,7 @@ the file <samp><span class="file">tld.h</span></samp> using:
 <p><a name="tld_005fcheck_005f4t"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_4t</b> (<var>const uint32_t * in, size_t inlen, size_t * errpos, const Tld_table * tld</var>)<var><a name="index-tld_005fcheck_005f4t-93"></a></var><br>
+&mdash; Function: int <b>tld_check_4t</b> (<var>const uint32_t * in, size_t inlen, size_t * errpos, const Tld_table * tld</var>)<var><a name="index-tld_005fcheck_005f4t-95"></a></var><br>
 <blockquote><p><var>in</var>: Array of unicode code points to process. Does not need to be
 zero terminated.
 
@@ -2389,7 +2395,7 @@ failure conditions.
 <p><a name="tld_005fcheck_005f4tz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_4tz</b> (<var>const uint32_t * in, size_t * errpos, const Tld_table * tld</var>)<var><a name="index-tld_005fcheck_005f4tz-94"></a></var><br>
+&mdash; Function: int <b>tld_check_4tz</b> (<var>const uint32_t * in, size_t * errpos, const Tld_table * tld</var>)<var><a name="index-tld_005fcheck_005f4tz-96"></a></var><br>
 <blockquote><p><var>in</var>: Zero terminated array of unicode code points to process.
 
         <p><var>errpos</var>: Position of offending character is returned here.
@@ -2415,7 +2421,7 @@ failure conditions.
 <p><a name="tld_005fget_005f4"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_get_4</b> (<var>const uint32_t * in, size_t inlen, char ** out</var>)<var><a name="index-tld_005fget_005f4-95"></a></var><br>
+&mdash; Function: int <b>tld_get_4</b> (<var>const uint32_t * in, size_t inlen, char ** out</var>)<var><a name="index-tld_005fget_005f4-97"></a></var><br>
 <blockquote><p><var>in</var>: Array of unicode code points to process. Does not need to be
 zero terminated.
 
@@ -2435,7 +2441,7 @@ string in <code>out</code>.
 <p><a name="tld_005fget_005f4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_get_4z</b> (<var>const uint32_t * in, char ** out</var>)<var><a name="index-tld_005fget_005f4z-96"></a></var><br>
+&mdash; Function: int <b>tld_get_4z</b> (<var>const uint32_t * in, char ** out</var>)<var><a name="index-tld_005fget_005f4z-98"></a></var><br>
 <blockquote><p><var>in</var>: Zero terminated array of unicode code points to process.
 
         <p><var>out</var>: Zero terminated ascii result string pointer.
@@ -2452,7 +2458,7 @@ string in <code>out</code>.
 <p><a name="tld_005fget_005fz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_get_z</b> (<var>const char * in, char ** out</var>)<var><a name="index-tld_005fget_005fz-97"></a></var><br>
+&mdash; Function: int <b>tld_get_z</b> (<var>const char * in, char ** out</var>)<var><a name="index-tld_005fget_005fz-99"></a></var><br>
 <blockquote><p><var>in</var>: Zero terminated character array to process.
 
         <p><var>out</var>: Zero terminated ascii result string pointer.
@@ -2470,7 +2476,7 @@ any ASCII compatible character encoding.
 <p><a name="tld_005fget_005ftable"></a>
 
 <div class="defun">
-&mdash; Function: const Tld_table * <b>tld_get_table</b> (<var>const char * tld, const Tld_table ** tables</var>)<var><a name="index-tld_005fget_005ftable-98"></a></var><br>
+&mdash; Function: const Tld_table * <b>tld_get_table</b> (<var>const char * tld, const Tld_table ** tables</var>)<var><a name="index-tld_005fget_005ftable-100"></a></var><br>
 <blockquote><p><var>tld</var>: TLD name (e.g. "com") as zero terminated ASCII byte string.
 
         <p><var>tables</var>: Zero terminated array of <code>Tld_table</code> info-structures for
@@ -2488,7 +2494,7 @@ thru <code>tables</code>, or return <code>NULL</code> if no such structure is fo
 <p><a name="tld_005fdefault_005ftable"></a>
 
 <div class="defun">
-&mdash; Function: const Tld_table * <b>tld_default_table</b> (<var>const char * tld, const Tld_table ** overrides</var>)<var><a name="index-tld_005fdefault_005ftable-99"></a></var><br>
+&mdash; Function: const Tld_table * <b>tld_default_table</b> (<var>const char * tld, const Tld_table ** overrides</var>)<var><a name="index-tld_005fdefault_005ftable-101"></a></var><br>
 <blockquote><p><var>tld</var>: TLD name (e.g. "com") as zero terminated ASCII byte string.
 
         <p><var>overrides</var>: Additional zero terminated array of <code>Tld_table</code>
@@ -2510,7 +2516,7 @@ no such structure found.
 <p><a name="tld_005fcheck_005f4"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_4</b> (<var>const uint32_t * in, size_t inlen, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f4-100"></a></var><br>
+&mdash; Function: int <b>tld_check_4</b> (<var>const uint32_t * in, size_t inlen, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f4-102"></a></var><br>
 <blockquote><p><var>in</var>: Array of unicode code points to process. Does not need to be
 zero terminated.
 
@@ -2541,7 +2547,7 @@ failure conditions.
 <p><a name="tld_005fcheck_005f4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_4z</b> (<var>const uint32_t * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f4z-101"></a></var><br>
+&mdash; Function: int <b>tld_check_4z</b> (<var>const uint32_t * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f4z-103"></a></var><br>
 <blockquote><p><var>in</var>: Zero-terminated array of unicode code points to process.
 
         <p><var>errpos</var>: Position of offending character is returned here.
@@ -2569,7 +2575,7 @@ failure conditions.
 <p><a name="tld_005fcheck_005f8z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_8z</b> (<var>const char * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f8z-102"></a></var><br>
+&mdash; Function: int <b>tld_check_8z</b> (<var>const char * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005f8z-104"></a></var><br>
 <blockquote><p><var>in</var>: Zero-terminated UTF8 string to process.
 
         <p><var>errpos</var>: Position of offending character is returned here.
@@ -2599,7 +2605,7 @@ failure conditions.
 <p><a name="tld_005fcheck_005flz"></a>
 
 <div class="defun">
-&mdash; Function: int <b>tld_check_lz</b> (<var>const char * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005flz-103"></a></var><br>
+&mdash; Function: int <b>tld_check_lz</b> (<var>const char * in, size_t * errpos, const Tld_table ** overrides</var>)<var><a name="index-tld_005fcheck_005flz-105"></a></var><br>
 <blockquote><p><var>in</var>: Zero-terminated string in the current locales encoding to process.
 
         <p><var>errpos</var>: Position of offending character is returned here.
@@ -2631,7 +2637,7 @@ failure conditions.
 <p><a name="tld_005fstrerror"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>tld_strerror</b> (<var>Tld_rc rc</var>)<var><a name="index-tld_005fstrerror-104"></a></var><br>
+&mdash; Function: const char * <b>tld_strerror</b> (<var>Tld_rc rc</var>)<var><a name="index-tld_005fstrerror-106"></a></var><br>
 <blockquote><p><var>rc</var>: tld return code
 
         <p>Convert a return code integer to a text string.  This string can be
@@ -2669,7 +2675,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">8 PR29 Functions</h2>
 
-<p><a name="index-PR29-Functions-105"></a>
+<p><a name="index-PR29-Functions-107"></a>
 A deficiency in the specification of Unicode Normalization Forms has
 been found.  The consequence is that some strings can be normalized
 into different strings by different implementations.  In other words,
@@ -2719,7 +2725,7 @@ the file <samp><span class="file">pr29.h</span></samp> using:
 <p><a name="pr29_005f4"></a>
 
 <div class="defun">
-&mdash; Function: int <b>pr29_4</b> (<var>const uint32_t * in, size_t len</var>)<var><a name="index-pr29_005f4-106"></a></var><br>
+&mdash; Function: int <b>pr29_4</b> (<var>const uint32_t * in, size_t len</var>)<var><a name="index-pr29_005f4-108"></a></var><br>
 <blockquote><p><var>in</var>: input array with unicode code points.
 
         <p><var>len</var>: length of input array with unicode code points.
@@ -2741,7 +2747,7 @@ implementations).
 <p><a name="pr29_005f4z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>pr29_4z</b> (<var>const uint32_t * in</var>)<var><a name="index-pr29_005f4z-107"></a></var><br>
+&mdash; Function: int <b>pr29_4z</b> (<var>const uint32_t * in</var>)<var><a name="index-pr29_005f4z-109"></a></var><br>
 <blockquote><p><var>in</var>: zero terminated array of Unicode code points.
 
         <p>Check the input to see if it may be normalized into different
@@ -2759,7 +2765,7 @@ implementations).
 <p><a name="pr29_005f8z"></a>
 
 <div class="defun">
-&mdash; Function: int <b>pr29_8z</b> (<var>const char * in</var>)<var><a name="index-pr29_005f8z-108"></a></var><br>
+&mdash; Function: int <b>pr29_8z</b> (<var>const char * in</var>)<var><a name="index-pr29_005f8z-110"></a></var><br>
 <blockquote><p><var>in</var>: zero terminated input UTF-8 string.
 
         <p>Check the input to see if it may be normalized into different
@@ -2780,7 +2786,7 @@ problem converting the string from UTF-8 to UCS-4.
 <p><a name="pr29_005fstrerror"></a>
 
 <div class="defun">
-&mdash; Function: const char * <b>pr29_strerror</b> (<var>Pr29_rc rc</var>)<var><a name="index-pr29_005fstrerror-109"></a></var><br>
+&mdash; Function: const char * <b>pr29_strerror</b> (<var>Pr29_rc rc</var>)<var><a name="index-pr29_005fstrerror-111"></a></var><br>
 <blockquote><p><var>rc</var>: an <code>Pr29_rc</code> return code.
 
         <p>Convert a return code integer to a text string.  This string can be
@@ -2793,7 +2799,7 @@ non-zero values, for logical comparison purposes.
         <p><strong>PR29_PROBLEM:</strong> A problem sequence was encountered.
 
         <p><strong>PR29_STRINGPREP_ERROR:</strong> The character set conversion failed (only
-for <code>pr29_8()</code> and <code>pr29_8z()</code>).
+for <code>pr29_8z()</code>).
 
         <p><strong>Return value:</strong> Returns a pointer to a statically allocated string
 containing a description of the error with the return code <code>rc</code>. 
@@ -2813,7 +2819,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">9 Examples</h2>
 
-<p><a name="index-Examples-110"></a>
+<p><a name="index-Examples-112"></a>
 This chapter contains example code which illustrate how `Libidn' can
 be used when writing your own application.
 
@@ -2838,7 +2844,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 <p>This example demonstrates how the stringprep functions are used.
 
 <pre class="verbatim">/* example.c --- Example code showing how to use stringprep().
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2888,9 +2894,11 @@ main (void)
 
   printf ("Input string encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
+  buf[strlen (buf) - 1] = '\0';
 
-  printf ("Before locale2utf8 (length %d): ", strlen (buf));
+  printf ("Before locale2utf8 (length %ld): ", strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -2904,7 +2912,7 @@ main (void)
   else
     printf ("Could not convert string to UTF-8, continuing anyway...\n");
 
-  printf ("Before stringprep (length %d): ", strlen (buf));
+  printf ("Before stringprep (length %ld): ", strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -2914,7 +2922,7 @@ main (void)
     printf ("Stringprep failed (%d): %s\n", rc, stringprep_strerror (rc));
   else
     {
-      printf ("After stringprep (length %d): ", strlen (buf));
+      printf ("After stringprep (length %ld): ", strlen (buf));
       for (i = 0; i &lt; strlen (buf); i++)
 	printf ("%02x ", buf[i] &amp; 0xFF);
       printf ("\n");
@@ -2937,7 +2945,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 <p>This example demonstrates how the punycode functions are used.
 
 <pre class="verbatim">/* example2.c --- Example code showing how to use punycode.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  * Copyright (C) 2002  Adam M. Costello
  *
  * This file is part of GNU Libidn.
@@ -3122,7 +3130,8 @@ main (int argc, char **argv)
 
       /* Read the Punycode input string and convert to ASCII: */
 
-      fgets (input, ace_max_length + 2, stdin);
+      if (!fgets (input, ace_max_length + 2, stdin))
+	fail (io_error);
       if (ferror (stdin))
 	fail (io_error);
       if (feof (stdin))
@@ -3185,7 +3194,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 internationalized domain names into ASCII compatible names.
 
 <pre class="verbatim">/* example3.c --- Example ToASCII() code showing how to use Libidn.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3236,10 +3245,11 @@ main (void)
 
   printf ("Input domain encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %d): ", strlen (buf));
+  printf ("Read string (length %ld): ", strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3248,10 +3258,10 @@ main (void)
   if (rc != IDNA_SUCCESS)
     {
       printf ("ToASCII() failed (%d): %s\n", rc, idna_strerror (rc));
-      exit (1);
+      return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %d): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
   for (i = 0; i &lt; strlen (p); i++)
     printf ("%02x ", p[i] &amp; 0xFF);
   printf ("\n");
@@ -3276,7 +3286,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 compatible names to internationalized domain names.
 
 <pre class="verbatim">/* example4.c --- Example ToUnicode() code showing how to use Libidn.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3327,10 +3337,11 @@ main (void)
 
   printf ("Input domain encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %d): ", strlen (buf));
+  printf ("Read string (length %ld): ", strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3339,10 +3350,10 @@ main (void)
   if (rc != IDNA_SUCCESS)
     {
       printf ("ToUnicode() failed (%d): %s\n", rc, idna_strerror (rc));
-      exit (1);
+      return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %d): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
   for (i = 0; i &lt; strlen (p); i++)
     printf ("%02x ", p[i] &amp; 0xFF);
   printf ("\n");
@@ -3366,7 +3377,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 for invalid characters within a specific TLD.
 
 <pre class="verbatim">/* example5.c --- Example TLD checking.
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2004-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3429,10 +3440,11 @@ main (void)
 
   printf ("Input domain encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %d): ", strlen (buf));
+  printf ("Read string (length %ld): ", strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3453,7 +3465,7 @@ main (void)
       return 2;
     }
 
-  printf ("ToASCII string (length %d): %s\n", strlen (p), p);
+  printf ("ToASCII string (length %ld): %s\n", strlen (p), p);
 
   rc = idna_to_unicode_8z4z (p, &amp;r, 0);
   free (p);
@@ -3473,7 +3485,7 @@ main (void)
   free (r);
   if (rc == TLD_INVALID)
     {
-      printf ("Domain rejected by TLD check, Unicode position %d\n", errpos);
+      printf ("Domain rejected by TLD check, Unicode position %ld\n", errpos);
       return 1;
     }
   else if (rc != TLD_SUCCESS)
@@ -3501,7 +3513,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">10 Invoking idn</h2>
 
-<p><a name="index-idn-111"></a><a name="index-invoking-_0040command_007bidn_007d-112"></a><a name="index-command-line-113"></a>
+<p><a name="index-idn-113"></a><a name="index-invoking-_0040command_007bidn_007d-114"></a><a name="index-command-line-115"></a>
 
 <h3 class="section">10.1 Name</h3>
 
@@ -3559,7 +3571,7 @@ You can override the charset used by setting environment variable
 
   -p, --profile=STRING     Use specified stringprep profile instead
                              Valid stringprep profiles: `Nameprep',
-                             `iSCSI', `Nodeprep', `Resourceprep', 
+                             `iSCSI', `Nodeprep', `Resourceprep',
                              `trace', `SASLprep'
 
       --debug              Print debugging information
@@ -3595,8 +3607,8 @@ Example usage:
      xn--rksmrgs-5wao1o.se
      jas@latte:~$
 </pre>
-   <p>Reading input from command line, and disabling copyright and license
-information:
+   <p>Reading input from command line, and disable printing copyright and
+license information:
 
 <pre class="example">     jas@latte:~$ idn --quiet r&auml;ksm&ouml;rg&aring;s.se bl&aring;b&aelig;rgr&oslash;d.no
      xn--rksmrgs-5wao1o.se
@@ -3644,23 +3656,23 @@ error like the following:
 </pre>
    <p>The simplest explanation is that you haven't installed the
 &lsquo;<samp><span class="samp">iconv</span></samp>&rsquo; conversion tools.  You can find it as a standalone
-library in <acronym>GNU</acronym> Libiconv
-(<a href="http://www.gnu.org/software/libiconv/">http://www.gnu.org/software/libiconv/</a>).  On many
-<acronym>GNU</acronym>/Linux systems, this library is part of the system, but
-you may have to install additional packages (e.g., &lsquo;<samp><span class="samp">glibc-locale</span></samp>&rsquo;
-for Debian) to be able to use it.
+library in GNU Libiconv
+(<a href="http://www.gnu.org/software/libiconv/">http://www.gnu.org/software/libiconv/</a>).  On many GNU/Linux
+systems, this library is part of the system, but you may have to
+install additional packages (e.g., &lsquo;<samp><span class="samp">glibc-locale</span></samp>&rsquo; for Debian) to
+be able to use it.
 
    <p>Another explanation is that the error is correct and you are feeding
 &lsquo;<samp><span class="samp">idn</span></samp>&rsquo; invalid data.  This can happen inadvertently if you are not
-careful with the character set encodings you use.  For example, if
-your shell run in a <code>ISO-8859-1</code> environment, and you invoke
+careful with the character set encoding you use.  For example, if your
+shell run in a <code>ISO-8859-1</code> environment, and you invoke
 &lsquo;<samp><span class="samp">idn</span></samp>&rsquo; with the &lsquo;<samp><span class="samp">CHARSET</span></samp>&rsquo; environment variable as follows,
 you will feed it <code>ISO-8859-1</code> characters but force it to believe
 they are <code>UTF-8</code>.  Naturally this will lead to an error, unless
-the byte sequences happen to be parsable as <code>UTF-8</code>.  Note that
-even if you don't get an error, the output may be incorrect in this
-situation, because <code>ISO-8859-1</code> and <code>UTF-8</code> does not in
-general encode the same characters as the same byte sequences.
+the byte sequences happen to be valid <code>UTF-8</code>.  Note that even if
+you don't get an error, the output may be incorrect in this situation,
+because <code>ISO-8859-1</code> and <code>UTF-8</code> does not in general encode
+the same characters as the same byte sequences.
 
 <pre class="example">     jas@latte:~$ idn --quiet --debug ""
      system locale uses charset `ISO-8859-1'.
@@ -3720,40 +3732,40 @@ via the API.
 <h3 class="section">11.1 Punycode Emacs API</h3>
 
 <div class="defun">
-&mdash; Variable: <b>punycode-program</b><var><a name="index-punycode_002dprogram-114"></a></var><br>
+&mdash; Variable: <b>punycode-program</b><var><a name="index-punycode_002dprogram-116"></a></var><br>
 <blockquote><p>Name of the GNU Libidn <samp><span class="file">idn</span></samp> application.  The default is
 &lsquo;<samp><span class="samp">idn</span></samp>&rsquo;.  This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>punycode-environment</b><var><a name="index-punycode_002denvironment-115"></a></var><br>
+&mdash; Variable: <b>punycode-environment</b><var><a name="index-punycode_002denvironment-117"></a></var><br>
 <blockquote><p>List of environment variable definitions prepended to
 &lsquo;<samp><span class="samp">process-environment</span></samp>&rsquo;.  The default is &lsquo;<samp><span class="samp">("CHARSET=UTF-8")</span></samp>&rsquo;. 
 This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>punycode-encode-parameters</b><var><a name="index-punycode_002dencode_002dparameters-116"></a></var><br>
+&mdash; Variable: <b>punycode-encode-parameters</b><var><a name="index-punycode_002dencode_002dparameters-118"></a></var><br>
 <blockquote><p>List of parameters passed to <var>punycode-program</var> to invoke punycode
 encoding mode.  The default is &lsquo;<samp><span class="samp">("--quiet" "--punycode-encode")</span></samp>&rsquo;. 
 This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>punycode-decode-parameters</b><var><a name="index-punycode_002ddecode_002dparameters-117"></a></var><br>
+&mdash; Variable: <b>punycode-decode-parameters</b><var><a name="index-punycode_002ddecode_002dparameters-119"></a></var><br>
 <blockquote><p>Parameters passed to <var>punycode-program</var> to invoke punycode
 decoding mode.  The default is &lsquo;<samp><span class="samp">("--quiet" "--punycode-decode")</span></samp>&rsquo;. 
 This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: <b>punycode-encode</b><var> string<a name="index-punycode_002dencode-118"></a></var><br>
+&mdash; Function: <b>punycode-encode</b><var> string<a name="index-punycode_002dencode-120"></a></var><br>
 <blockquote><p>Returns a Punycode encoding of the <var>string</var>, after converting the
 input into UTF-8. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: <b>punycode-decode</b><var> string<a name="index-punycode_002ddecode-119"></a></var><br>
+&mdash; Function: <b>punycode-decode</b><var> string<a name="index-punycode_002ddecode-121"></a></var><br>
 <blockquote><p>Returns a possibly multibyte string which is the decoding of the
 <var>string</var> which is a punycode encoded string. 
 </p></blockquote></div>
@@ -3761,41 +3773,41 @@ input into UTF-8.
 <h3 class="section">11.2 IDNA Emacs API</h3>
 
 <div class="defun">
-&mdash; Variable: <b>idna-program</b><var><a name="index-idna_002dprogram-120"></a></var><br>
+&mdash; Variable: <b>idna-program</b><var><a name="index-idna_002dprogram-122"></a></var><br>
 <blockquote><p>Name of the GNU Libidn <samp><span class="file">idn</span></samp> application.  The default is
 &lsquo;<samp><span class="samp">idn</span></samp>&rsquo;.  This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>idna-environment</b><var><a name="index-idna_002denvironment-121"></a></var><br>
+&mdash; Variable: <b>idna-environment</b><var><a name="index-idna_002denvironment-123"></a></var><br>
 <blockquote><p>List of environment variable definitions prepended to
 &lsquo;<samp><span class="samp">process-environment</span></samp>&rsquo;.  The default is &lsquo;<samp><span class="samp">("CHARSET=UTF-8")</span></samp>&rsquo;. 
 This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>idna-to-ascii-parameters</b><var><a name="index-idna_002dto_002dascii_002dparameters-122"></a></var><br>
+&mdash; Variable: <b>idna-to-ascii-parameters</b><var><a name="index-idna_002dto_002dascii_002dparameters-124"></a></var><br>
 <blockquote><p>List of parameters passed to <var>idna-program</var> to invoke IDNA ToASCII
 mode.  The default is &lsquo;<samp><span class="samp">("--quiet" "--idna-to-ascii"
 "--usestd3asciirules")</span></samp>&rsquo;.  This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Variable: <b>idna-to-unicode-parameters</b><var><a name="index-idna_002dto_002dunicode_002dparameters-123"></a></var><br>
+&mdash; Variable: <b>idna-to-unicode-parameters</b><var><a name="index-idna_002dto_002dunicode_002dparameters-125"></a></var><br>
 <blockquote><p>Parameters passed <var>idna-program</var> to invoke IDNA ToUnicode mode. 
 The default is &lsquo;<samp><span class="samp">("--quiet" "--idna-to-unicode"
 "--usestd3asciirules")</span></samp>&rsquo;.  This variable can be customized. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: <b>idna-to-ascii</b><var> string<a name="index-idna_002dto_002dascii-124"></a></var><br>
+&mdash; Function: <b>idna-to-ascii</b><var> string<a name="index-idna_002dto_002dascii-126"></a></var><br>
 <blockquote><p>Returns an ASCII Compatible Encoding (ACE) of the string computed by
 the IDNA ToASCII operation on the input <var>string</var>, after converting
 the input to UTF-8. 
 </p></blockquote></div>
 
 <div class="defun">
-&mdash; Function: <b>idna-to-unicode</b><var> string<a name="index-idna_002dto_002dunicode-125"></a></var><br>
+&mdash; Function: <b>idna-to-unicode</b><var> string<a name="index-idna_002dto_002dunicode-127"></a></var><br>
 <blockquote><p>Returns a possibly multibyte string which is the output of the IDNA
 ToUnicode operation computed on the input <var>string</var>. 
 </p></blockquote></div>
@@ -3818,7 +3830,7 @@ pending.
 
    <p>The Java library, if Libidn has been built with Java support
 (see <a href="#Downloading-and-Installing">Downloading and Installing</a>), will be placed in
-<samp><span class="file">java/libidn-1.15.jar</span></samp>.  The source code is located in
+<samp><span class="file">java/libidn-1.25.jar</span></samp>.  The source code is located in
 <samp><span class="file">java/gnu/inet/encoding/</span></samp>.
 
 <h3 class="section">12.1 Overview</h3>
@@ -3879,7 +3891,7 @@ or against Simon Josefsson's test vectors.
    <p>The test vectors can be found at the Libidn homepage,
 <a href="http://www.gnu.org/software/libidn/">http://www.gnu.org/software/libidn/</a>.
 
-   <p>To test the tranformation manually, use:
+   <p>To test the transformation manually, use:
 
 <pre class="example">     $ java -cp .:../libidn.jar TestIDNA -a &lt;string to test&gt;
      Input: &lt;string to test&gt;
@@ -3929,7 +3941,7 @@ require changes to this library.  See also the next section.
 
 <h3 class="section">12.4 A Note on Java and Unicode</h3>
 
-<p>This library uses Java's builtin 'char' datatype. Up to Java 1.4, this
+<p>This library uses Java's built-in 'char' datatype. Up to Java 1.4, this
 datatype only supports 16-bit Unicode code points, also called the
 Basic Multilingual Plane. For this reason, this library doesn't work
 for Supplementary Characters (i.e. characters from U+10000 to
@@ -4068,15 +4080,15 @@ Subject: Possible bug and status of PR 29 change(s)
 To: bug-libidn@gnu.org
 Date: Wed, 27 Oct 2004 14:49:17 -0700
 
-Hello. On behalf of the Unicode Consortium editorial committee, I would  
-like to find out more information about the PR 29 fixes, if any, and  
-functions in Libidn. Your implementation was listed in the text of PR29 as  
+Hello. On behalf of the Unicode Consortium editorial committee, I would
+like to find out more information about the PR 29 fixes, if any, and
+functions in Libidn. Your implementation was listed in the text of PR29 as
 needing investigation, so I am following up on several implementations.
 
-The UTC has accepted the proposed fix to D2 as outlined in PR29, and a new  
+The UTC has accepted the proposed fix to D2 as outlined in PR29, and a new
 draft of UAX #15 has been issued.
 
-I have looked at Libidn 0.5.8 (today), and there may still be a possible  
+I have looked at Libidn 0.5.8 (today), and there may still be a possible
 bug in NFKC.java and nfkc.c.
 
 ------------------------------------------------------
@@ -4101,9 +4113,9 @@ but I'm not sure of the sense of this comparison.
 		       &amp;wc_buffer[last_start]))
 	    {
 
-This appears to have the same bug as the current Python implementation (in  
-Python 2.3.4). The code should be checking, as per new rule D2 UAX #15  
-update, that the next combining character is the same or HIGHER than the  
+This appears to have the same bug as the current Python implementation (in
+Python 2.3.4). The code should be checking, as per new rule D2 UAX #15
+update, that the next combining character is the same or HIGHER than the
 current one. It now checks to see if it's non-zero and not equal.
 
 The above line(s) should perhaps be changed to:
@@ -4116,8 +4128,8 @@ The above line(s) should perhaps be changed to:
 
 but I'm not sure of the sense of the comparison (&lt; or > or &lt;=?) here.
 
-In the text of PR29, I will be marking Libidn as "needs change" and adding  
-the version number that I checked. If any further change is made, please  
+In the text of PR29, I will be marking Libidn as "needs change" and adding
+the version number that I checked. If any further change is made, please
 let me know the release version, and I'll update again.
 
 Regards,
@@ -4132,15 +4144,15 @@ Date: Thu, 28 Oct 2004 09:47:47 +0200
 
 Rick McGowan &lt;rick@unicode.org> writes:
 
-> Hello. On behalf of the Unicode Consortium editorial committee, I would  
-> like to find out more information about the PR 29 fixes, if any, and  
-> functions in Libidn. Your implementation was listed in the text of PR29 as  
+> Hello. On behalf of the Unicode Consortium editorial committee, I would
+> like to find out more information about the PR 29 fixes, if any, and
+> functions in Libidn. Your implementation was listed in the text of PR29 as
 > needing investigation, so I am following up on several implementations.
 >
-> The UTC has accepted the proposed fix to D2 as outlined in PR29, and a new  
+> The UTC has accepted the proposed fix to D2 as outlined in PR29, and a new
 > draft of UAX #15 has been issued.
 >
-> I have looked at Libidn 0.5.8 (today), and there may still be a possible  
+> I have looked at Libidn 0.5.8 (today), and there may still be a possible
 > bug in NFKC.java and nfkc.c.
 
 Hello Rick.
@@ -4236,21 +4248,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <ul class="menu">
 <li><a accesskey="1" href="#GNU-Free-Documentation-License">GNU Free Documentation License</a>:    License for copying this manual. 
-<li><a accesskey="2" href="#GNU-LGPL">GNU LGPL</a>:                          License for copying the library. 
-<li><a accesskey="3" href="#GNU-GPL">GNU GPL</a>:                           License for copying the programs. 
 </ul>
 
 <div class="node">
 <a name="GNU-Free-Documentation-License"></a>
 <p><hr>
-Next:&nbsp;<a rel="next" accesskey="n" href="#GNU-LGPL">GNU LGPL</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Copying-Information">Copying Information</a>
 
 </div>
 
 <h3 class="appendixsec">C.1 GNU Free Documentation License</h3>
 
-<p><a name="index-FDL_002c-GNU-Free-Documentation-License-126"></a>
+<p><a name="index-FDL_002c-GNU-Free-Documentation-License-128"></a>
 
 <!-- The GNU Free Documentation License. -->
 <div align="center">Version 1.3, 3 November 2008</div>
@@ -4341,16 +4350,16 @@ An image format is not Transparent if used for any substantial amount
 of text.  A copy that is not &ldquo;Transparent&rdquo; is called &ldquo;Opaque&rdquo;.
 
      <p>Examples of suitable formats for Transparent copies include plain
-<span class="sc">ascii</span> without markup, Texinfo input format, LaTeX input
-format, <acronym>SGML</acronym> or <acronym>XML</acronym> using a publicly available
-<acronym>DTD</acronym>, and standard-conforming simple <acronym>HTML</acronym>,
-PostScript or <acronym>PDF</acronym> designed for human modification.  Examples
-of transparent image formats include <acronym>PNG</acronym>, <acronym>XCF</acronym> and
-<acronym>JPG</acronym>.  Opaque formats include proprietary formats that can be
-read and edited only by proprietary word processors, <acronym>SGML</acronym> or
-<acronym>XML</acronym> for which the <acronym>DTD</acronym> and/or processing tools are
-not generally available, and the machine-generated <acronym>HTML</acronym>,
-PostScript or <acronym>PDF</acronym> produced by some word processors for
+ASCII without markup, Texinfo input format, LaTeX input
+format, SGML or XML using a publicly available
+DTD, and standard-conforming simple HTML,
+PostScript or PDF designed for human modification.  Examples
+of transparent image formats include PNG, XCF and
+JPG.  Opaque formats include proprietary formats that can be
+read and edited only by proprietary word processors, SGML or
+XML for which the DTD and/or processing tools are
+not generally available, and the machine-generated HTML,
+PostScript or PDF produced by some word processors for
 output purposes only.
 
      <p>The &ldquo;Title Page&rdquo; means, for a printed book, the title page itself,
@@ -4719,1237 +4728,6 @@ to permit their use in free software.
 <!-- ispell-local-pdict: "ispell-dict" -->
 <!-- End: -->
 <div class="node">
-<a name="GNU-LGPL"></a>
-<p><hr>
-Next:&nbsp;<a rel="next" accesskey="n" href="#GNU-GPL">GNU GPL</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#GNU-Free-Documentation-License">GNU Free Documentation License</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="#Copying-Information">Copying Information</a>
-
-</div>
-
-<h3 class="appendixsec">C.2 GNU Lesser General Public License</h3>
-
-<p><a name="index-LGPL_002c-GNU-Lesser-General-Public-License-127"></a><a name="index-License_002c-GNU-LGPL-128"></a>
-
-<!-- The GNU Lesser General Public License. -->
-<div align="center">Version 2.1, February 1999</div>
-
-<!-- This file is intended to be included within another document, -->
-<!-- hence no sectioning command or @node. -->
-<pre class="display">     Copyright &copy; 1991, 1999 Free Software Foundation, Inc.
-     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
-     
-     Everyone is permitted to copy and distribute verbatim copies
-     of this license document, but changing it is not allowed.
-     
-     [This is the first released version of the Lesser GPL.  It also counts
-     as the successor of the GNU Library Public License, version 2, hence the
-     version number 2.1.]
-</pre>
-   <h4 class="subheading">Preamble</h4>
-
-<p>The licenses for most software are designed to take away your
-freedom to share and change it.  By contrast, the GNU General Public
-Licenses are intended to guarantee your freedom to share and change
-free software&mdash;to make sure the software is free for all its users.
-
-   <p>This license, the Lesser General Public License, applies to some
-specially designated software&mdash;typically libraries&mdash;of the Free
-Software Foundation and other authors who decide to use it.  You can use
-it too, but we suggest you first think carefully about whether this
-license or the ordinary General Public License is the better strategy to
-use in any particular case, based on the explanations below.
-
-   <p>When we speak of free software, we are referring to freedom of use,
-not price.  Our General Public Licenses are designed to make sure that
-you have the freedom to distribute copies of free software (and charge
-for this service if you wish); that you receive source code or can get
-it if you want it; that you can change the software and use pieces of it
-in new free programs; and that you are informed that you can do these
-things.
-
-   <p>To protect your rights, we need to make restrictions that forbid
-distributors to deny you these rights or to ask you to surrender these
-rights.  These restrictions translate to certain responsibilities for
-you if you distribute copies of the library or if you modify it.
-
-   <p>For example, if you distribute copies of the library, whether gratis
-or for a fee, you must give the recipients all the rights that we gave
-you.  You must make sure that they, too, receive or can get the source
-code.  If you link other code with the library, you must provide
-complete object files to the recipients, so that they can relink them
-with the library after making changes to the library and recompiling
-it.  And you must show them these terms so they know their rights.
-
-   <p>We protect your rights with a two-step method: (1) we copyright the
-library, and (2) we offer you this license, which gives you legal
-permission to copy, distribute and/or modify the library.
-
-   <p>To protect each distributor, we want to make it very clear that
-there is no warranty for the free library.  Also, if the library is
-modified by someone else and passed on, the recipients should know
-that what they have is not the original version, so that the original
-author's reputation will not be affected by problems that might be
-introduced by others.
-
-   <p>Finally, software patents pose a constant threat to the existence of
-any free program.  We wish to make sure that a company cannot
-effectively restrict the users of a free program by obtaining a
-restrictive license from a patent holder.  Therefore, we insist that
-any patent license obtained for a version of the library must be
-consistent with the full freedom of use specified in this license.
-
-   <p>Most GNU software, including some libraries, is covered by the
-ordinary GNU General Public License.  This license, the GNU Lesser
-General Public License, applies to certain designated libraries, and
-is quite different from the ordinary General Public License.  We use
-this license for certain libraries in order to permit linking those
-libraries into non-free programs.
-
-   <p>When a program is linked with a library, whether statically or using
-a shared library, the combination of the two is legally speaking a
-combined work, a derivative of the original library.  The ordinary
-General Public License therefore permits such linking only if the
-entire combination fits its criteria of freedom.  The Lesser General
-Public License permits more lax criteria for linking other code with
-the library.
-
-   <p>We call this license the <dfn>Lesser</dfn> General Public License because it
-does <em>Less</em> to protect the user's freedom than the ordinary General
-Public License.  It also provides other free software developers Less
-of an advantage over competing non-free programs.  These disadvantages
-are the reason we use the ordinary General Public License for many
-libraries.  However, the Lesser license provides advantages in certain
-special circumstances.
-
-   <p>For example, on rare occasions, there may be a special need to
-encourage the widest possible use of a certain library, so that it becomes
-a de-facto standard.  To achieve this, non-free programs must be
-allowed to use the library.  A more frequent case is that a free
-library does the same job as widely used non-free libraries.  In this
-case, there is little to gain by limiting the free library to free
-software only, so we use the Lesser General Public License.
-
-   <p>In other cases, permission to use a particular library in non-free
-programs enables a greater number of people to use a large body of
-free software.  For example, permission to use the GNU C Library in
-non-free programs enables many more people to use the whole GNU
-operating system, as well as its variant, the GNU/Linux operating
-system.
-
-   <p>Although the Lesser General Public License is Less protective of the
-users' freedom, it does ensure that the user of a program that is
-linked with the Library has the freedom and the wherewithal to run
-that program using a modified version of the Library.
-
-   <p>The precise terms and conditions for copying, distribution and
-modification follow.  Pay close attention to the difference between a
-&ldquo;work based on the library&rdquo; and a &ldquo;work that uses the library&rdquo;.  The
-former contains code derived from the library, whereas the latter must
-be combined with the library in order to run.
-
-<h4 class="subheading">TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</h4>
-
-     <ol type=1 start=0>
-<li>This License Agreement applies to any software library or other program
-which contains a notice placed by the copyright holder or other
-authorized party saying it may be distributed under the terms of this
-Lesser General Public License (also called &ldquo;this License&rdquo;).  Each
-licensee is addressed as &ldquo;you&rdquo;.
-
-     <p>A &ldquo;library&rdquo; means a collection of software functions and/or data
-prepared so as to be conveniently linked with application programs
-(which use some of those functions and data) to form executables.
-
-     <p>The &ldquo;Library&rdquo;, below, refers to any such software library or work
-which has been distributed under these terms.  A &ldquo;work based on the
-Library&rdquo; means either the Library or any derivative work under
-copyright law: that is to say, a work containing the Library or a
-portion of it, either verbatim or with modifications and/or translated
-straightforwardly into another language.  (Hereinafter, translation is
-included without limitation in the term &ldquo;modification&rdquo;.)
-
-     <p>&ldquo;Source code&rdquo; for a work means the preferred form of the work for
-making modifications to it.  For a library, complete source code means
-all the source code for all modules it contains, plus any associated
-interface definition files, plus the scripts used to control compilation
-and installation of the library.
-
-     <p>Activities other than copying, distribution and modification are not
-covered by this License; they are outside its scope.  The act of
-running a program using the Library is not restricted, and output from
-such a program is covered only if its contents constitute a work based
-on the Library (independent of the use of the Library in a tool for
-writing it).  Whether that is true depends on what the Library does
-and what the program that uses the Library does.
-
-     <li>You may copy and distribute verbatim copies of the Library's
-complete source code as you receive it, in any medium, provided that
-you conspicuously and appropriately publish on each copy an
-appropriate copyright notice and disclaimer of warranty; keep intact
-all the notices that refer to this License and to the absence of any
-warranty; and distribute a copy of this License along with the
-Library.
-
-     <p>You may charge a fee for the physical act of transferring a copy,
-and you may at your option offer warranty protection in exchange for a
-fee.
-
-     <li>You may modify your copy or copies of the Library or any portion
-of it, thus forming a work based on the Library, and copy and
-distribute such modifications or work under the terms of Section 1
-above, provided that you also meet all of these conditions:
-
-          <ol type=a start=1>
-<li>The modified work must itself be a software library.
-
-          <li>You must cause the files modified to carry prominent notices
-stating that you changed the files and the date of any change.
-
-          <li>You must cause the whole of the work to be licensed at no
-charge to all third parties under the terms of this License.
-
-          <li>If a facility in the modified Library refers to a function or a
-table of data to be supplied by an application program that uses
-the facility, other than as an argument passed when the facility
-is invoked, then you must make a good faith effort to ensure that,
-in the event an application does not supply such function or
-table, the facility still operates, and performs whatever part of
-its purpose remains meaningful.
-
-          <p>(For example, a function in a library to compute square roots has
-a purpose that is entirely well-defined independent of the
-application.  Therefore, Subsection 2d requires that any
-application-supplied function or table used by this function must
-be optional: if the application does not supply it, the square
-root function must still compute square roots.)
-          </ol>
-
-     <p>These requirements apply to the modified work as a whole.  If
-identifiable sections of that work are not derived from the Library,
-and can be reasonably considered independent and separate works in
-themselves, then this License, and its terms, do not apply to those
-sections when you distribute them as separate works.  But when you
-distribute the same sections as part of a whole which is a work based
-on the Library, the distribution of the whole must be on the terms of
-this License, whose permissions for other licensees extend to the
-entire whole, and thus to each and every part regardless of who wrote
-it.
-
-     <p>Thus, it is not the intent of this section to claim rights or contest
-your rights to work written entirely by you; rather, the intent is to
-exercise the right to control the distribution of derivative or
-collective works based on the Library.
-
-     <p>In addition, mere aggregation of another work not based on the Library
-with the Library (or with a work based on the Library) on a volume of
-a storage or distribution medium does not bring the other work under
-the scope of this License.
-
-     <li>You may opt to apply the terms of the ordinary GNU General Public
-License instead of this License to a given copy of the Library.  To do
-this, you must alter all the notices that refer to this License, so
-that they refer to the ordinary GNU General Public License, version 2,
-instead of to this License.  (If a newer version than version 2 of the
-ordinary GNU General Public License has appeared, then you can specify
-that version instead if you wish.)  Do not make any other change in
-these notices.
-
-     <p>Once this change is made in a given copy, it is irreversible for
-that copy, so the ordinary GNU General Public License applies to all
-subsequent copies and derivative works made from that copy.
-
-     <p>This option is useful when you wish to copy part of the code of
-the Library into a program that is not a library.
-
-     <li>You may copy and distribute the Library (or a portion or
-derivative of it, under Section 2) in object code or executable form
-under the terms of Sections 1 and 2 above provided that you accompany
-it with the complete corresponding machine-readable source code, which
-must be distributed under the terms of Sections 1 and 2 above on a
-medium customarily used for software interchange.
-
-     <p>If distribution of object code is made by offering access to copy
-from a designated place, then offering equivalent access to copy the
-source code from the same place satisfies the requirement to
-distribute the source code, even though third parties are not
-compelled to copy the source along with the object code.
-
-     <li>A program that contains no derivative of any portion of the
-Library, but is designed to work with the Library by being compiled or
-linked with it, is called a &ldquo;work that uses the Library&rdquo;.  Such a
-work, in isolation, is not a derivative work of the Library, and
-therefore falls outside the scope of this License.
-
-     <p>However, linking a &ldquo;work that uses the Library&rdquo; with the Library
-creates an executable that is a derivative of the Library (because it
-contains portions of the Library), rather than a &ldquo;work that uses the
-library&rdquo;.  The executable is therefore covered by this License. 
-Section 6 states terms for distribution of such executables.
-
-     <p>When a &ldquo;work that uses the Library&rdquo; uses material from a header file
-that is part of the Library, the object code for the work may be a
-derivative work of the Library even though the source code is not. 
-Whether this is true is especially significant if the work can be
-linked without the Library, or if the work is itself a library.  The
-threshold for this to be true is not precisely defined by law.
-
-     <p>If such an object file uses only numerical parameters, data
-structure layouts and accessors, and small macros and small inline
-functions (ten lines or less in length), then the use of the object
-file is unrestricted, regardless of whether it is legally a derivative
-work.  (Executables containing this object code plus portions of the
-Library will still fall under Section 6.)
-
-     <p>Otherwise, if the work is a derivative of the Library, you may
-distribute the object code for the work under the terms of Section 6. 
-Any executables containing that work also fall under Section 6,
-whether or not they are linked directly with the Library itself.
-
-     <li>As an exception to the Sections above, you may also combine or
-link a &ldquo;work that uses the Library&rdquo; with the Library to produce a
-work containing portions of the Library, and distribute that work
-under terms of your choice, provided that the terms permit
-modification of the work for the customer's own use and reverse
-engineering for debugging such modifications.
-
-     <p>You must give prominent notice with each copy of the work that the
-Library is used in it and that the Library and its use are covered by
-this License.  You must supply a copy of this License.  If the work
-during execution displays copyright notices, you must include the
-copyright notice for the Library among them, as well as a reference
-directing the user to the copy of this License.  Also, you must do one
-of these things:
-
-          <ol type=a start=1>
-<li>Accompany the work with the complete corresponding
-machine-readable source code for the Library including whatever
-changes were used in the work (which must be distributed under
-Sections 1 and 2 above); and, if the work is an executable linked
-with the Library, with the complete machine-readable &ldquo;work that
-uses the Library&rdquo;, as object code and/or source code, so that the
-user can modify the Library and then relink to produce a modified
-executable containing the modified Library.  (It is understood
-that the user who changes the contents of definitions files in the
-Library will not necessarily be able to recompile the application
-to use the modified definitions.)
-
-          <li>Use a suitable shared library mechanism for linking with the Library.  A
-suitable mechanism is one that (1) uses at run time a copy of the
-library already present on the user's computer system, rather than
-copying library functions into the executable, and (2) will operate
-properly with a modified version of the library, if the user installs
-one, as long as the modified version is interface-compatible with the
-version that the work was made with.
-
-          <li>Accompany the work with a written offer, valid for at
-least three years, to give the same user the materials
-specified in Subsection 6a, above, for a charge no more
-than the cost of performing this distribution.
-
-          <li>If distribution of the work is made by offering access to copy
-from a designated place, offer equivalent access to copy the above
-specified materials from the same place.
-
-          <li>Verify that the user has already received a copy of these
-materials or that you have already sent this user a copy.
-          </ol>
-
-     <p>For an executable, the required form of the &ldquo;work that uses the
-Library&rdquo; must include any data and utility programs needed for
-reproducing the executable from it.  However, as a special exception,
-the materials to be distributed need not include anything that is
-normally distributed (in either source or binary form) with the major
-components (compiler, kernel, and so on) of the operating system on
-which the executable runs, unless that component itself accompanies the
-executable.
-
-     <p>It may happen that this requirement contradicts the license
-restrictions of other proprietary libraries that do not normally
-accompany the operating system.  Such a contradiction means you cannot
-use both them and the Library together in an executable that you
-distribute.
-
-     <li>You may place library facilities that are a work based on the
-Library side-by-side in a single library together with other library
-facilities not covered by this License, and distribute such a combined
-library, provided that the separate distribution of the work based on
-the Library and of the other library facilities is otherwise
-permitted, and provided that you do these two things:
-
-          <ol type=a start=1>
-<li>Accompany the combined library with a copy of the same work
-based on the Library, uncombined with any other library
-facilities.  This must be distributed under the terms of the
-Sections above.
-
-          <li>Give prominent notice with the combined library of the fact
-that part of it is a work based on the Library, and explaining
-where to find the accompanying uncombined form of the same work.
-          </ol>
-
-     <li>You may not copy, modify, sublicense, link with, or distribute
-the Library except as expressly provided under this License.  Any
-attempt otherwise to copy, modify, sublicense, link with, or
-distribute the Library is void, and will automatically terminate your
-rights under this License.  However, parties who have received copies,
-or rights, from you under this License will not have their licenses
-terminated so long as such parties remain in full compliance.
-
-     <li>You are not required to accept this License, since you have not
-signed it.  However, nothing else grants you permission to modify or
-distribute the Library or its derivative works.  These actions are
-prohibited by law if you do not accept this License.  Therefore, by
-modifying or distributing the Library (or any work based on the
-Library), you indicate your acceptance of this License to do so, and
-all its terms and conditions for copying, distributing or modifying
-the Library or works based on it.
-
-     <li>Each time you redistribute the Library (or any work based on the
-Library), the recipient automatically receives a license from the
-original licensor to copy, distribute, link with or modify the Library
-subject to these terms and conditions.  You may not impose any further
-restrictions on the recipients' exercise of the rights granted herein. 
-You are not responsible for enforcing compliance by third parties with
-this License.
-
-     <li>If, as a consequence of a court judgment or allegation of patent
-infringement or for any other reason (not limited to patent issues),
-conditions are imposed on you (whether by court order, agreement or
-otherwise) that contradict the conditions of this License, they do not
-excuse you from the conditions of this License.  If you cannot
-distribute so as to satisfy simultaneously your obligations under this
-License and any other pertinent obligations, then as a consequence you
-may not distribute the Library at all.  For example, if a patent
-license would not permit royalty-free redistribution of the Library by
-all those who receive copies directly or indirectly through you, then
-the only way you could satisfy both it and this License would be to
-refrain entirely from distribution of the Library.
-
-     <p>If any portion of this section is held invalid or unenforceable under any
-particular circumstance, the balance of the section is intended to apply,
-and the section as a whole is intended to apply in other circumstances.
-
-     <p>It is not the purpose of this section to induce you to infringe any
-patents or other property right claims or to contest validity of any
-such claims; this section has the sole purpose of protecting the
-integrity of the free software distribution system which is
-implemented by public license practices.  Many people have made
-generous contributions to the wide range of software distributed
-through that system in reliance on consistent application of that
-system; it is up to the author/donor to decide if he or she is willing
-to distribute software through any other system and a licensee cannot
-impose that choice.
-
-     <p>This section is intended to make thoroughly clear what is believed to
-be a consequence of the rest of this License.
-
-     <li>If the distribution and/or use of the Library is restricted in
-certain countries either by patents or by copyrighted interfaces, the
-original copyright holder who places the Library under this License may add
-an explicit geographical distribution limitation excluding those countries,
-so that distribution is permitted only in or among countries not thus
-excluded.  In such case, this License incorporates the limitation as if
-written in the body of this License.
-
-     <li>The Free Software Foundation may publish revised and/or new
-versions of the Lesser General Public License from time to time. 
-Such new versions will be similar in spirit to the present version,
-but may differ in detail to address new problems or concerns.
-
-     <p>Each version is given a distinguishing version number.  If the Library
-specifies a version number of this License which applies to it and
-&ldquo;any later version&rdquo;, you have the option of following the terms and
-conditions either of that version or of any later version published by
-the Free Software Foundation.  If the Library does not specify a
-license version number, you may choose any version ever published by
-the Free Software Foundation.
-
-     <li>If you wish to incorporate parts of the Library into other free
-programs whose distribution conditions are incompatible with these,
-write to the author to ask for permission.  For software which is
-copyrighted by the Free Software Foundation, write to the Free
-Software Foundation; we sometimes make exceptions for this.  Our
-decision will be guided by the two goals of preserving the free status
-of all derivatives of our free software and of promoting the sharing
-and reuse of software generally.
-
-     <li>BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
-WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW. 
-EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
-OTHER PARTIES PROVIDE THE LIBRARY &ldquo;AS IS&rdquo; WITHOUT WARRANTY OF ANY
-KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
-LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME
-THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
-
-     <li>IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
-WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
-AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU
-FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
-CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
-LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
-DAMAGES.
-     </ol>
-
-<h4 class="subheading">How to Apply These Terms to Your New Libraries</h4>
-
-<p>If you develop a new library, and you want it to be of the greatest
-possible use to the public, we recommend making it free software that
-everyone can redistribute and change.  You can do so by permitting
-redistribution under these terms (or, alternatively, under the terms of the
-ordinary General Public License).
-
-   <p>To apply these terms, attach the following notices to the library.  It is
-safest to attach them to the start of each source file to most effectively
-convey the exclusion of warranty; and each file should have at least the
-&ldquo;copyright&rdquo; line and a pointer to where the full notice is found.
-
-<pre class="smallexample">     <var>one line to give the library's name and an idea of what it does.</var>
-     Copyright (C) <var>year</var>  <var>name of author</var>
-     
-     This library is free software; you can redistribute it and/or modify it
-     under the terms of the GNU Lesser General Public License as published by
-     the Free Software Foundation; either version 2.1 of the License, or (at
-     your option) any later version.
-     
-     This library is distributed in the hope that it will be useful, but
-     WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-     Lesser General Public License for more details.
-     
-     You should have received a copy of the GNU Lesser General Public
-     License along with this library; if not, write to the Free Software
-     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
-     USA.
-</pre>
-   <p>Also add information on how to contact you by electronic and paper mail.
-
-   <p>You should also get your employer (if you work as a programmer) or your
-school, if any, to sign a &ldquo;copyright disclaimer&rdquo; for the library, if
-necessary.  Here is a sample; alter the names:
-
-<pre class="smallexample">     Yoyodyne, Inc., hereby disclaims all copyright interest in the library
-     `Frob' (a library for tweaking knobs) written by James Random Hacker.
-     
-     <var>signature of Ty Coon</var>, 1 April 1990
-     Ty Coon, President of Vice
-</pre>
-   <p>That's all there is to it!
-
-<div class="node">
-<a name="GNU-GPL"></a>
-<p><hr>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#GNU-LGPL">GNU LGPL</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="#Copying-Information">Copying Information</a>
-
-</div>
-
-<h3 class="appendixsec">C.3 GNU General Public License</h3>
-
-<p><a name="index-GPL_002c-GNU-General-Public-License-129"></a><a name="index-License_002c-GNU-GPL-130"></a>
-
-<!-- The GNU General Public License. -->
-<div align="center">Version 3, 29 June 2007</div>
-
-<!-- This file is intended to be included within another document, -->
-<!-- hence no sectioning command or @node. -->
-<pre class="display">     Copyright &copy; 2007 Free Software Foundation, Inc. <a href="http://fsf.org/">http://fsf.org/</a>
-     
-     Everyone is permitted to copy and distribute verbatim copies of this
-     license document, but changing it is not allowed.
-</pre>
-   <h3 class="heading">Preamble</h3>
-
-<p>The GNU General Public License is a free, copyleft license for
-software and other kinds of works.
-
-   <p>The licenses for most software and other practical works are designed
-to take away your freedom to share and change the works.  By contrast,
-the GNU General Public License is intended to guarantee your freedom
-to share and change all versions of a program&mdash;to make sure it remains
-free software for all its users.  We, the Free Software Foundation,
-use the GNU General Public License for most of our software; it
-applies also to any other work released this way by its authors.  You
-can apply it to your programs, too.
-
-   <p>When we speak of free software, we are referring to freedom, not
-price.  Our General Public Licenses are designed to make sure that you
-have the freedom to distribute copies of free software (and charge for
-them if you wish), that you receive source code or can get it if you
-want it, that you can change the software or use pieces of it in new
-free programs, and that you know you can do these things.
-
-   <p>To protect your rights, we need to prevent others from denying you
-these rights or asking you to surrender the rights.  Therefore, you
-have certain responsibilities if you distribute copies of the
-software, or if you modify it: responsibilities to respect the freedom
-of others.
-
-   <p>For example, if you distribute copies of such a program, whether
-gratis or for a fee, you must pass on to the recipients the same
-freedoms that you received.  You must make sure that they, too,
-receive or can get the source code.  And you must show them these
-terms so they know their rights.
-
-   <p>Developers that use the GNU GPL protect your rights with two steps:
-(1) assert copyright on the software, and (2) offer you this License
-giving you legal permission to copy, distribute and/or modify it.
-
-   <p>For the developers' and authors' protection, the GPL clearly explains
-that there is no warranty for this free software.  For both users' and
-authors' sake, the GPL requires that modified versions be marked as
-changed, so that their problems will not be attributed erroneously to
-authors of previous versions.
-
-   <p>Some devices are designed to deny users access to install or run
-modified versions of the software inside them, although the
-manufacturer can do so.  This is fundamentally incompatible with the
-aim of protecting users' freedom to change the software.  The
-systematic pattern of such abuse occurs in the area of products for
-individuals to use, which is precisely where it is most unacceptable. 
-Therefore, we have designed this version of the GPL to prohibit the
-practice for those products.  If such problems arise substantially in
-other domains, we stand ready to extend this provision to those
-domains in future versions of the GPL, as needed to protect the
-freedom of users.
-
-   <p>Finally, every program is threatened constantly by software patents. 
-States should not allow patents to restrict development and use of
-software on general-purpose computers, but in those that do, we wish
-to avoid the special danger that patents applied to a free program
-could make it effectively proprietary.  To prevent this, the GPL
-assures that patents cannot be used to render the program non-free.
-
-   <p>The precise terms and conditions for copying, distribution and
-modification follow.
-
-<h3 class="heading">TERMS AND CONDITIONS</h3>
-
-     <ol type=1 start=0>
-<li>Definitions.
-
-     <p>&ldquo;This License&rdquo; refers to version 3 of the GNU General Public License.
-
-     <p>&ldquo;Copyright&rdquo; also means copyright-like laws that apply to other kinds
-of works, such as semiconductor masks.
-
-     <p>&ldquo;The Program&rdquo; refers to any copyrightable work licensed under this
-License.  Each licensee is addressed as &ldquo;you&rdquo;.  &ldquo;Licensees&rdquo; and
-&ldquo;recipients&rdquo; may be individuals or organizations.
-
-     <p>To &ldquo;modify&rdquo; a work means to copy from or adapt all or part of the work
-in a fashion requiring copyright permission, other than the making of
-an exact copy.  The resulting work is called a &ldquo;modified version&rdquo; of
-the earlier work or a work &ldquo;based on&rdquo; the earlier work.
-
-     <p>A &ldquo;covered work&rdquo; means either the unmodified Program or a work based
-on the Program.
-
-     <p>To &ldquo;propagate&rdquo; a work means to do anything with it that, without
-permission, would make you directly or secondarily liable for
-infringement under applicable copyright law, except executing it on a
-computer or modifying a private copy.  Propagation includes copying,
-distribution (with or without modification), making available to the
-public, and in some countries other activities as well.
-
-     <p>To &ldquo;convey&rdquo; a work means any kind of propagation that enables other
-parties to make or receive copies.  Mere interaction with a user
-through a computer network, with no transfer of a copy, is not
-conveying.
-
-     <p>An interactive user interface displays &ldquo;Appropriate Legal Notices&rdquo; to
-the extent that it includes a convenient and prominently visible
-feature that (1) displays an appropriate copyright notice, and (2)
-tells the user that there is no warranty for the work (except to the
-extent that warranties are provided), that licensees may convey the
-work under this License, and how to view a copy of this License.  If
-the interface presents a list of user commands or options, such as a
-menu, a prominent item in the list meets this criterion.
-
-     <li>Source Code.
-
-     <p>The &ldquo;source code&rdquo; for a work means the preferred form of the work for
-making modifications to it.  &ldquo;Object code&rdquo; means any non-source form
-of a work.
-
-     <p>A &ldquo;Standard Interface&rdquo; means an interface that either is an official
-standard defined by a recognized standards body, or, in the case of
-interfaces specified for a particular programming language, one that
-is widely used among developers working in that language.
-
-     <p>The &ldquo;System Libraries&rdquo; of an executable work include anything, other
-than the work as a whole, that (a) is included in the normal form of
-packaging a Major Component, but which is not part of that Major
-Component, and (b) serves only to enable use of the work with that
-Major Component, or to implement a Standard Interface for which an
-implementation is available to the public in source code form.  A
-&ldquo;Major Component&rdquo;, in this context, means a major essential component
-(kernel, window system, and so on) of the specific operating system
-(if any) on which the executable work runs, or a compiler used to
-produce the work, or an object code interpreter used to run it.
-
-     <p>The &ldquo;Corresponding Source&rdquo; for a work in object code form means all
-the source code needed to generate, install, and (for an executable
-work) run the object code and to modify the work, including scripts to
-control those activities.  However, it does not include the work's
-System Libraries, or general-purpose tools or generally available free
-programs which are used unmodified in performing those activities but
-which are not part of the work.  For example, Corresponding Source
-includes interface definition files associated with source files for
-the work, and the source code for shared libraries and dynamically
-linked subprograms that the work is specifically designed to require,
-such as by intimate data communication or control flow between those
-subprograms and other parts of the work.
-
-     <p>The Corresponding Source need not include anything that users can
-regenerate automatically from other parts of the Corresponding Source.
-
-     <p>The Corresponding Source for a work in source code form is that same
-work.
-
-     <li>Basic Permissions.
-
-     <p>All rights granted under this License are granted for the term of
-copyright on the Program, and are irrevocable provided the stated
-conditions are met.  This License explicitly affirms your unlimited
-permission to run the unmodified Program.  The output from running a
-covered work is covered by this License only if the output, given its
-content, constitutes a covered work.  This License acknowledges your
-rights of fair use or other equivalent, as provided by copyright law.
-
-     <p>You may make, run and propagate covered works that you do not convey,
-without conditions so long as your license otherwise remains in force. 
-You may convey covered works to others for the sole purpose of having
-them make modifications exclusively for you, or provide you with
-facilities for running those works, provided that you comply with the
-terms of this License in conveying all material for which you do not
-control copyright.  Those thus making or running the covered works for
-you must do so exclusively on your behalf, under your direction and
-control, on terms that prohibit them from making any copies of your
-copyrighted material outside their relationship with you.
-
-     <p>Conveying under any other circumstances is permitted solely under the
-conditions stated below.  Sublicensing is not allowed; section 10
-makes it unnecessary.
-
-     <li>Protecting Users' Legal Rights From Anti-Circumvention Law.
-
-     <p>No covered work shall be deemed part of an effective technological
-measure under any applicable law fulfilling obligations under article
-11 of the WIPO copyright treaty adopted on 20 December 1996, or
-similar laws prohibiting or restricting circumvention of such
-measures.
-
-     <p>When you convey a covered work, you waive any legal power to forbid
-circumvention of technological measures to the extent such
-circumvention is effected by exercising rights under this License with
-respect to the covered work, and you disclaim any intention to limit
-operation or modification of the work as a means of enforcing, against
-the work's users, your or third parties' legal rights to forbid
-circumvention of technological measures.
-
-     <li>Conveying Verbatim Copies.
-
-     <p>You may convey verbatim copies of the Program's source code as you
-receive it, in any medium, provided that you conspicuously and
-appropriately publish on each copy an appropriate copyright notice;
-keep intact all notices stating that this License and any
-non-permissive terms added in accord with section 7 apply to the code;
-keep intact all notices of the absence of any warranty; and give all
-recipients a copy of this License along with the Program.
-
-     <p>You may charge any price or no price for each copy that you convey,
-and you may offer support or warranty protection for a fee.
-
-     <li>Conveying Modified Source Versions.
-
-     <p>You may convey a work based on the Program, or the modifications to
-produce it from the Program, in the form of source code under the
-terms of section 4, provided that you also meet all of these
-conditions:
-
-          <ol type=a start=1>
-<li>The work must carry prominent notices stating that you modified it,
-and giving a relevant date.
-
-          <li>The work must carry prominent notices stating that it is released
-under this License and any conditions added under section 7.  This
-requirement modifies the requirement in section 4 to &ldquo;keep intact all
-notices&rdquo;.
-
-          <li>You must license the entire work, as a whole, under this License to
-anyone who comes into possession of a copy.  This License will
-therefore apply, along with any applicable section 7 additional terms,
-to the whole of the work, and all its parts, regardless of how they
-are packaged.  This License gives no permission to license the work in
-any other way, but it does not invalidate such permission if you have
-separately received it.
-
-          <li>If the work has interactive user interfaces, each must display
-Appropriate Legal Notices; however, if the Program has interactive
-interfaces that do not display Appropriate Legal Notices, your work
-need not make them do so.
-          </ol>
-
-     <p>A compilation of a covered work with other separate and independent
-works, which are not by their nature extensions of the covered work,
-and which are not combined with it such as to form a larger program,
-in or on a volume of a storage or distribution medium, is called an
-&ldquo;aggregate&rdquo; if the compilation and its resulting copyright are not
-used to limit the access or legal rights of the compilation's users
-beyond what the individual works permit.  Inclusion of a covered work
-in an aggregate does not cause this License to apply to the other
-parts of the aggregate.
-
-     <li>Conveying Non-Source Forms.
-
-     <p>You may convey a covered work in object code form under the terms of
-sections 4 and 5, provided that you also convey the machine-readable
-Corresponding Source under the terms of this License, in one of these
-ways:
-
-          <ol type=a start=1>
-<li>Convey the object code in, or embodied in, a physical product
-(including a physical distribution medium), accompanied by the
-Corresponding Source fixed on a durable physical medium customarily
-used for software interchange.
-
-          <li>Convey the object code in, or embodied in, a physical product
-(including a physical distribution medium), accompanied by a written
-offer, valid for at least three years and valid for as long as you
-offer spare parts or customer support for that product model, to give
-anyone who possesses the object code either (1) a copy of the
-Corresponding Source for all the software in the product that is
-covered by this License, on a durable physical medium customarily used
-for software interchange, for a price no more than your reasonable
-cost of physically performing this conveying of source, or (2) access
-to copy the Corresponding Source from a network server at no charge.
-
-          <li>Convey individual copies of the object code with a copy of the written
-offer to provide the Corresponding Source.  This alternative is
-allowed only occasionally and noncommercially, and only if you
-received the object code with such an offer, in accord with subsection
-6b.
-
-          <li>Convey the object code by offering access from a designated place
-(gratis or for a charge), and offer equivalent access to the
-Corresponding Source in the same way through the same place at no
-further charge.  You need not require recipients to copy the
-Corresponding Source along with the object code.  If the place to copy
-the object code is a network server, the Corresponding Source may be
-on a different server (operated by you or a third party) that supports
-equivalent copying facilities, provided you maintain clear directions
-next to the object code saying where to find the Corresponding Source. 
-Regardless of what server hosts the Corresponding Source, you remain
-obligated to ensure that it is available for as long as needed to
-satisfy these requirements.
-
-          <li>Convey the object code using peer-to-peer transmission, provided you
-inform other peers where the object code and Corresponding Source of
-the work are being offered to the general public at no charge under
-subsection 6d.
-
-          </ol>
-
-     <p>A separable portion of the object code, whose source code is excluded
-from the Corresponding Source as a System Library, need not be
-included in conveying the object code work.
-
-     <p>A &ldquo;User Product&rdquo; is either (1) a &ldquo;consumer product&rdquo;, which means any
-tangible personal property which is normally used for personal,
-family, or household purposes, or (2) anything designed or sold for
-incorporation into a dwelling.  In determining whether a product is a
-consumer product, doubtful cases shall be resolved in favor of
-coverage.  For a particular product received by a particular user,
-&ldquo;normally used&rdquo; refers to a typical or common use of that class of
-product, regardless of the status of the particular user or of the way
-in which the particular user actually uses, or expects or is expected
-to use, the product.  A product is a consumer product regardless of
-whether the product has substantial commercial, industrial or
-non-consumer uses, unless such uses represent the only significant
-mode of use of the product.
-
-     <p>&ldquo;Installation Information&rdquo; for a User Product means any methods,
-procedures, authorization keys, or other information required to
-install and execute modified versions of a covered work in that User
-Product from a modified version of its Corresponding Source.  The
-information must suffice to ensure that the continued functioning of
-the modified object code is in no case prevented or interfered with
-solely because modification has been made.
-
-     <p>If you convey an object code work under this section in, or with, or
-specifically for use in, a User Product, and the conveying occurs as
-part of a transaction in which the right of possession and use of the
-User Product is transferred to the recipient in perpetuity or for a
-fixed term (regardless of how the transaction is characterized), the
-Corresponding Source conveyed under this section must be accompanied
-by the Installation Information.  But this requirement does not apply
-if neither you nor any third party retains the ability to install
-modified object code on the User Product (for example, the work has
-been installed in ROM).
-
-     <p>The requirement to provide Installation Information does not include a
-requirement to continue to provide support service, warranty, or
-updates for a work that has been modified or installed by the
-recipient, or for the User Product in which it has been modified or
-installed.  Access to a network may be denied when the modification
-itself materially and adversely affects the operation of the network
-or violates the rules and protocols for communication across the
-network.
-
-     <p>Corresponding Source conveyed, and Installation Information provided,
-in accord with this section must be in a format that is publicly
-documented (and with an implementation available to the public in
-source code form), and must require no special password or key for
-unpacking, reading or copying.
-
-     <li>Additional Terms.
-
-     <p>&ldquo;Additional permissions&rdquo; are terms that supplement the terms of this
-License by making exceptions from one or more of its conditions. 
-Additional permissions that are applicable to the entire Program shall
-be treated as though they were included in this License, to the extent
-that they are valid under applicable law.  If additional permissions
-apply only to part of the Program, that part may be used separately
-under those permissions, but the entire Program remains governed by
-this License without regard to the additional permissions.
-
-     <p>When you convey a copy of a covered work, you may at your option
-remove any additional permissions from that copy, or from any part of
-it.  (Additional permissions may be written to require their own
-removal in certain cases when you modify the work.)  You may place
-additional permissions on material, added by you to a covered work,
-for which you have or can give appropriate copyright permission.
-
-     <p>Notwithstanding any other provision of this License, for material you
-add to a covered work, you may (if authorized by the copyright holders
-of that material) supplement the terms of this License with terms:
-
-          <ol type=a start=1>
-<li>Disclaiming warranty or limiting liability differently from the terms
-of sections 15 and 16 of this License; or
-
-          <li>Requiring preservation of specified reasonable legal notices or author
-attributions in that material or in the Appropriate Legal Notices
-displayed by works containing it; or
-
-          <li>Prohibiting misrepresentation of the origin of that material, or
-requiring that modified versions of such material be marked in
-reasonable ways as different from the original version; or
-
-          <li>Limiting the use for publicity purposes of names of licensors or
-authors of the material; or
-
-          <li>Declining to grant rights under trademark law for use of some trade
-names, trademarks, or service marks; or
-
-          <li>Requiring indemnification of licensors and authors of that material by
-anyone who conveys the material (or modified versions of it) with
-contractual assumptions of liability to the recipient, for any
-liability that these contractual assumptions directly impose on those
-licensors and authors.
-          </ol>
-
-     <p>All other non-permissive additional terms are considered &ldquo;further
-restrictions&rdquo; within the meaning of section 10.  If the Program as you
-received it, or any part of it, contains a notice stating that it is
-governed by this License along with a term that is a further
-restriction, you may remove that term.  If a license document contains
-a further restriction but permits relicensing or conveying under this
-License, you may add to a covered work material governed by the terms
-of that license document, provided that the further restriction does
-not survive such relicensing or conveying.
-
-     <p>If you add terms to a covered work in accord with this section, you
-must place, in the relevant source files, a statement of the
-additional terms that apply to those files, or a notice indicating
-where to find the applicable terms.
-
-     <p>Additional terms, permissive or non-permissive, may be stated in the
-form of a separately written license, or stated as exceptions; the
-above requirements apply either way.
-
-     <li>Termination.
-
-     <p>You may not propagate or modify a covered work except as expressly
-provided under this License.  Any attempt otherwise to propagate or
-modify it is void, and will automatically terminate your rights under
-this License (including any patent licenses granted under the third
-paragraph of section 11).
-
-     <p>However, if you cease all violation of this License, then your license
-from a particular copyright holder is reinstated (a) provisionally,
-unless and until the copyright holder explicitly and finally
-terminates your license, and (b) permanently, if the copyright holder
-fails to notify you of the violation by some reasonable means prior to
-60 days after the cessation.
-
-     <p>Moreover, your license from a particular copyright holder is
-reinstated permanently if the copyright holder notifies you of the
-violation by some reasonable means, this is the first time you have
-received notice of violation of this License (for any work) from that
-copyright holder, and you cure the violation prior to 30 days after
-your receipt of the notice.
-
-     <p>Termination of your rights under this section does not terminate the
-licenses of parties who have received copies or rights from you under
-this License.  If your rights have been terminated and not permanently
-reinstated, you do not qualify to receive new licenses for the same
-material under section 10.
-
-     <li>Acceptance Not Required for Having Copies.
-
-     <p>You are not required to accept this License in order to receive or run
-a copy of the Program.  Ancillary propagation of a covered work
-occurring solely as a consequence of using peer-to-peer transmission
-to receive a copy likewise does not require acceptance.  However,
-nothing other than this License grants you permission to propagate or
-modify any covered work.  These actions infringe copyright if you do
-not accept this License.  Therefore, by modifying or propagating a
-covered work, you indicate your acceptance of this License to do so.
-
-     <li>Automatic Licensing of Downstream Recipients.
-
-     <p>Each time you convey a covered work, the recipient automatically
-receives a license from the original licensors, to run, modify and
-propagate that work, subject to this License.  You are not responsible
-for enforcing compliance by third parties with this License.
-
-     <p>An &ldquo;entity transaction&rdquo; is a transaction transferring control of an
-organization, or substantially all assets of one, or subdividing an
-organization, or merging organizations.  If propagation of a covered
-work results from an entity transaction, each party to that
-transaction who receives a copy of the work also receives whatever
-licenses to the work the party's predecessor in interest had or could
-give under the previous paragraph, plus a right to possession of the
-Corresponding Source of the work from the predecessor in interest, if
-the predecessor has it or can get it with reasonable efforts.
-
-     <p>You may not impose any further restrictions on the exercise of the
-rights granted or affirmed under this License.  For example, you may
-not impose a license fee, royalty, or other charge for exercise of
-rights granted under this License, and you may not initiate litigation
-(including a cross-claim or counterclaim in a lawsuit) alleging that
-any patent claim is infringed by making, using, selling, offering for
-sale, or importing the Program or any portion of it.
-
-     <li>Patents.
-
-     <p>A &ldquo;contributor&rdquo; is a copyright holder who authorizes use under this
-License of the Program or a work on which the Program is based.  The
-work thus licensed is called the contributor's &ldquo;contributor version&rdquo;.
-
-     <p>A contributor's &ldquo;essential patent claims&rdquo; are all patent claims owned
-or controlled by the contributor, whether already acquired or
-hereafter acquired, that would be infringed by some manner, permitted
-by this License, of making, using, or selling its contributor version,
-but do not include claims that would be infringed only as a
-consequence of further modification of the contributor version.  For
-purposes of this definition, &ldquo;control&rdquo; includes the right to grant
-patent sublicenses in a manner consistent with the requirements of
-this License.
-
-     <p>Each contributor grants you a non-exclusive, worldwide, royalty-free
-patent license under the contributor's essential patent claims, to
-make, use, sell, offer for sale, import and otherwise run, modify and
-propagate the contents of its contributor version.
-
-     <p>In the following three paragraphs, a &ldquo;patent license&rdquo; is any express
-agreement or commitment, however denominated, not to enforce a patent
-(such as an express permission to practice a patent or covenant not to
-sue for patent infringement).  To &ldquo;grant&rdquo; such a patent license to a
-party means to make such an agreement or commitment not to enforce a
-patent against the party.
-
-     <p>If you convey a covered work, knowingly relying on a patent license,
-and the Corresponding Source of the work is not available for anyone
-to copy, free of charge and under the terms of this License, through a
-publicly available network server or other readily accessible means,
-then you must either (1) cause the Corresponding Source to be so
-available, or (2) arrange to deprive yourself of the benefit of the
-patent license for this particular work, or (3) arrange, in a manner
-consistent with the requirements of this License, to extend the patent
-license to downstream recipients.  &ldquo;Knowingly relying&rdquo; means you have
-actual knowledge that, but for the patent license, your conveying the
-covered work in a country, or your recipient's use of the covered work
-in a country, would infringe one or more identifiable patents in that
-country that you have reason to believe are valid.
-
-     <p>If, pursuant to or in connection with a single transaction or
-arrangement, you convey, or propagate by procuring conveyance of, a
-covered work, and grant a patent license to some of the parties
-receiving the covered work authorizing them to use, propagate, modify
-or convey a specific copy of the covered work, then the patent license
-you grant is automatically extended to all recipients of the covered
-work and works based on it.
-
-     <p>A patent license is &ldquo;discriminatory&rdquo; if it does not include within the
-scope of its coverage, prohibits the exercise of, or is conditioned on
-the non-exercise of one or more of the rights that are specifically
-granted under this License.  You may not convey a covered work if you
-are a party to an arrangement with a third party that is in the
-business of distributing software, under which you make payment to the
-third party based on the extent of your activity of conveying the
-work, and under which the third party grants, to any of the parties
-who would receive the covered work from you, a discriminatory patent
-license (a) in connection with copies of the covered work conveyed by
-you (or copies made from those copies), or (b) primarily for and in
-connection with specific products or compilations that contain the
-covered work, unless you entered into that arrangement, or that patent
-license was granted, prior to 28 March 2007.
-
-     <p>Nothing in this License shall be construed as excluding or limiting
-any implied license or other defenses to infringement that may
-otherwise be available to you under applicable patent law.
-
-     <li>No Surrender of Others' Freedom.
-
-     <p>If conditions are imposed on you (whether by court order, agreement or
-otherwise) that contradict the conditions of this License, they do not
-excuse you from the conditions of this License.  If you cannot convey
-a covered work so as to satisfy simultaneously your obligations under
-this License and any other pertinent obligations, then as a
-consequence you may not convey it at all.  For example, if you agree
-to terms that obligate you to collect a royalty for further conveying
-from those to whom you convey the Program, the only way you could
-satisfy both those terms and this License would be to refrain entirely
-from conveying the Program.
-
-     <li>Use with the GNU Affero General Public License.
-
-     <p>Notwithstanding any other provision of this License, you have
-permission to link or combine any covered work with a work licensed
-under version 3 of the GNU Affero General Public License into a single
-combined work, and to convey the resulting work.  The terms of this
-License will continue to apply to the part which is the covered work,
-but the special requirements of the GNU Affero General Public License,
-section 13, concerning interaction through a network will apply to the
-combination as such.
-
-     <li>Revised Versions of this License.
-
-     <p>The Free Software Foundation may publish revised and/or new versions
-of the GNU General Public License from time to time.  Such new
-versions will be similar in spirit to the present version, but may
-differ in detail to address new problems or concerns.
-
-     <p>Each version is given a distinguishing version number.  If the Program
-specifies that a certain numbered version of the GNU General Public
-License &ldquo;or any later version&rdquo; applies to it, you have the option of
-following the terms and conditions either of that numbered version or
-of any later version published by the Free Software Foundation.  If
-the Program does not specify a version number of the GNU General
-Public License, you may choose any version ever published by the Free
-Software Foundation.
-
-     <p>If the Program specifies that a proxy can decide which future versions
-of the GNU General Public License can be used, that proxy's public
-statement of acceptance of a version permanently authorizes you to
-choose that version for the Program.
-
-     <p>Later license versions may give you additional or different
-permissions.  However, no additional obligations are imposed on any
-author or copyright holder as a result of your choosing to follow a
-later version.
-
-     <li>Disclaimer of Warranty.
-
-     <p>THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
-APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
-HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM &ldquo;AS IS&rdquo; WITHOUT
-WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND
-PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE
-DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR
-CORRECTION.
-
-     <li>Limitation of Liability.
-
-     <p>IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR
-CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
-INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES
-ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT
-NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR
-LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM
-TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER
-PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-
-     <li>Interpretation of Sections 15 and 16.
-
-     <p>If the disclaimer of warranty and limitation of liability provided
-above cannot be given local legal effect according to their terms,
-reviewing courts shall apply local law that most closely approximates
-an absolute waiver of all civil liability in connection with the
-Program, unless a warranty or assumption of liability accompanies a
-copy of the Program in return for a fee.
-
-     </ol>
-
-<h3 class="heading">END OF TERMS AND CONDITIONS</h3>
-
-<h3 class="heading">How to Apply These Terms to Your New Programs</h3>
-
-<p>If you develop a new program, and you want it to be of the greatest
-possible use to the public, the best way to achieve this is to make it
-free software which everyone can redistribute and change under these
-terms.
-
-   <p>To do so, attach the following notices to the program.  It is safest
-to attach them to the start of each source file to most effectively
-state the exclusion of warranty; and each file should have at least
-the &ldquo;copyright&rdquo; line and a pointer to where the full notice is found.
-
-<pre class="smallexample">     <var>one line to give the program's name and a brief idea of what it does.</var>
-     Copyright (C) <var>year</var> <var>name of author</var>
-     
-     This program is free software: you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation, either version 3 of the License, or (at
-     your option) any later version.
-     
-     This program is distributed in the hope that it will be useful, but
-     WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-     General Public License for more details.
-     
-     You should have received a copy of the GNU General Public License
-     along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-</pre>
-   <p>Also add information on how to contact you by electronic and paper mail.
-
-   <p>If the program does terminal interaction, make it output a short
-notice like this when it starts in an interactive mode:
-
-<pre class="smallexample">     <var>program</var> Copyright (C) <var>year</var> <var>name of author</var>
-     This program comes with ABSOLUTELY NO WARRANTY; for details type &lsquo;<samp><span class="samp">show w</span></samp>&rsquo;.
-     This is free software, and you are welcome to redistribute it
-     under certain conditions; type &lsquo;<samp><span class="samp">show c</span></samp>&rsquo; for details.
-</pre>
-   <p>The hypothetical commands &lsquo;<samp><span class="samp">show w</span></samp>&rsquo; and &lsquo;<samp><span class="samp">show c</span></samp>&rsquo; should show
-the appropriate parts of the General Public License.  Of course, your
-program's commands might be different; for a GUI interface, you would
-use an &ldquo;about box&rdquo;.
-
-   <p>You should also get your employer (if you work as a programmer) or school,
-if any, to sign a &ldquo;copyright disclaimer&rdquo; for the program, if necessary. 
-For more information on this, and how to apply and follow the GNU GPL, see
-<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-
-   <p>The GNU General Public License does not permit incorporating your
-program into proprietary programs.  If your program is a subroutine
-library, you may consider it more useful to permit linking proprietary
-applications with the library.  If this is what you want to do, use
-the GNU Lesser General Public License instead of this License.  But
-first, please read <a href="http://www.gnu.org/philosophy/why-not-lgpl.html">http://www.gnu.org/philosophy/why-not-lgpl.html</a>.
-
-<div class="node">
 <a name="Function-and-Variable-Index"></a>
 <p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Concept-Index">Concept Index</a>,
@@ -5961,62 +4739,62 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h2 class="unnumbered">Function and Variable Index</h2>
 
 <ul class="index-fn" compact>
-<li><a href="#index-idn_005ffree-46"><code>idn_free</code></a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
-<li><a href="#index-idna_002dto_002dascii-124"><code>idna-to-ascii</code></a>: <a href="#Emacs-API">Emacs API</a></li>
-<li><a href="#index-idna_002dto_002dunicode-125"><code>idna-to-unicode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
-<li><a href="#index-idna_005fstrerror-91"><code>idna_strerror</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005fascii_005f4i-81"><code>idna_to_ascii_4i</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005fascii_005f4z-83"><code>idna_to_ascii_4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005fascii_005f8z-84"><code>idna_to_ascii_8z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005fascii_005flz-85"><code>idna_to_ascii_lz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005f44i-82"><code>idna_to_unicode_44i</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005f4z4z-86"><code>idna_to_unicode_4z4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005f8z4z-87"><code>idna_to_unicode_8z4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005f8z8z-88"><code>idna_to_unicode_8z8z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005f8zlz-89"><code>idna_to_unicode_8zlz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-idna_005fto_005funicode_005flzlz-90"><code>idna_to_unicode_lzlz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-pr29_005f4-106"><code>pr29_4</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
-<li><a href="#index-pr29_005f4z-107"><code>pr29_4z</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
-<li><a href="#index-pr29_005f8z-108"><code>pr29_8z</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
-<li><a href="#index-pr29_005fstrerror-109"><code>pr29_strerror</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
-<li><a href="#index-punycode_002ddecode-119"><code>punycode-decode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
-<li><a href="#index-punycode_002dencode-118"><code>punycode-encode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
-<li><a href="#index-punycode_005fdecode-75"><code>punycode_decode</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
-<li><a href="#index-punycode_005fencode-74"><code>punycode_encode</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
-<li><a href="#index-punycode_005fstrerror-76"><code>punycode_strerror</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
-<li><a href="#index-stringprep-64"><code>stringprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005f4i-62"><code>stringprep_4i</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005f4zi-63"><code>stringprep_4zi</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fcheck_005fversion-38"><code>stringprep_check_version</code></a>: <a href="#Version-Check">Version Check</a></li>
-<li><a href="#index-stringprep_005fconvert-55"><code>stringprep_convert</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005fiscsi-68"><code>stringprep_iscsi</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005flocale_005fcharset-54"><code>stringprep_locale_charset</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005flocale_005fto_005futf8-56"><code>stringprep_locale_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005fnameprep_005fno_005funassigned-67"><code>stringprep_nameprep_no_unassigned</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fplain-69"><code>stringprep_plain</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fprofile-65"><code>stringprep_profile</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fstrerror-66"><code>stringprep_strerror</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fucs4_005fnfkc_005fnormalize-52"><code>stringprep_ucs4_nfkc_normalize</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005fucs4_005fto_005futf8-50"><code>stringprep_ucs4_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005funichar_005fto_005futf8-48"><code>stringprep_unichar_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005futf8_005fnfkc_005fnormalize-53"><code>stringprep_utf8_nfkc_normalize</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005futf8_005fto_005flocale-57"><code>stringprep_utf8_to_locale</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005futf8_005fto_005fucs4-51"><code>stringprep_utf8_to_ucs4</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005futf8_005fto_005funichar-49"><code>stringprep_utf8_to_unichar</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
-<li><a href="#index-stringprep_005fxmpp_005fnodeprep-70"><code>stringprep_xmpp_nodeprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-stringprep_005fxmpp_005fresourceprep-71"><code>stringprep_xmpp_resourceprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
-<li><a href="#index-tld_005fcheck_005f4-100"><code>tld_check_4</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fcheck_005f4t-93"><code>tld_check_4t</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fcheck_005f4tz-94"><code>tld_check_4tz</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fcheck_005f4z-101"><code>tld_check_4z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fcheck_005f8z-102"><code>tld_check_8z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fcheck_005flz-103"><code>tld_check_lz</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fdefault_005ftable-99"><code>tld_default_table</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fget_005f4-95"><code>tld_get_4</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fget_005f4z-96"><code>tld_get_4z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fget_005ftable-98"><code>tld_get_table</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fget_005fz-97"><code>tld_get_z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
-<li><a href="#index-tld_005fstrerror-104"><code>tld_strerror</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-idn_005ffree-48"><code>idn_free</code></a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
+<li><a href="#index-idna_002dto_002dascii-126"><code>idna-to-ascii</code></a>: <a href="#Emacs-API">Emacs API</a></li>
+<li><a href="#index-idna_002dto_002dunicode-127"><code>idna-to-unicode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
+<li><a href="#index-idna_005fstrerror-93"><code>idna_strerror</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005fascii_005f4i-83"><code>idna_to_ascii_4i</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005fascii_005f4z-85"><code>idna_to_ascii_4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005fascii_005f8z-86"><code>idna_to_ascii_8z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005fascii_005flz-87"><code>idna_to_ascii_lz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005f44i-84"><code>idna_to_unicode_44i</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005f4z4z-88"><code>idna_to_unicode_4z4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005f8z4z-89"><code>idna_to_unicode_8z4z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005f8z8z-90"><code>idna_to_unicode_8z8z</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005f8zlz-91"><code>idna_to_unicode_8zlz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-idna_005fto_005funicode_005flzlz-92"><code>idna_to_unicode_lzlz</code></a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-pr29_005f4-108"><code>pr29_4</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
+<li><a href="#index-pr29_005f4z-109"><code>pr29_4z</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
+<li><a href="#index-pr29_005f8z-110"><code>pr29_8z</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
+<li><a href="#index-pr29_005fstrerror-111"><code>pr29_strerror</code></a>: <a href="#PR29-Functions">PR29 Functions</a></li>
+<li><a href="#index-punycode_002ddecode-121"><code>punycode-decode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
+<li><a href="#index-punycode_002dencode-120"><code>punycode-encode</code></a>: <a href="#Emacs-API">Emacs API</a></li>
+<li><a href="#index-punycode_005fdecode-77"><code>punycode_decode</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
+<li><a href="#index-punycode_005fencode-76"><code>punycode_encode</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
+<li><a href="#index-punycode_005fstrerror-78"><code>punycode_strerror</code></a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
+<li><a href="#index-stringprep-66"><code>stringprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005f4i-64"><code>stringprep_4i</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005f4zi-65"><code>stringprep_4zi</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fcheck_005fversion-40"><code>stringprep_check_version</code></a>: <a href="#Version-Check">Version Check</a></li>
+<li><a href="#index-stringprep_005fconvert-57"><code>stringprep_convert</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005fiscsi-70"><code>stringprep_iscsi</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005flocale_005fcharset-56"><code>stringprep_locale_charset</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005flocale_005fto_005futf8-58"><code>stringprep_locale_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005fnameprep_005fno_005funassigned-69"><code>stringprep_nameprep_no_unassigned</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fplain-71"><code>stringprep_plain</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fprofile-67"><code>stringprep_profile</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fstrerror-68"><code>stringprep_strerror</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fucs4_005fnfkc_005fnormalize-54"><code>stringprep_ucs4_nfkc_normalize</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005fucs4_005fto_005futf8-52"><code>stringprep_ucs4_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005funichar_005fto_005futf8-50"><code>stringprep_unichar_to_utf8</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005futf8_005fnfkc_005fnormalize-55"><code>stringprep_utf8_nfkc_normalize</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005futf8_005fto_005flocale-59"><code>stringprep_utf8_to_locale</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005futf8_005fto_005fucs4-53"><code>stringprep_utf8_to_ucs4</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005futf8_005fto_005funichar-51"><code>stringprep_utf8_to_unichar</code></a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-stringprep_005fxmpp_005fnodeprep-72"><code>stringprep_xmpp_nodeprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-stringprep_005fxmpp_005fresourceprep-73"><code>stringprep_xmpp_resourceprep</code></a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-tld_005fcheck_005f4-102"><code>tld_check_4</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fcheck_005f4t-95"><code>tld_check_4t</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fcheck_005f4tz-96"><code>tld_check_4tz</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fcheck_005f4z-103"><code>tld_check_4z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fcheck_005f8z-104"><code>tld_check_8z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fcheck_005flz-105"><code>tld_check_lz</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fdefault_005ftable-101"><code>tld_default_table</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fget_005f4-97"><code>tld_get_4</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fget_005f4z-98"><code>tld_get_4z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fget_005ftable-100"><code>tld_get_table</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fget_005fz-99"><code>tld_get_z</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-tld_005fstrerror-106"><code>tld_strerror</code></a>: <a href="#TLD-Functions">TLD Functions</a></li>
    </ul><div class="node">
 <a name="Concept-Index"></a>
 <p><hr>
@@ -6032,53 +4810,51 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <ul class="index-cp" compact>
 <li><a href="#index-AIX-15">AIX</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-ARM-29">ARM</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Autoconf-tests-40">Autoconf tests</a>: <a href="#Autoconf-tests">Autoconf tests</a></li>
-<li><a href="#index-command-line-113">command line</a>: <a href="#Invoking-idn">Invoking idn</a></li>
-<li><a href="#index-Compiling-your-application-39">Compiling your application</a>: <a href="#Building-the-source">Building the source</a></li>
-<li><a href="#index-Configure-tests-41">Configure tests</a>: <a href="#Autoconf-tests">Autoconf tests</a></li>
-<li><a href="#index-Contributing-36">Contributing</a>: <a href="#Contributing">Contributing</a></li>
-<li><a href="#index-de_002dallocation-44">de-allocation</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
+<li><a href="#index-Autoconf-tests-42">Autoconf tests</a>: <a href="#Autoconf-tests">Autoconf tests</a></li>
+<li><a href="#index-command-line-115">command line</a>: <a href="#Invoking-idn">Invoking idn</a></li>
+<li><a href="#index-Compiling-your-application-41">Compiling your application</a>: <a href="#Building-the-source">Building the source</a></li>
+<li><a href="#index-Configure-tests-43">Configure tests</a>: <a href="#Autoconf-tests">Autoconf tests</a></li>
+<li><a href="#index-Contributing-38">Contributing</a>: <a href="#Contributing">Contributing</a></li>
+<li><a href="#index-de_002dallocation-46">de-allocation</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
 <li><a href="#index-Debian-1">Debian</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Download-34">Download</a>: <a href="#Downloading-and-Installing">Downloading and Installing</a></li>
-<li><a href="#index-Examples-110">Examples</a>: <a href="#Examples">Examples</a></li>
-<li><a href="#index-FDL_002c-GNU-Free-Documentation-License-126">FDL, GNU Free Documentation License</a>: <a href="#GNU-Free-Documentation-License">GNU Free Documentation License</a></li>
-<li><a href="#index-free-42">free</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
+<li><a href="#index-Download-36">Download</a>: <a href="#Downloading-and-Installing">Downloading and Installing</a></li>
+<li><a href="#index-Examples-112">Examples</a>: <a href="#Examples">Examples</a></li>
+<li><a href="#index-FDL_002c-GNU-Free-Documentation-License-128">FDL, GNU Free Documentation License</a>: <a href="#GNU-Free-Documentation-License">GNU Free Documentation License</a></li>
+<li><a href="#index-free-44">free</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
 <li><a href="#index-FreeBSD-23">FreeBSD</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-GPL_002c-GNU-General-Public-License-129">GPL, GNU General Public License</a>: <a href="#GNU-GPL">GNU GPL</a></li>
-<li><a href="#index-Hacking-37">Hacking</a>: <a href="#Contributing">Contributing</a></li>
-<li><a href="#index-heap-memory-45">heap memory</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
+<li><a href="#index-Hacking-39">Hacking</a>: <a href="#Contributing">Contributing</a></li>
+<li><a href="#index-heap-memory-47">heap memory</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
 <li><a href="#index-HP_002dUX-17">HP-UX</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-idn-111"><code>idn</code></a>: <a href="#Invoking-idn">Invoking idn</a></li>
-<li><a href="#index-IDNA-Functions-77">IDNA Functions</a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
-<li><a href="#index-Installation-33">Installation</a>: <a href="#Downloading-and-Installing">Downloading and Installing</a></li>
-<li><a href="#index-invoking-_0040command_007bidn_007d-112">invoking <samp><span class="command">idn</span></samp></a>: <a href="#Invoking-idn">Invoking idn</a></li>
+<li><a href="#index-IBM-34">IBM</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
+<li><a href="#index-idn-113"><code>idn</code></a>: <a href="#Invoking-idn">Invoking idn</a></li>
+<li><a href="#index-IDNA-Functions-79">IDNA Functions</a>: <a href="#IDNA-Functions">IDNA Functions</a></li>
+<li><a href="#index-Installation-35">Installation</a>: <a href="#Downloading-and-Installing">Downloading and Installing</a></li>
+<li><a href="#index-invoking-_0040command_007bidn_007d-114">invoking <samp><span class="command">idn</span></samp></a>: <a href="#Invoking-idn">Invoking idn</a></li>
 <li><a href="#index-IRIX-14">IRIX</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-LGPL_002c-GNU-Lesser-General-Public-License-127">LGPL, GNU Lesser General Public License</a>: <a href="#GNU-LGPL">GNU LGPL</a></li>
-<li><a href="#index-License_002c-GNU-GPL-130">License, GNU GPL</a>: <a href="#GNU-GPL">GNU GPL</a></li>
-<li><a href="#index-License_002c-GNU-LGPL-128">License, GNU LGPL</a>: <a href="#GNU-LGPL">GNU LGPL</a></li>
 <li><a href="#index-MacOS-X-24">MacOS X</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-Mandrake-13">Mandrake</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Memory-handling-43">Memory handling</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
+<li><a href="#index-Memory-handling-45">Memory handling</a>: <a href="#Memory-handling-under-Windows">Memory handling under Windows</a></li>
 <li><a href="#index-Microsoft-31">Microsoft</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-mingw32-32">mingw32</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-Motorola-Coldfire-26">Motorola Coldfire</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-NetBSD-21">NetBSD</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-OpenBSD-22">OpenBSD</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-OpenPower-720-8">OpenPower 720</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-PR29-Functions-105">PR29 Functions</a>: <a href="#PR29-Functions">PR29 Functions</a></li>
-<li><a href="#index-Punycode-Functions-72">Punycode Functions</a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
+<li><a href="#index-OS_002f2-33">OS/2</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
+<li><a href="#index-PR29-Functions-107">PR29 Functions</a>: <a href="#PR29-Functions">PR29 Functions</a></li>
+<li><a href="#index-Punycode-Functions-74">Punycode Functions</a>: <a href="#Punycode-Functions">Punycode Functions</a></li>
 <li><a href="#index-RedHat-9">RedHat</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-RedHat-Advanced-Server-11">RedHat Advanced Server</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Reporting-Bugs-35">Reporting Bugs</a>: <a href="#Bug-Reports">Bug Reports</a></li>
+<li><a href="#index-Reporting-Bugs-37">Reporting Bugs</a>: <a href="#Bug-Reports">Bug Reports</a></li>
 <li><a href="#index-Solaris-18">Solaris</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Stringprep-Functions-58">Stringprep Functions</a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
+<li><a href="#index-Stringprep-Functions-60">Stringprep Functions</a>: <a href="#Stringprep-Functions">Stringprep Functions</a></li>
 <li><a href="#index-SuSE-4">SuSE</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-SuSE-Linux-5">SuSE Linux</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-TLD-Functions-92">TLD Functions</a>: <a href="#TLD-Functions">TLD Functions</a></li>
+<li><a href="#index-TLD-Functions-94">TLD Functions</a>: <a href="#TLD-Functions">TLD Functions</a></li>
 <li><a href="#index-Tru64-3">Tru64</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-uClibc-28">uClibc</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
 <li><a href="#index-uClinux-27">uClinux</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
-<li><a href="#index-Utility-Functions-47">Utility Functions</a>: <a href="#Utility-Functions">Utility Functions</a></li>
+<li><a href="#index-Utility-Functions-49">Utility Functions</a>: <a href="#Utility-Functions">Utility Functions</a></li>
 <li><a href="#index-Windows-16">Windows</a>: <a href="#Supported-Platforms">Supported Platforms</a></li>
    </ul><div class="footnote">
 <hr>

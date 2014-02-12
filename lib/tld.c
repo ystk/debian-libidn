@@ -1,26 +1,34 @@
-/* tld.c --- Handle TLD restriction checking.
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009  Simon Josefsson.
- * Copyright (C) 2003, 2004  Free Software Foundation, Inc.
- *
- * Author: Thomas Jacob, Internet24.de
- *
- * This file is part of GNU Libidn.
- *
- * GNU Libidn is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * GNU Libidn is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with GNU Libidn; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
- *
- */
+/* tld.c --- Declarations for TLD restriction checking.
+   Copyright (C) 2004-2012 Simon Josefsson.
+   Copyright (C) 2003-2012 Free Software Foundation, Inc.
+
+   Author: Thomas Jacob, Internet24.de
+
+   This file is part of GNU Libidn.
+
+   GNU Libidn is free software: you can redistribute it and/or
+   modify it under the terms of either:
+
+     * the GNU Lesser General Public License as published by the Free
+       Software Foundation; either version 3 of the License, or (at
+       your option) any later version.
+
+   or
+
+     * the GNU General Public License as published by the Free
+       Software Foundation; either version 2 of the License, or (at
+       your option) any later version.
+
+   or both in parallel, as here.
+
+   GNU Libidn is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received copies of the GNU General Public License and
+   the GNU Lesser General Public License along with this program.  If
+   not, see <http://www.gnu.org/licenses/>. */
 
 #include <config.h>
 
@@ -37,7 +45,7 @@
 extern const Tld_table *_tld_tables[];
 
 /**
- * tld_get_table - get table for a TLD name in table
+ * tld_get_table:
  * @tld: TLD name (e.g. "com") as zero terminated ASCII byte string.
  * @tables: Zero terminated array of #Tld_table info-structures for
  *   TLDs.
@@ -64,7 +72,7 @@ tld_get_table (const char *tld, const Tld_table ** tables)
 }
 
 /**
- * tld_default_table - get table for a TLD name
+ * tld_default_table:
  * @tld: TLD name (e.g. "com") as zero terminated ASCII byte string.
  * @overrides: Additional zero terminated array of #Tld_table
  *   info-structures for TLDs, or %NULL to only use library deault
@@ -98,7 +106,7 @@ tld_default_table (const char *tld, const Tld_table ** overrides)
 		 (c) == 0xFF0E || (c) == 0xFF61)
 
 /**
- * tld_get_4 - extract top level domain part in input Unicode string
+ * tld_get_4:
  * @in: Array of unicode code points to process. Does not need to be
  *   zero terminated.
  * @inlen: Number of unicode code points.
@@ -148,7 +156,7 @@ tld_get_4 (const uint32_t * in, size_t inlen, char **out)
 }
 
 /**
- * tld_get_4z - extract top level domain part in input Unicode string
+ * tld_get_4z:
  * @in: Zero terminated array of unicode code points to process.
  * @out: Zero terminated ascii result string pointer.
  *
@@ -173,7 +181,7 @@ tld_get_4z (const uint32_t * in, char **out)
 }
 
 /**
- * tld_get_z - extract top level domain part in input string
+ * tld_get_z:
  * @in: Zero terminated character array to process.
  * @out: Zero terminated ascii result string pointer.
  *
@@ -249,7 +257,7 @@ _tld_checkchar (uint32_t ch, const Tld_table * tld)
 }
 
 /**
- * tld_check_4t - verify that characters are permitted
+ * tld_check_4t:
  * @in: Array of unicode code points to process. Does not need to be
  *   zero terminated.
  * @inlen: Number of unicode code points.
@@ -293,7 +301,7 @@ tld_check_4t (const uint32_t * in, size_t inlen, size_t * errpos,
 }
 
 /**
- * tld_check_4tz - verify that characters are permitted
+ * tld_check_4tz:
  * @in: Zero terminated array of unicode code points to process.
  * @errpos: Position of offending character is returned here.
  * @tld: A #Tld_table data structure representing the restrictions for
@@ -324,7 +332,7 @@ tld_check_4tz (const uint32_t * in, size_t * errpos, const Tld_table * tld)
 }
 
 /**
- * tld_check_4 - verify that characters are permitted
+ * tld_check_4:
  * @in: Array of unicode code points to process. Does not need to be
  *   zero terminated.
  * @inlen: Number of unicode code points.
@@ -376,7 +384,7 @@ tld_check_4 (const uint32_t * in, size_t inlen, size_t * errpos,
 }
 
 /**
- * tld_check_4z - verify that characters are permitted
+ * tld_check_4z:
  * @in: Zero-terminated array of unicode code points to process.
  * @errpos: Position of offending character is returned here.
  * @overrides: A #Tld_table array of additional domain restriction
@@ -412,7 +420,7 @@ tld_check_4z (const uint32_t * in, size_t * errpos,
 }
 
 /**
- * tld_check_8z - verify that characters are permitted
+ * tld_check_8z:
  * @in: Zero-terminated UTF8 string to process.
  * @errpos: Position of offending character is returned here.
  * @overrides: A #Tld_table array of additional domain restriction
@@ -457,7 +465,7 @@ tld_check_8z (const char *in, size_t * errpos, const Tld_table ** overrides)
 }
 
 /**
- * tld_check_lz - verify that characters are permitted
+ * tld_check_lz:
  * @in: Zero-terminated string in the current locales encoding to process.
  * @errpos: Position of offending character is returned here.
  * @overrides: A #Tld_table array of additional domain restriction
@@ -510,6 +518,8 @@ tld_check_lz (const char *in, size_t * errpos, const Tld_table ** overrides)
  * @TLD_MALLOC_ERROR: Error during memory allocation.
  * @TLD_ICONV_ERROR: Error during iconv string conversion.
  * @TLD_NO_TLD: No top-level domain found in domain string.
+ * @TLD_NOTLD: Same as @TLD_NO_TLD, for compatibility
+ *   with typo in earlier versions.
  *
  * Enumerated return codes of the TLD checking functions.
  * The value 0 is guaranteed to always correspond to success.

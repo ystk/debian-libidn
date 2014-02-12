@@ -1,5 +1,5 @@
 /* tst_pr29.c --- Self tests for pr29_*().
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2004-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -52,7 +52,7 @@ static const struct tv tv[] = {
    PR29_PROBLEM},
   {
    "Instability Example",
-   3,
+   4,
    {0x1100, 0x0300, 0x1161, 0x0323, 0},
    PR29_PROBLEM},
   {
@@ -79,7 +79,13 @@ static const struct tv tv[] = {
    "Not a problem sequence 5",
    3,
    {0x1100, 0x00AA, 0x1161, 0},
-   PR29_SUCCESS}
+   PR29_SUCCESS},
+  {
+    /* http://lists.gnu.org/archive/html/help-libidn/2012-01/msg00008.html */
+    "Infloop",
+    3,
+    {0x1100, 0x0300, 0x4711, 0},
+    PR29_SUCCESS}
 };
 
 void
@@ -91,18 +97,30 @@ doit (void)
   for (i = 0; i < sizeof (tv) / sizeof (tv[0]); i++)
     {
       if (debug)
-	printf ("PR29 entry %d: %s\n", i, tv[i].name);
-
-      if (debug)
 	{
+	  uint32_t *p, *q;
+
+	  printf ("PR29 entry %ld: %s\n", i, tv[i].name);
+
 	  printf ("in:\n");
 	  ucs4print (tv[i].in, tv[i].inlen);
+
+	  printf ("nfkc:\n");
+	  p = stringprep_ucs4_nfkc_normalize (tv[i].in, tv[i].inlen);
+	  ucs4print (p, -1);
+
+	  printf ("second nfkc:\n");
+	  q = stringprep_ucs4_nfkc_normalize (p, -1);
+	  ucs4print (q, -1);
+
+	  free (p);
+	  free (q);
 	}
 
       rc = pr29_4 (tv[i].in, tv[i].inlen);
       if (rc != tv[i].rc)
 	{
-	  fail ("PR29 entry %d failed (expected %d): %d\n", i, tv[i].rc, rc);
+	  fail ("PR29 entry %ld failed (expected %d): %d\n", i, tv[i].rc, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -111,7 +129,7 @@ doit (void)
       rc = pr29_4z (tv[i].in);
       if (rc != tv[i].rc)
 	{
-	  fail ("PR29 entry %d failed (expected %d): %d\n", i, tv[i].rc, rc);
+	  fail ("PR29 entry %ld failed (expected %d): %d\n", i, tv[i].rc, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -124,7 +142,7 @@ doit (void)
 	p = stringprep_ucs4_to_utf8 (tv[i].in, (ssize_t) tv[i].inlen,
 				     &items_read, &items_written);
 	if (p == NULL)
-	  fail ("FAIL: stringprep_ucs4_to_utf8(tv[%d]) == NULL\n", i);
+	  fail ("FAIL: stringprep_ucs4_to_utf8(tv[%ld]) == NULL\n", i);
 	if (debug)
 	  hexprint (p, strlen (p));
 
@@ -132,7 +150,8 @@ doit (void)
 	free (p);
 	if (rc != tv[i].rc)
 	  {
-	    fail ("PR29 entry %d failed (expected %d): %d\n", i, tv[i].rc, rc);
+	    fail ("PR29 entry %ld failed (expected %d): %d\n",
+		  i, tv[i].rc, rc);
 	    if (debug)
 	      printf ("FATAL\n");
 	    continue;
@@ -140,6 +159,11 @@ doit (void)
       }
 
       if (debug)
-	printf ("OK\n");
+	{
+	  if (tv[i].rc != PR29_SUCCESS)
+	    printf ("EXPECTED FAIL\n");
+	  else
+	    printf ("OK\n");
+	}
     }
 }

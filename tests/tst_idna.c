@@ -1,5 +1,5 @@
 /* tst_idna.c --- Self tests for idna_to_ascii().
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -226,7 +226,7 @@ doit (void)
   for (i = 0; i < sizeof (idna) / sizeof (idna[0]); i++)
     {
       if (debug)
-	printf ("IDNA entry %d: %s\n", i, idna[i].name);
+	printf ("IDNA entry %ld: %s\n", i, idna[i].name);
 
       if (debug)
 	{
@@ -237,7 +237,7 @@ doit (void)
       rc = idna_to_ascii_4i (idna[i].in, idna[i].inlen, label, idna[i].flags);
       if (rc != idna[i].toasciirc)
 	{
-	  fail ("IDNA entry %d failed: %d\n", i, rc);
+	  fail ("IDNA entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -256,7 +256,7 @@ doit (void)
 	  if (strlen (idna[i].out) != strlen (label) ||
 	      strcasecmp (idna[i].out, label) != 0)
 	    {
-	      fail ("IDNA entry %d failed\n", i);
+	      fail ("IDNA entry %ld failed\n", i);
 	      if (debug)
 		printf ("ERROR\n");
 	    }
@@ -273,7 +273,7 @@ doit (void)
 
       if (debug)
 	{
-	  printf ("in: %s (%d==%d)\n", idna[i].out, strlen (idna[i].out),
+	  printf ("in: %s (%ld==%ld)\n", idna[i].out, strlen (idna[i].out),
 		  len);
 	  ucs4print (ucs4label, len);
 	}
@@ -282,20 +282,20 @@ doit (void)
       rc = idna_to_unicode_44i (ucs4label, len, tmp, &len2, idna[i].flags);
       if (debug)
 	{
-	  printf ("expected out (%d):\n",
+	  printf ("expected out (%ld):\n",
 		  rc == IDNA_SUCCESS ? idna[i].inlen : len);
 	  if (rc == IDNA_SUCCESS)
 	    ucs4print (idna[i].in, idna[i].inlen);
 	  else
 	    ucs4print (ucs4label, len);
 
-	  printf ("computed out (%d):\n", len2);
+	  printf ("computed out (%ld):\n", len2);
 	  ucs4print (tmp, len2);
 	}
 
       if (rc != idna[i].tounicoderc)
 	{
-	  fail ("IDNA entry %d failed: %d\n", i, rc);
+	  fail ("IDNA entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -309,11 +309,11 @@ doit (void)
 	  if (debug)
 	    {
 	      if (rc == IDNA_SUCCESS)
-		printf ("len=%d len2=%d\n", len2, idna[i].inlen);
+		printf ("len=%ld len2=%ld\n", len2, idna[i].inlen);
 	      else
-		printf ("len=%d len2=%d\n", len, len2);
+		printf ("len=%ld len2=%ld\n", len, len2);
 	    }
-	  fail ("IDNA entry %d failed\n", i);
+	  fail ("IDNA entry %ld failed\n", i);
 	  if (debug)
 	    printf ("ERROR\n");
 	}

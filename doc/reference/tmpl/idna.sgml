@@ -19,12 +19,30 @@ idna
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO IDNAPI ##### -->
 <para>
 
 </para>
 
 
+
+<!-- ##### MACRO IDNA_ACE_PREFIX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM Idna_flags ##### -->
+<para>
+
+</para>
+
+@IDNA_ALLOW_UNASSIGNED: 
+@IDNA_USE_STD3_ASCII_RULES: 
 
 <!-- ##### ENUM Idna_rc ##### -->
 <para>
@@ -45,21 +63,6 @@ idna
 @IDNA_MALLOC_ERROR: 
 @IDNA_DLOPEN_ERROR: 
 
-<!-- ##### ENUM Idna_flags ##### -->
-<para>
-
-</para>
-
-@IDNA_ALLOW_UNASSIGNED: 
-@IDNA_USE_STD3_ASCII_RULES: 
-
-<!-- ##### MACRO IDNA_ACE_PREFIX ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### FUNCTION idna_strerror ##### -->
 <para>
 
@@ -77,19 +80,6 @@ idna
 @in: 
 @inlen: 
 @out: 
-@flags: 
-@Returns: 
-
-
-<!-- ##### FUNCTION idna_to_unicode_44i ##### -->
-<para>
-
-</para>
-
-@in: 
-@inlen: 
-@out: 
-@outlen: 
 @flags: 
 @Returns: 
 
@@ -123,6 +113,19 @@ idna
 
 @input: 
 @output: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION idna_to_unicode_44i ##### -->
+<para>
+
+</para>
+
+@in: 
+@inlen: 
+@out: 
+@outlen: 
 @flags: 
 @Returns: 
 

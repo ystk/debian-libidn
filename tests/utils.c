@@ -1,5 +1,5 @@
 /* utils.c --- Self test utilities.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -41,7 +41,7 @@ fail (const char *format, ...)
   va_end (arg_ptr);
   error_count++;
   if (break_on_error)
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 void
@@ -49,7 +49,7 @@ escapeprint (const char *str, size_t len)
 {
   size_t i;
 
-  printf (" (length %d bytes):\n\t", len);
+  printf (" (length %ld bytes):\n\t", len);
   for (i = 0; i < len; i++)
     {
       if (((str[i] & 0xFF) >= 'A' && (str[i] & 0xFF) <= 'Z') ||
@@ -112,7 +112,7 @@ ucs4print (const uint32_t * str, size_t len)
   size_t i;
 
   printf ("\t;; ");
-  for (i = 0; i < len; i++)
+  for (i = 0; (len == (size_t) -1) ? str[i] : i < len; i++)
     {
       printf ("U+%04x ", str[i]);
       if ((i + 1) % 4 == 0)

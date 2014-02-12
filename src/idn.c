@@ -1,5 +1,5 @@
 /* idn.c --- Command line interface to libidn.
- * Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009  Simon Josefsson
+ * Copyright (C) 2003-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -27,6 +27,7 @@
 #include <string.h>
 #include <errno.h>
 #include <locale.h>
+#include <unistd.h>
 
 /* Gnulib headers. */
 #include "error.h"
@@ -47,11 +48,9 @@
 #include "idn_cmd.h"
 
 #define GREETING \
-  "Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.\n" \
-  "GNU Libidn comes with NO WARRANTY, to the extent permitted by law.\n" \
-  "You may redistribute copies of GNU Libidn under the terms of\n"	\
-  "the GNU Lesser General Public License.  For more information\n"	\
-  "about these matters, see the file named COPYING.LIB.\n"
+  "Copyright 2002-2012 Simon Josefsson.\n"				 \
+  "GNU Libidn is free software with ABSOLUTELY NO WARRANTY.  For more\n" \
+  "information about these matters, see <http://www.gnu.org/licenses/>.\n"
 
 const char version_etc_copyright[] =
   /* Do *not* mark this string for translation.  %s is a copyright
@@ -174,13 +173,17 @@ main (int argc, char *argv[])
       usage (EXIT_FAILURE);
     }
 
-  if (!args_info.quiet_given)
+  if (!args_info.quiet_given
+      && args_info.inputs_num == 0
+      && isatty (fileno (stdin)))
     fprintf (stderr, "%s %s\n" GREETING, PACKAGE, VERSION);
 
   if (args_info.debug_given)
     fprintf (stderr, _("Charset `%s'.\n"), stringprep_locale_charset ());
 
-  if (!args_info.quiet_given && args_info.inputs_num == 0)
+  if (!args_info.quiet_given
+      && args_info.inputs_num == 0
+      && isatty (fileno (stdin)))
     fprintf (stderr, _("Type each input string on a line by itself, "
 		       "terminated by a newline character.\n"));
 
