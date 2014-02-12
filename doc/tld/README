@@ -1,5 +1,5 @@
 Libidn doc/tld/README -- Notes and definition of the TLD tables.
-Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009  Simon Josefsson
+Copyright (C) 2004-2012 Simon Josefsson
 Copyright (C) 2004  Free Software Foundation, Inc
 See the end for copying conditions.
 
@@ -13,7 +13,7 @@ install a file you only need to remove lib/tlds.c and type 'make' and
 it will be incorporated in the library.
 
 Experimental tables for various TLDs can be found at
-<http://tldchk.berlios.de>.
+<https://github.com/gnuthor/tldchk>.
 
 The format for the files are as follows.  Empty lines or those
 starting with '#' are ignored.  It is highly recommended to discuss

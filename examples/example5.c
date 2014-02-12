@@ -1,5 +1,5 @@
 /* example5.c --- Example TLD checking.
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2004-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -62,10 +62,11 @@ main (void)
 
   printf ("Input domain encoded as `%s': ", stringprep_locale_charset ());
   fflush (stdout);
-  fgets (buf, BUFSIZ, stdin);
+  if (!fgets (buf, BUFSIZ, stdin))
+    perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %d): ", strlen (buf));
+  printf ("Read string (length %ld): ", strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -86,7 +87,7 @@ main (void)
       return 2;
     }
 
-  printf ("ToASCII string (length %d): %s\n", strlen (p), p);
+  printf ("ToASCII string (length %ld): %s\n", strlen (p), p);
 
   rc = idna_to_unicode_8z4z (p, &r, 0);
   free (p);
@@ -106,7 +107,7 @@ main (void)
   free (r);
   if (rc == TLD_INVALID)
     {
-      printf ("Domain rejected by TLD check, Unicode position %d\n", errpos);
+      printf ("Domain rejected by TLD check, Unicode position %ld\n", errpos);
       return 1;
     }
   else if (rc != TLD_SUCCESS)

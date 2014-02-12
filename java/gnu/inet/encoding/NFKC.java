@@ -1,25 +1,31 @@
-/**
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009  Free Software Foundation, Inc.
- *
- * Author: Oliver Hitz
- *
- * This file is part of GNU Libidn.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public License
- * as published by the Free Software Foundation; either version 2.1 of
- * the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
- * USA
- */
+/* Copyright (C) 2004-2012 Free Software Foundation, Inc.
+   Author: Oliver Hitz
+
+   This file is part of GNU Libidn.
+
+   GNU Libidn is free software: you can redistribute it and/or
+   modify it under the terms of either:
+
+     * the GNU Lesser General Public License as published by the Free
+       Software Foundation; either version 3 of the License, or (at
+       your option) any later version.
+
+   or
+
+     * the GNU General Public License as published by the Free
+       Software Foundation; either version 2 of the License, or (at
+       your option) any later version.
+
+   or both in parallel, as here.
+
+   GNU Libidn is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received copies of the GNU General Public License and
+   the GNU Lesser General Public License along with this program.  If
+   not, see <http://www.gnu.org/licenses/>. */
 
 package gnu.inet.encoding;
 
@@ -68,16 +74,16 @@ public class NFKC
       int cc = combiningClass(out.charAt(i));
 
       if (i > 0 && (last_cc == 0 || last_cc != cc)) {
- 	// Try to combine characters
- 	char a = out.charAt(last_start);
- 	char b = out.charAt(i);
+	  // Try to combine characters
+	  char a = out.charAt(last_start);
+	  char b = out.charAt(i);
 
- 	int c = compose(a, b);
+	  int c = compose(a, b);
 
- 	if (c != -1) {
- 	  out.setCharAt(last_start, (char) c);
- 	  out.deleteCharAt(i);
- 	  i--;
+	  if (c != -1) {
+	      out.setCharAt(last_start, (char) c);
+	      out.deleteCharAt(i);
+	      i--;
 
 	  if (i == last_start) {
 	    last_cc = 0;
@@ -89,7 +95,7 @@ public class NFKC
       }
 
       if (cc == 0) {
- 	last_start = i;
+	  last_start = i;
       }
 
       last_cc = cc;
@@ -324,5 +330,4 @@ public class NFKC
     }
     return -1;
   }
-
 }

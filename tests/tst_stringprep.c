@@ -1,5 +1,5 @@
 /* tst_stringprep.c --- Self tests for stringprep().
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -218,7 +218,7 @@ doit (void)
   for (i = 0; i < sizeof (strprep) / sizeof (strprep[0]); i++)
     {
       if (debug)
-	printf ("STRINGPREP entry %d\n", i);
+	printf ("STRINGPREP entry %ld\n", i);
 
       if (debug)
 	{
@@ -239,7 +239,7 @@ doit (void)
 
 	if (strcmp (strprep[i].in, x) != 0)
 	  {
-	    fail ("bad UTF-8 in entry %d\n", i);
+	    fail ("bad UTF-8 in entry %ld\n", i);
 	    if (debug)
 	      {
 		puts ("expected:");
@@ -259,7 +259,7 @@ doit (void)
 			       "Nameprep", strprep[i].flags);
       if (rc != strprep[i].rc)
 	{
-	  fail ("stringprep() entry %d failed: %d\n", i, rc);
+	  fail ("stringprep() entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  if (rc == STRINGPREP_OK)
@@ -287,7 +287,7 @@ doit (void)
 	  if (strlen (strprep[i].out) != strlen (p) ||
 	      memcmp (strprep[i].out, p, strlen (p)) != 0)
 	    {
-	      fail ("stringprep() entry %d failed\n", i);
+	      fail ("stringprep() entry %ld failed\n", i);
 	      if (debug)
 		printf ("ERROR\n");
 	    }

@@ -6,6 +6,7 @@ dnl Usage:
 dnl   GTK_DOC_CHECK([minimum-gtk-doc-version])
 AC_DEFUN([GTK_DOC_CHECK],
 [
+  AC_REQUIRE([PKG_PROG_PKG_CONFIG])
   AC_BEFORE([AC_PROG_LIBTOOL],[$0])dnl setup libtool first
   AC_BEFORE([AM_PROG_LIBTOOL],[$0])dnl setup libtool first
 
@@ -48,7 +49,7 @@ AC_DEFUN([GTK_DOC_CHECK],
                      [build documentation in pdf format [[default=no]]]),,
       [enable_gtk_doc_pdf=no])
 
-  if test -n "$GTKDOC_MKPDF"; then
+  if test -z "$GTKDOC_MKPDF"; then
     enable_gtk_doc_pdf=no
   fi
 

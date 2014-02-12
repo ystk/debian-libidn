@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2006, 2007, 2008, 2009 Simon Josefsson.
+# Copyright (C) 2002-2012 Simon Josefsson
 #
 # This file is part of GNU Libidn.
 #
@@ -18,6 +18,7 @@
 
 AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS)
 AM_CPPFLAGS = -I$(top_srcdir)/lib -I../lib -I$(top_srcdir)/gl -I../gl
+AM_CPPFLAGS += -DLOCALEDIR=\"$(localedir)\"
 
 dist_lisp_DATA = punycode.el idna.el
 
@@ -26,20 +27,18 @@ idn_SOURCES = idn.c
 idn_LDADD = libidn_cmd.la ../lib/libidn.la ../gl/libgnu.la $(LTLIBINTL)
 
 localedir = $(datadir)/locale
-DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
 
 idn.c: $(BUILT_SOURCES)
 
 noinst_LTLIBRARIES = libidn_cmd.la
 libidn_cmd_la_SOURCES =  idn.ggo idn_cmd.c idn_cmd.h
+libidn_cmd_la_LIBADD = ../gl/libgnu.la
 libidn_cmd_la_CFLAGS =
 
 idn_cmd.c idn_cmd.h: idn.ggo Makefile.am
 	gengetopt --unamed-opts --no-handle-version --no-handle-help \
 		--set-package="idn" \
-		--input $^ --file-name idn_cmd || \
-		test -f idn_cmd.h -a -f idn_cmd.c || \
-		cp $(srcdir)/idn_cmd.h $(srcdir)/idn_cmd.h .
+		--input $^ --file-name idn_cmd
 	perl -pi -e 's/\[OPTIONS\]/\[OPTION\]/g' idn_cmd.c
 	perl -pi -e 's/\[FILES\]/\[STRING\]/g' idn_cmd.c
 

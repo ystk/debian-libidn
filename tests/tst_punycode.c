@@ -1,5 +1,5 @@
 /* tst_punycode.c --- Self tests for punycode.
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -186,7 +186,7 @@ doit (void)
   for (i = 0; i < sizeof (punycode) / sizeof (punycode[0]); i++)
     {
       if (debug)
-	printf ("PUNYCODE entry %d: %s\n", i, punycode[i].name);
+	printf ("PUNYCODE entry %ld: %s\n", i, punycode[i].name);
 
       if (debug)
 	{
@@ -199,7 +199,7 @@ doit (void)
 			    NULL, &outlen, p);
       if (rc != punycode[i].rc)
 	{
-	  fail ("punycode_encode() entry %d failed: %d\n", i, rc);
+	  fail ("punycode_encode() entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -221,7 +221,7 @@ doit (void)
 	  if (strlen (punycode[i].out) != strlen (p) ||
 	      memcmp (punycode[i].out, p, strlen (p)) != 0)
 	    {
-	      fail ("punycode() entry %d failed\n", i);
+	      fail ("punycode() entry %ld failed\n", i);
 	      if (debug)
 		printf ("ERROR\n");
 	    }
@@ -241,7 +241,7 @@ doit (void)
 			    &outlen, q, NULL);
       if (rc != punycode[i].rc)
 	{
-	  fail ("punycode() entry %d failed: %d\n", i, rc);
+	  fail ("punycode() entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -262,7 +262,7 @@ doit (void)
 	  if (punycode[i].inlen != outlen ||
 	      memcmp (punycode[i].in, q, outlen) != 0)
 	    {
-	      fail ("punycode_decode() entry %d failed\n", i);
+	      fail ("punycode_decode() entry %ld failed\n", i);
 	      if (debug)
 		printf ("ERROR\n");
 	    }

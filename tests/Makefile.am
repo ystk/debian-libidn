@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2006, 2007, 2008, 2009 Simon Josefsson
+# Copyright (C) 2002-2012 Simon Josefsson
 #
 # This file is part of GNU Libidn.
 #
@@ -20,19 +20,21 @@ AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS)
 AM_CPPFLAGS = -I$(top_srcdir)/lib -I../lib -I$(top_srcdir)/gl -I../gl
 AM_LDFLAGS = -no-install
 
-LDADD = ../lib/libidn.la libutils.la
+LDADD = libutils.a ../lib/libidn.la
 
-noinst_LTLIBRARIES = libutils.la
-libutils_la_SOURCES = utils.h utils.c
+check_LIBRARIES = libutils.a
+libutils_a_SOURCES = utils.h utils.c
 
-ctests = tst_stringprep$(EXEEXT) tst_punycode$(EXEEXT)			\
-	tst_idna$(EXEEXT) tst_idna2$(EXEEXT) tst_nfkc$(EXEEXT)		\
-	tst_pr29$(EXEEXT) tst_strerror$(EXEEXT) tst_toutf8$(EXEEXT)
+ctests = tst_stringprep tst_punycode tst_idna tst_idna2 tst_idna3	\
+	tst_idna4 tst_nfkc tst_pr29 tst_strerror tst_toutf8		\
+	tst_symbols
 if TLD
-ctests += tst_tld$(EXEEXT)
+ctests += tst_tld
 endif
 
-TESTS = $(ctests)	
+EXTRA_DIST = libidn.supp
+
+TESTS = $(ctests)
 check_PROGRAMS = $(ctests)
 
 TESTS_ENVIRONMENT = $(VALGRIND)

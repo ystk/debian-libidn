@@ -1,5 +1,5 @@
 /* tst_idna2.c --- Self tests for idna_to_ascii_8z().
- * Copyright (C) 2002, 2003, 2004, 2006, 2007, 2008, 2009  Simon Josefsson
+ * Copyright (C) 2002-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -468,7 +468,7 @@ doit (void)
   for (i = 0; i < sizeof (idna) / sizeof (idna[0]); i++)
     {
       if (debug)
-	printf ("IDNA2 entry %d\n", i);
+	printf ("IDNA2 entry %ld\n", i);
 
       if (debug)
 	{
@@ -487,7 +487,7 @@ doit (void)
 			     IDNA_USE_STD3_ASCII_RULES);
       if (rc != IDNA_SUCCESS && strlen (idna[i].out) > 0)
 	{
-	  fail ("IDNA2 entry %d failed: %d\n", i, rc);
+	  fail ("IDNA2 entry %ld failed: %d\n", i, rc);
 	  continue;
 	}
 
@@ -504,7 +504,7 @@ doit (void)
 	  if (strlen (idna[i].out) != strlen (out) ||
 	      strcasecmp (idna[i].out, out) != 0)
 	    {
-	      fail ("IDNA2 entry %d failed\n", i);
+	      fail ("IDNA2 entry %ld failed\n", i);
 	      if (debug)
 		printf ("ERROR\n");
 	    }

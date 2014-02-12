@@ -11,14 +11,18 @@ AUTOMAKE_OPTIONS = 1.6
 # The name of the module, e.g. 'glib'.
 DOC_MODULE=$(PACKAGE)
 
+# Uncomment for versioned docs and specify the version of the module, e.g. '2'.
+#DOC_MODULE_VERSION=2
+
+
 # The top-level SGML file. You can change this if you want to.
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 
-# The directory containing the source code. Relative to $(srcdir).
-# gtk-doc will search all .c & .h files beneath here for inline comments
-# documenting the functions and macros.
-# e.g. DOC_SOURCE_DIR=../../../gtk
-DOC_SOURCE_DIR=../../lib
+# Directories containing the source code.
+# gtk-doc will search all .c and .h files beneath these paths
+# for inline comments documenting functions and macros.
+# e.g. DOC_SOURCE_DIR=$(top_srcdir)/gtk $(top_srcdir)/gdk
+DOC_SOURCE_DIR=$(top_srcdir)/lib
 
 # Extra options to pass to gtkdoc-scangobj. Not normally needed.
 SCANGOBJ_OPTIONS=
@@ -28,12 +32,15 @@ SCANGOBJ_OPTIONS=
 SCAN_OPTIONS=--ignore-decorators=IDNAPI
 
 # Extra options to supply to gtkdoc-mkdb.
-# e.g. MKDB_OPTIONS=--sgml-mode --output-format=xml
-MKDB_OPTIONS=--sgml-mode --output-format=xml
+# e.g. MKDB_OPTIONS=--xml-mode --output-format=xml
+MKDB_OPTIONS=--xml-mode --output-format=xml
 
 # Extra options to supply to gtkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
 MKTMPL_OPTIONS=
+
+# Extra options to supply to gtkdoc-mkhtml
+MKHTML_OPTIONS=
 
 # Extra options to supply to gtkdoc-fixref. Not normally needed.
 # e.g. FIXXREF_OPTIONS=--extra-dir=../gdk-pixbuf/html --extra-dir=../gdk/html
@@ -45,9 +52,13 @@ FIXXREF_OPTIONS=
 HFILE_GLOB=$(top_srcdir)/lib/*.h
 CFILE_GLOB=$(top_srcdir)/lib/*.c
 
-# Header files to ignore when scanning.
-# e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
-IGNORE_HFILES=gunibreak.h gunicomp.h gunidecomp.h idn-int.h gl
+# Extra header to include when scanning, which are not under DOC_SOURCE_DIR
+# e.g. EXTRA_HFILES=$(top_srcdir}/contrib/extra.h
+EXTRA_HFILES=
+
+# Header files or dirs to ignore when scanning. Use base file/dir names
+# e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h private_code
+IGNORE_HFILES=gunibreak.h gunicomp.h gunidecomp.h idn-int.h gl gltests
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
@@ -65,9 +76,9 @@ expand_content_files=
 # CFLAGS and LDFLAGS for compiling gtkdoc-scangobj with your library.
 # Only needed if you are using gtkdoc-scangobj to dynamically query widget
 # signals and properties.
-# e.g. INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
+# e.g. GTKDOC_CFLAGS=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
 # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
-AM_CPPFLAGS=
+GTKDOC_CFLAGS=
 GTKDOC_LIBS=
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
@@ -82,6 +93,13 @@ EXTRA_DIST +=
 # for --rebuild-sections in $(SCAN_OPTIONS) e.g. $(DOC_MODULE)-sections.txt
 #DISTCLEANFILES +=
 
-# Comment this out if you want your docs-status tested during 'make check'
+# Comment this out if you want 'make check' to test you doc status
+# and run some sanity checks
+if ENABLE_GTK_DOC
+TESTS_ENVIRONMENT = cd $(srcdir) && \
+  DOC_MODULE=$(DOC_MODULE) DOC_MAIN_SGML_FILE=$(DOC_MAIN_SGML_FILE) \
+  SRCDIR=$(abs_srcdir) BUILDDIR=$(abs_builddir)
 #TESTS = $(GTKDOC_CHECK)
+endif
 
+-include $(top_srcdir)/git.mk

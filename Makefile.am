@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+# Copyright (C) 2002-2012 Simon Josefsson
 #
 # This file is part of GNU Libidn.
 #
@@ -20,6 +20,7 @@ SUBDIRS = gl lib/gl lib po src doc gltests lib/gltests tests examples	\
 	java csharp
 
 EXTRA_DIST = cfg.mk maint.mk .clcopying
+EXTRA_DIST += COPYING.LESSERv2 COPYING.LESSERv3 COPYINGv2 COPYINGv3
 
 ACLOCAL_AMFLAGS = -I m4 -I gl/m4 -I lib/gl/m4
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
@@ -38,7 +39,9 @@ EXTRA_DIST += FAQ libc/README libc/getaddrinfo-idn.txt libc/example.c	\
 EXTRA_DIST += win32/libidn.sln win32/libidn.vcproj			\
 	win32/include/unistd.h win32/include/idn-int.h			\
 	win32/include/stdbool.h win32/include/ac-stdint.h		\
-	win32/include/config.h
+	win32/include/config.h win32/libidn4win.mk
+
+EXTRA_DIST += HACKING
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libidn.pc

@@ -1,5 +1,5 @@
 /* tst_tld.c --- Self tests for tld_*().
- * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson
+ * Copyright (C) 2004-2012 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -84,7 +84,7 @@ doit (void)
   for (i = 0; i < sizeof (tld) / sizeof (tld[0]); i++)
     {
       if (debug)
-	printf ("TLD entry %d: %s\n", i, tld[i].name);
+	printf ("TLD entry %ld: %s\n", i, tld[i].name);
 
       if (debug)
 	{
@@ -95,7 +95,7 @@ doit (void)
       tldtable = tld_default_table (tld[i].tld, NULL);
       if (tldtable == NULL)
 	{
-	  fail ("TLD entry %d tld_get_table (%s)\n", i, tld[i].tld);
+	  fail ("TLD entry %ld tld_get_table (%s)\n", i, tld[i].tld);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -104,7 +104,7 @@ doit (void)
       rc = tld_check_4t (tld[i].in, tld[i].inlen, &errpos, tldtable);
       if (rc != tld[i].rc)
 	{
-	  fail ("TLD entry %d failed: %d\n", i, rc);
+	  fail ("TLD entry %ld failed: %d\n", i, rc);
 	  if (debug)
 	    printf ("FATAL\n");
 	  continue;
@@ -115,19 +115,19 @@ doit (void)
 
       if (rc != tld[i].rc)
 	{
-	  fail ("TLD entry %d failed\n", i);
+	  fail ("TLD entry %ld failed\n", i);
 	  if (debug)
 	    printf ("ERROR\n");
 	}
       else if (rc == TLD_INVALID)
 	{
 	  if (debug)
-	    printf ("returned errpos %d expected errpos %d\n",
+	    printf ("returned errpos %ld expected errpos %ld\n",
 		    errpos, tld[i].errpos);
 
 	  if (tld[i].errpos != errpos)
 	    {
-	      fail ("TLD entry %d failed because errpos %d != %d\n", i,
+	      fail ("TLD entry %ld failed because errpos %ld != %ld\n", i,
 		    tld[i].errpos, errpos);
 	      if (debug)
 		printf ("ERROR\n");
@@ -140,12 +140,12 @@ doit (void)
 	rc = tld_check_8z (tld[i].example, &errpos, NULL);
 	if (rc != tld[i].rc)
 	  {
-	    fail ("TLD entry %d failed\n", i);
+	    fail ("TLD entry %ld failed\n", i);
 	    if (debug)
 	      printf ("ERROR\n");
 	  }
 	if (debug)
-	  printf ("TLD entry %d tld_check_8z (%s)\n", i, tld[i].example);
+	  printf ("TLD entry %ld tld_check_8z (%s)\n", i, tld[i].example);
       }
     }
 }
