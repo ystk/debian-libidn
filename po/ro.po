@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libidn 0.4.1\n"
 "Report-Msgid-Bugs-To: bug-libidn@gnu.org\n"
-"POT-Creation-Date: 2012-05-23 10:37+0200\n"
+"POT-Creation-Date: 2014-08-10 22:50+0200\n"
 "PO-Revision-Date: 2004-04-23 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -265,6 +265,7 @@ msgid "punycode_encode: %s"
 msgstr ""
 
 #: src/idn.c:317
+#, c-format
 msgid "malloc"
 msgstr ""
 

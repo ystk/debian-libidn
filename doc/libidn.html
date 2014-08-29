@@ -1,16 +1,16 @@
 <html lang="en">
 <head>
-<title>GNU Libidn 1.25</title>
+<title>GNU Libidn 1.29</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="GNU Libidn 1.25">
+<meta name="description" content="GNU Libidn 1.29">
 <meta name="generator" content="makeinfo 4.13">
 <link title="Top" rel="top" href="#Top">
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
-This manual is last updated 27 April 2012 for version
-1.25 of GNU Libidn.
+This manual is last updated 10 August 2014 for version
+1.29 of GNU Libidn.
 
-Copyright (C) 2002-2012 Simon Josefsson.
+Copyright (C) 2002-2014 Simon Josefsson.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -77,7 +77,7 @@ dd, li {
 --></style>
 </head>
 <body>
-<h1 class="settitle">GNU Libidn 1.25</h1>
+<h1 class="settitle">GNU Libidn 1.29</h1>
    <div class="contents">
 <h2>Table of Contents</h2>
 <ul>
@@ -220,10 +220,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 <h2 class="unnumbered">GNU Libidn</h2>
 
-<p>This manual is last updated 27 April 2012 for version
-1.25 of GNU Libidn.
+<p>This manual is last updated 10 August 2014 for version
+1.29 of GNU Libidn.
 
-   <p>Copyright &copy; 2002-2012 Simon Josefsson.
+   <p>Copyright &copy; 2002-2014 Simon Josefsson.
 
    <blockquote>
 Permission is granted to copy, distribute and/or modify this document
@@ -650,7 +650,7 @@ The package can be downloaded from several places, including:
    <p><a href="ftp://alpha.gnu.org/pub/gnu/libidn/">ftp://alpha.gnu.org/pub/gnu/libidn/</a>
 
    <p>The latest version is stored in a file, e.g.,
-&lsquo;<samp><span class="samp">libidn-1.25.tar.gz</span></samp>&rsquo; where the &lsquo;<samp><span class="samp">1.25</span></samp>&rsquo;
+&lsquo;<samp><span class="samp">libidn-1.29.tar.gz</span></samp>&rsquo; where the &lsquo;<samp><span class="samp">1.29</span></samp>&rsquo;
 value is the highest version number in the directory.
 
    <p>The package is then extracted, configured and built like many other
@@ -662,9 +662,9 @@ distribution archive.
 and install the package.  You will need a few basic tools, such as
 &lsquo;<samp><span class="samp">sh</span></samp>&rsquo;, &lsquo;<samp><span class="samp">make</span></samp>&rsquo; and &lsquo;<samp><span class="samp">cc</span></samp>&rsquo;.
 
-<pre class="example">     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.25.tar.gz
-     $ tar xfz libidn-1.25.tar.gz
-     $ cd libidn-1.25/
+<pre class="example">     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.29.tar.gz
+     $ tar xfz libidn-1.29.tar.gz
+     $ cd libidn-1.29/
      $ ./configure
      ...
      $ make
@@ -732,11 +732,11 @@ such as Windows Mobile.  You need Visual Studio 2005 or later.
    <p>First download and unpack the archive as described in the generic
 installation instructions (see <a href="#Downloading-and-Installing">Downloading and Installing</a>).  Don't
 run <code>./configure</code>.  Instead, start Visual Studio and open the
-project file <samp><span class="file">win32/libidn.sln</span></samp> inside the Libidn directory.  You
+project file <samp><span class="file">windows/libidn.sln</span></samp> inside the Libidn directory.  You
 should be able to build the project using Build Project.
 
-   <p>Output libraries will be written into the <code>win32/lib</code> (or
-<code>win32/lib/debug</code> for Debug versions) folder.
+   <p>Output libraries will be written into the <code>windows/lib</code> (or
+<code>windows/lib/debug</code> for Debug versions) folder.
 
    <p>When working with Windows you may want to look into the special memory
 handling functions that may be needed (see <a href="#Memory-handling-under-Windows">Memory handling under Windows</a>).
@@ -2844,7 +2844,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 <p>This example demonstrates how the stringprep functions are used.
 
 <pre class="verbatim">/* example.c --- Example code showing how to use stringprep().
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2898,7 +2898,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Before locale2utf8 (length %ld): ", strlen (buf));
+  printf ("Before locale2utf8 (length %ld): ", (long int) strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -2912,7 +2912,7 @@ main (void)
   else
     printf ("Could not convert string to UTF-8, continuing anyway...\n");
 
-  printf ("Before stringprep (length %ld): ", strlen (buf));
+  printf ("Before stringprep (length %ld): ", (long int) strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -2922,7 +2922,7 @@ main (void)
     printf ("Stringprep failed (%d): %s\n", rc, stringprep_strerror (rc));
   else
     {
-      printf ("After stringprep (length %ld): ", strlen (buf));
+      printf ("After stringprep (length %ld): ", (long int) strlen (buf));
       for (i = 0; i &lt; strlen (buf); i++)
 	printf ("%02x ", buf[i] &amp; 0xFF);
       printf ("\n");
@@ -2945,7 +2945,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 <p>This example demonstrates how the punycode functions are used.
 
 <pre class="verbatim">/* example2.c --- Example code showing how to use punycode.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  * Copyright (C) 2002  Adam M. Costello
  *
  * This file is part of GNU Libidn.
@@ -3194,7 +3194,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 internationalized domain names into ASCII compatible names.
 
 <pre class="verbatim">/* example3.c --- Example ToASCII() code showing how to use Libidn.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3249,7 +3249,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3261,7 +3261,7 @@ main (void)
       return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", (long int) strlen (p), p);
   for (i = 0; i &lt; strlen (p); i++)
     printf ("%02x ", p[i] &amp; 0xFF);
   printf ("\n");
@@ -3286,7 +3286,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 compatible names to internationalized domain names.
 
 <pre class="verbatim">/* example4.c --- Example ToUnicode() code showing how to use Libidn.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3341,7 +3341,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3353,7 +3353,7 @@ main (void)
       return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", (long int) strlen (p), p);
   for (i = 0; i &lt; strlen (p); i++)
     printf ("%02x ", p[i] &amp; 0xFF);
   printf ("\n");
@@ -3377,7 +3377,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Examples">Examples</a>
 for invalid characters within a specific TLD.
 
 <pre class="verbatim">/* example5.c --- Example TLD checking.
- * Copyright (C) 2004-2012 Simon Josefsson
+ * Copyright (C) 2004-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -3444,7 +3444,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i &lt; strlen (buf); i++)
     printf ("%02x ", buf[i] &amp; 0xFF);
   printf ("\n");
@@ -3465,7 +3465,7 @@ main (void)
       return 2;
     }
 
-  printf ("ToASCII string (length %ld): %s\n", strlen (p), p);
+  printf ("ToASCII string (length %ld): %s\n", (long int) strlen (p), p);
 
   rc = idna_to_unicode_8z4z (p, &amp;r, 0);
   free (p);
@@ -3485,7 +3485,7 @@ main (void)
   free (r);
   if (rc == TLD_INVALID)
     {
-      printf ("Domain rejected by TLD check, Unicode position %ld\n", errpos);
+      printf ("Domain rejected by TLD check, Unicode position %ld\n", (long int) errpos);
       return 1;
     }
   else if (rc != TLD_SUCCESS)
@@ -3830,8 +3830,10 @@ pending.
 
    <p>The Java library, if Libidn has been built with Java support
 (see <a href="#Downloading-and-Installing">Downloading and Installing</a>), will be placed in
-<samp><span class="file">java/libidn-1.25.jar</span></samp>.  The source code is located in
-<samp><span class="file">java/gnu/inet/encoding/</span></samp>.
+<samp><span class="file">java/libidn-1.29.jar</span></samp>.  The source code is below
+<samp><span class="file">java/</span></samp> in Maven directory layout, and there is a Maven
+<samp><span class="file">pom.xml</span></samp> build script as well.  Source code files are in
+<samp><span class="file">java/src/main/java/gnu/inet/encoding/</span></samp>.
 
 <h3 class="section">12.1 Overview</h3>
 
@@ -3847,9 +3849,9 @@ and toUnicode which can be used as follows:
 </pre>
    <h3 class="section">12.2 Miscellaneous Programs</h3>
 
-<p>The <samp><span class="file">misc/</span></samp> directory contains several programs that are related
-to the Java part of GNU Libidn, but that don't need to be included in
-the main source tree.
+<p>The <samp><span class="file">java/src/util/java/</span></samp> directory contains several programs that
+are related to the Java part of GNU Libidn, but that don't need to be
+included in the main source tree or the JAR file.
 
 <h4 class="subsection">12.2.1 GenerateRFC3454</h4>
 
@@ -3893,16 +3895,16 @@ or against Simon Josefsson's test vectors.
 
    <p>To test the transformation manually, use:
 
-<pre class="example">     $ java -cp .:../libidn.jar TestIDNA -a &lt;string to test&gt;
+<pre class="example">     $ java -cp .:/usr/share/java/libidn.jar TestIDNA -a &lt;string to test&gt;
      Input: &lt;string to test&gt;
      Output: &lt;toASCII(string to test)&gt;
-     $ java -cp .:../libidn.jar TestIDNA -u &lt;string to test&gt;
+     $ java -cp .:/usr/share/java/libidn.jar TestIDNA -u &lt;string to test&gt;
      Input: &lt;string to test&gt;
      Output: &lt;toUnicode(string to test)&gt;
 </pre>
    <p>To test against draft-josefsson-idn-test-vectors.html, use:
 
-<pre class="example">     $ java -cp .:../libidn.jar TestIDNA -t
+<pre class="example">     $ java -cp .:/usr/share/java/libidn/libidn.jar TestIDNA -t
      No errors detected!
 </pre>
    <h4 class="subsection">12.2.4 TestNFKC</h4>
@@ -3912,13 +3914,13 @@ or against the NormalizationTest.txt file from the Unicode data files.
 
    <p>To test the normalization manually, use:
 
-<pre class="example">     $ java -cp .:../libidn.jar TestNFKC &lt;string to test&gt;
+<pre class="example">     $ java -cp .:/usr/share/java/libidn.jar TestNFKC &lt;string to test&gt;
      Input: &lt;string to test&gt;
      Output: &lt;nfkc version of the string to test&gt;
 </pre>
    <p>To test against NormalizationTest.txt:
 
-<pre class="example">     $ java -cp .:../libidn.jar TestNFKC
+<pre class="example">     $ java -cp .:/usr/share/java/libidn.jar TestNFKC
      No errors detected!
 </pre>
    <h3 class="section">12.3 Possible Problems</h3>

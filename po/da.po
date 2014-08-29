@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libidn 1.9\n"
 "Report-Msgid-Bugs-To: bug-libidn@gnu.org\n"
-"POT-Creation-Date: 2012-05-23 10:37+0200\n"
+"POT-Creation-Date: 2014-08-10 22:50+0200\n"
 "PO-Revision-Date: 2011-01-03 17:38+0100\n"
 "Last-Translator: Morten Bo Johansen <mbj@spamcop.net>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -299,6 +299,7 @@ msgid "punycode_encode: %s"
 msgstr "punycode_encode: %s"
 
 #: src/idn.c:317
+#, c-format
 msgid "malloc"
 msgstr ""
 

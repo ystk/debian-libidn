@@ -1,9 +1,9 @@
 This is libidn.info, produced by makeinfo version 4.13 from libidn.texi.
 
-This manual is last updated 27 April 2012 for version 1.25 of GNU
+This manual is last updated 10 August 2014 for version 1.29 of GNU
 Libidn.
 
-   Copyright (C) 2002-2012 Simon Josefsson.
+   Copyright (C) 2002-2014 Simon Josefsson.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,10 +33,10 @@ File: libidn.info,  Node: Top,  Next: Introduction,  Up: (dir)
 GNU Libidn
 **********
 
-This manual is last updated 27 April 2012 for version 1.25 of GNU
+This manual is last updated 10 August 2014 for version 1.29 of GNU
 Libidn.
 
-   Copyright (C) 2002-2012 Simon Josefsson.
+   Copyright (C) 2002-2014 Simon Josefsson.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -409,8 +409,8 @@ The package can be downloaded from several places, including:
 
    `ftp://alpha.gnu.org/pub/gnu/libidn/'
 
-   The latest version is stored in a file, e.g., `libidn-1.25.tar.gz'
-where the `1.25' value is the highest version number in the directory.
+   The latest version is stored in a file, e.g., `libidn-1.29.tar.gz'
+where the `1.29' value is the highest version number in the directory.
 
    The package is then extracted, configured and built like many other
 packages that use Autoconf.  For detailed information on configuring
@@ -421,9 +421,9 @@ distribution archive.
 and install the package.  You will need a few basic tools, such as
 `sh', `make' and `cc'.
 
-     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.25.tar.gz
-     $ tar xfz libidn-1.25.tar.gz
-     $ cd libidn-1.25/
+     $ wget -q ftp://alpha.gnu.org/pub/gnu/libidn/libidn-1.29.tar.gz
+     $ tar xfz libidn-1.29.tar.gz
+     $ cd libidn-1.29/
      $ ./configure
      ...
      $ make
@@ -489,11 +489,11 @@ as Windows Mobile.  You need Visual Studio 2005 or later.
    First download and unpack the archive as described in the generic
 installation instructions (*note Downloading and Installing::).  Don't
 run `./configure'.  Instead, start Visual Studio and open the project
-file `win32/libidn.sln' inside the Libidn directory.  You should be
+file `windows/libidn.sln' inside the Libidn directory.  You should be
 able to build the project using Build Project.
 
-   Output libraries will be written into the `win32/lib' (or
-`win32/lib/debug' for Debug versions) folder.
+   Output libraries will be written into the `windows/lib' (or
+`windows/lib/debug' for Debug versions) folder.
 
    When working with Windows you may want to look into the special
 memory handling functions that may be needed (*note Memory handling
@@ -2337,7 +2337,7 @@ File: libidn.info,  Node: Example 1,  Next: Example 2,  Up: Examples
 This example demonstrates how the stringprep functions are used.
 
 /* example.c --- Example code showing how to use stringprep().
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2391,7 +2391,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Before locale2utf8 (length %ld): ", strlen (buf));
+  printf ("Before locale2utf8 (length %ld): ", (long int) strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -2405,7 +2405,7 @@ main (void)
   else
     printf ("Could not convert string to UTF-8, continuing anyway...\n");
 
-  printf ("Before stringprep (length %ld): ", strlen (buf));
+  printf ("Before stringprep (length %ld): ", (long int) strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -2415,7 +2415,7 @@ main (void)
     printf ("Stringprep failed (%d): %s\n", rc, stringprep_strerror (rc));
   else
     {
-      printf ("After stringprep (length %ld): ", strlen (buf));
+      printf ("After stringprep (length %ld): ", (long int) strlen (buf));
       for (i = 0; i < strlen (buf); i++)
 	printf ("%02x ", buf[i] & 0xFF);
       printf ("\n");
@@ -2433,7 +2433,7 @@ File: libidn.info,  Node: Example 2,  Next: Example 3,  Prev: Example 1,  Up: Ex
 This example demonstrates how the punycode functions are used.
 
 /* example2.c --- Example code showing how to use punycode.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  * Copyright (C) 2002  Adam M. Costello
  *
  * This file is part of GNU Libidn.
@@ -2677,7 +2677,7 @@ This example demonstrates how the library is used to convert
 internationalized domain names into ASCII compatible names.
 
 /* example3.c --- Example ToASCII() code showing how to use Libidn.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2732,7 +2732,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -2744,7 +2744,7 @@ main (void)
       return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", (long int) strlen (p), p);
   for (i = 0; i < strlen (p); i++)
     printf ("%02x ", p[i] & 0xFF);
   printf ("\n");
@@ -2764,7 +2764,7 @@ This example demonstrates how the library is used to convert ASCII
 compatible names to internationalized domain names.
 
 /* example4.c --- Example ToUnicode() code showing how to use Libidn.
- * Copyright (C) 2002-2012 Simon Josefsson
+ * Copyright (C) 2002-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2819,7 +2819,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -2831,7 +2831,7 @@ main (void)
       return EXIT_FAILURE;
     }
 
-  printf ("ACE label (length %ld): '%s'\n", strlen (p), p);
+  printf ("ACE label (length %ld): '%s'\n", (long int) strlen (p), p);
   for (i = 0; i < strlen (p); i++)
     printf ("%02x ", p[i] & 0xFF);
   printf ("\n");
@@ -2851,7 +2851,7 @@ This example demonstrates how the library is used to check a string for
 invalid characters within a specific TLD.
 
 /* example5.c --- Example TLD checking.
- * Copyright (C) 2004-2012 Simon Josefsson
+ * Copyright (C) 2004-2014 Simon Josefsson
  *
  * This file is part of GNU Libidn.
  *
@@ -2918,7 +2918,7 @@ main (void)
     perror ("fgets");
   buf[strlen (buf) - 1] = '\0';
 
-  printf ("Read string (length %ld): ", strlen (buf));
+  printf ("Read string (length %ld): ", (long int) strlen (buf));
   for (i = 0; i < strlen (buf); i++)
     printf ("%02x ", buf[i] & 0xFF);
   printf ("\n");
@@ -2939,7 +2939,7 @@ main (void)
       return 2;
     }
 
-  printf ("ToASCII string (length %ld): %s\n", strlen (p), p);
+  printf ("ToASCII string (length %ld): %s\n", (long int) strlen (p), p);
 
   rc = idna_to_unicode_8z4z (p, &r, 0);
   free (p);
@@ -2959,7 +2959,7 @@ main (void)
   free (r);
   if (rc == TLD_INVALID)
     {
-      printf ("Domain rejected by TLD check, Unicode position %ld\n", errpos);
+      printf ("Domain rejected by TLD check, Unicode position %ld\n", (long int) errpos);
       return 1;
     }
   else if (rc != TLD_SUCCESS)
@@ -3262,8 +3262,9 @@ pending.
 
    The Java library, if Libidn has been built with Java support (*note
 Downloading and Installing::), will be placed in
-`java/libidn-1.25.jar'.  The source code is located in
-`java/gnu/inet/encoding/'.
+`java/libidn-1.29.jar'.  The source code is below `java/' in Maven
+directory layout, and there is a Maven `pom.xml' build script as well.
+Source code files are in `java/src/main/java/gnu/inet/encoding/'.
 
 12.1 Overview
 =============
@@ -3281,9 +3282,9 @@ and toUnicode which can be used as follows:
 12.2 Miscellaneous Programs
 ===========================
 
-The `misc/' directory contains several programs that are related to the
-Java part of GNU Libidn, but that don't need to be included in the main
-source tree.
+The `java/src/util/java/' directory contains several programs that are
+related to the Java part of GNU Libidn, but that don't need to be
+included in the main source tree or the JAR file.
 
 12.2.1 GenerateRFC3454
 ----------------------
@@ -3330,16 +3331,16 @@ against Simon Josefsson's test vectors.
 
    To test the transformation manually, use:
 
-     $ java -cp .:../libidn.jar TestIDNA -a <string to test>
+     $ java -cp .:/usr/share/java/libidn.jar TestIDNA -a <string to test>
      Input: <string to test>
      Output: <toASCII(string to test)>
-     $ java -cp .:../libidn.jar TestIDNA -u <string to test>
+     $ java -cp .:/usr/share/java/libidn.jar TestIDNA -u <string to test>
      Input: <string to test>
      Output: <toUnicode(string to test)>
 
    To test against draft-josefsson-idn-test-vectors.html, use:
 
-     $ java -cp .:../libidn.jar TestIDNA -t
+     $ java -cp .:/usr/share/java/libidn/libidn.jar TestIDNA -t
      No errors detected!
 
 12.2.4 TestNFKC
@@ -3350,13 +3351,13 @@ against the NormalizationTest.txt file from the Unicode data files.
 
    To test the normalization manually, use:
 
-     $ java -cp .:../libidn.jar TestNFKC <string to test>
+     $ java -cp .:/usr/share/java/libidn.jar TestNFKC <string to test>
      Input: <string to test>
      Output: <nfkc version of the string to test>
 
    To test against NormalizationTest.txt:
 
-     $ java -cp .:../libidn.jar TestNFKC
+     $ java -cp .:/usr/share/java/libidn.jar TestNFKC
      No errors detected!
 
 12.3 Possible Problems
@@ -4298,97 +4299,97 @@ Concept Index
 
 
 Tag Table:
-Node: Top1018
-Node: Introduction2719
-Node: Getting Started5027
-Node: Features6134
-Node: Library Overview7475
-Node: Supported Platforms8273
-Node: Getting help11845
-Node: Commercial Support12308
-Node: Downloading and Installing13242
-Node: Installing under Windows15532
-Node: Bug Reports16912
-Node: Contributing18302
-Node: Preparation20274
-Node: Header20988
-Node: Initialization24003
-Node: Version Check24200
-Ref: stringprep_check_version24735
-Node: Building the source25700
-Node: Autoconf tests27560
-Node: Memory handling under Windows29926
-Ref: idn_free30874
-Node: Utility Functions31410
-Ref: stringprep_unichar_to_utf832074
-Ref: stringprep_utf8_to_unichar32498
-Ref: stringprep_ucs4_to_utf832886
-Ref: stringprep_utf8_to_ucs433748
-Ref: stringprep_ucs4_nfkc_normalize34501
-Ref: stringprep_utf8_nfkc_normalize34983
-Ref: stringprep_locale_charset36141
-Ref: stringprep_convert37174
-Ref: stringprep_locale_to_utf837730
-Ref: stringprep_utf8_to_locale38110
-Node: Stringprep Functions38458
-Ref: stringprep_4i40369
-Ref: stringprep_4zi41957
-Ref: stringprep43169
-Ref: stringprep_profile44494
-Ref: stringprep_strerror45601
-Node: Punycode Functions49200
-Ref: punycode_encode50939
-Ref: punycode_decode53134
-Ref: punycode_strerror55246
-Node: IDNA Functions56008
-Ref: idna_to_ascii_4i58573
-Ref: idna_to_unicode_44i60203
-Ref: idna_to_ascii_4z62169
-Ref: idna_to_ascii_8z62760
-Ref: idna_to_ascii_lz63345
-Ref: idna_to_unicode_4z4z64073
-Ref: idna_to_unicode_8z4z64722
-Ref: idna_to_unicode_8z8z65365
-Ref: idna_to_unicode_8zlz66002
-Ref: idna_to_unicode_lzlz66724
-Ref: idna_strerror67529
-Node: TLD Functions69146
-Ref: tld_check_4t70786
-Ref: tld_check_4tz71686
-Ref: tld_get_472540
-Ref: tld_get_4z73046
-Ref: tld_get_z73457
-Ref: tld_get_table73955
-Ref: tld_default_table74488
-Ref: tld_check_475213
-Ref: tld_check_4z76462
-Ref: tld_check_8z77628
-Ref: tld_check_lz78895
-Ref: tld_strerror80233
-Node: PR29 Functions81056
-Ref: pr29_483344
-Ref: pr29_4z83975
-Ref: pr29_8z84499
-Ref: pr29_strerror85158
-Node: Examples85869
-Node: Example 186318
-Node: Example 288864
-Node: Example 395483
-Node: Example 498003
-Node: Example 5100532
-Node: Invoking idn103984
-Node: Emacs API111306
-Node: Java API114063
-Node: C# API118969
-Node: Acknowledgements119434
-Node: History120536
-Node: PR29 discussion122180
-Node: On Label Separators126048
-Ref: On Label Separators-Footnote-1128522
-Node: Copying Information128615
-Node: GNU Free Documentation License128881
-Node: Function and Variable Index154014
-Node: Concept Index159000
+Node: Top1019
+Node: Introduction2721
+Node: Getting Started5029
+Node: Features6136
+Node: Library Overview7477
+Node: Supported Platforms8275
+Node: Getting help11847
+Node: Commercial Support12310
+Node: Downloading and Installing13244
+Node: Installing under Windows15534
+Node: Bug Reports16920
+Node: Contributing18310
+Node: Preparation20282
+Node: Header20996
+Node: Initialization24011
+Node: Version Check24208
+Ref: stringprep_check_version24743
+Node: Building the source25708
+Node: Autoconf tests27568
+Node: Memory handling under Windows29934
+Ref: idn_free30882
+Node: Utility Functions31418
+Ref: stringprep_unichar_to_utf832082
+Ref: stringprep_utf8_to_unichar32506
+Ref: stringprep_ucs4_to_utf832894
+Ref: stringprep_utf8_to_ucs433756
+Ref: stringprep_ucs4_nfkc_normalize34509
+Ref: stringprep_utf8_nfkc_normalize34991
+Ref: stringprep_locale_charset36149
+Ref: stringprep_convert37182
+Ref: stringprep_locale_to_utf837738
+Ref: stringprep_utf8_to_locale38118
+Node: Stringprep Functions38466
+Ref: stringprep_4i40377
+Ref: stringprep_4zi41965
+Ref: stringprep43177
+Ref: stringprep_profile44502
+Ref: stringprep_strerror45609
+Node: Punycode Functions49208
+Ref: punycode_encode50947
+Ref: punycode_decode53142
+Ref: punycode_strerror55254
+Node: IDNA Functions56016
+Ref: idna_to_ascii_4i58581
+Ref: idna_to_unicode_44i60211
+Ref: idna_to_ascii_4z62177
+Ref: idna_to_ascii_8z62768
+Ref: idna_to_ascii_lz63353
+Ref: idna_to_unicode_4z4z64081
+Ref: idna_to_unicode_8z4z64730
+Ref: idna_to_unicode_8z8z65373
+Ref: idna_to_unicode_8zlz66010
+Ref: idna_to_unicode_lzlz66732
+Ref: idna_strerror67537
+Node: TLD Functions69154
+Ref: tld_check_4t70794
+Ref: tld_check_4tz71694
+Ref: tld_get_472548
+Ref: tld_get_4z73054
+Ref: tld_get_z73465
+Ref: tld_get_table73963
+Ref: tld_default_table74496
+Ref: tld_check_475221
+Ref: tld_check_4z76470
+Ref: tld_check_8z77636
+Ref: tld_check_lz78903
+Ref: tld_strerror80241
+Node: PR29 Functions81064
+Ref: pr29_483352
+Ref: pr29_4z83983
+Ref: pr29_8z84507
+Ref: pr29_strerror85166
+Node: Examples85877
+Node: Example 186326
+Node: Example 288905
+Node: Example 395524
+Node: Example 498066
+Node: Example 5100617
+Node: Invoking idn104102
+Node: Emacs API111424
+Node: Java API114181
+Node: C# API119311
+Node: Acknowledgements119776
+Node: History120878
+Node: PR29 discussion122522
+Node: On Label Separators126390
+Ref: On Label Separators-Footnote-1128864
+Node: Copying Information128957
+Node: GNU Free Documentation License129223
+Node: Function and Variable Index154356
+Node: Concept Index159342
 
 End Tag Table
 

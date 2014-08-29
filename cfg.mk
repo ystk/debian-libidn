@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2012 Simon Josefsson
+# Copyright (C) 2006-2014 Simon Josefsson
 #
 # This file is part of GNU Libidn.
 #
@@ -37,6 +37,7 @@ exclude_file_name_regexp--sc_bindtextdomain = ^examples/|libc/|tests/
 exclude_file_name_regexp--sc_prohibit_atoi_atof = ^examples/example2.c$$
 exclude_file_name_regexp--sc_copyright_check = ^doc/libidn.texi
 exclude_file_name_regexp--sc_useless_cpp_parens = ^lib/nfkc.c$$
+exclude_file_name_regexp--sc_prohibit_strncpy = ^src/idn.c$$
 
 doc/Makefile.gdoc:
 	printf "gdoc_MANS =\ngdoc_TEXINFOS =\n" > doc/Makefile.gdoc
@@ -45,8 +46,8 @@ autoreconf: doc/Makefile.gdoc
 	for f in po/*.po.in; do \
 		cp $$f `echo $$f | sed 's/.in//'`; \
 	done
-	mv build-aux/config.rpath build-aux/config.rpath-
 	touch ChangeLog
+	mv build-aux/config.rpath build-aux/config.rpath-
 	test -f ./configure || autoreconf --install
 	mv build-aux/config.rpath- build-aux/config.rpath
 
@@ -111,9 +112,8 @@ cyclo-upload:
 	cd $(htmldir) && cvs commit -m "Update." cyclo/index.html
 
 gendoc-copy:
-	cd doc && env MAKEINFO="makeinfo -I ../examples" \
-		      TEXI2DVI="texi2dvi -I ../examples" \
-		$(SHELL) ../build-aux/gendocs.sh \
+	cd doc && $(SHELL) ../build-aux/gendocs.sh -I ../examples -I . \
+		--email $(PACKAGE_BUGREPORT) \
 		--html "--css-include=texinfo.css" \
 		-o ../$(htmldir)/manual/ $(PACKAGE) "$(PACKAGE_NAME)"
 
@@ -121,7 +121,8 @@ gendoc-upload:
 	cd $(htmldir) && \
 		cvs add manual || true && \
 		cvs add manual/html_node || true && \
-		cvs add -kb manual/*.gz manual/*.pdf || true && \
+		cvs add -kb manual/*.gz manual/*.pdf \
+			manual/html_node/*.png || true && \
 		cvs add manual/*.txt manual/*.html \
 			manual/html_node/*.html || true && \
 		cvs commit -m "Update." manual/
@@ -155,6 +156,9 @@ doxygen-copy:
 
 doxygen-upload:
 	cd $(htmldir) && \
+		cvs add doxygen || true && \
+		cvs add -kb doxygen/*.png || true && \
+		cvs add doxygen/*.js doxygen/*.html || true && \
 		cvs commit -m "Update." doxygen/
 
 ChangeLog:
@@ -169,14 +173,13 @@ tarball:
 	$(MAKE) ChangeLog distcheck
 
 binaries:
-	cd win32 && make -f libidn4win.mk libidn4win VERSION=$(VERSION)
+	cd windows && make -f libidn4win.mk libidn4win VERSION=$(VERSION)
 
 binaries-upload:
-	cd win32 && make -f libidn4win.mk upload VERSION=$(VERSION)
+	cd windows && make -f libidn4win.mk upload VERSION=$(VERSION)
 
 source:
-	git commit -m Generated. ChangeLog
-	git tag -u b565716f! -m $(VERSION) $(tag)
+	git tag -u 54265e8c -m $(VERSION) $(tag)
 
 release-check: syntax-check i18n tarball binaries gendoc-copy gtkdoc-copy coverage-my coverage-copy clang clang-copy cyclo-copy javadoc-copy doxygen-copy
 
