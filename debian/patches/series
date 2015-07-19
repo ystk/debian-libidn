@@ -1,0 +1,4 @@
+libidn-stringprep_utf8_to_ucs4-now-rejects-invalid-utf-8-cve-2015-2059.patch
+gnulib-update-to-include-unistr-u8-check.patch
+autoreconf.patch
+gnulib-generate-iconv_open-solaris.h.patch

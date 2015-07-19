@@ -1,3 +1,12 @@
+libidn (1.15-2+deb6u1) squeeze-lts; urgency=high
+
+  * Non-maintainer upload by the Squeeze LTS team
+  * Change source format to 3.0 (quilt)
+  * stringprep_utf8_to_ucs4 now rejects invalid UTF-8 (CVE-2015-2059)
+  * Run gnulib and autoreconf to update generated files
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Sat, 18 Jul 2015 22:50:22 +0100
+
 libidn (1.15-2) unstable; urgency=low
 
   [ Simon Josefsson ]
