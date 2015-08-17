@@ -1,0 +1,129 @@
+From c261018477f971d274dee305d27f8bff4afd4238 Mon Sep 17 00:00:00 2001
+From: Simon Josefsson <simon@josefsson.org>
+Date: Sat, 01 Aug 2015 13:02:04 +0000
+Subject: Add regression check for malformed UTF-8 crash, reported by Adam Sampson.
+Origin: upstream, http://git.savannah.gnu.org/cgit/libidn.git/commit/?id=c261018477f971d274dee305d27f8bff4afd4238
+
+---
+Index: libidn-1.15/tests/Makefile.am
+===================================================================
+--- libidn-1.15.orig/tests/Makefile.am	2015-08-11 14:06:53.753010068 +0000
++++ libidn-1.15/tests/Makefile.am	2015-08-11 14:06:54.088998393 +0000
+@@ -28,7 +28,7 @@
+ ctests = tst_stringprep$(EXEEXT) tst_punycode$(EXEEXT)			\
+ 	tst_idna$(EXEEXT) tst_idna2$(EXEEXT) tst_nfkc$(EXEEXT)		\
+ 	tst_pr29$(EXEEXT) tst_strerror$(EXEEXT) tst_toutf8$(EXEEXT)	\
+-	tst_badutf8$(EXEEXT)
++	tst_badutf8$(EXEEXT) tst_utf8crash$(EXEEXT)
+ if TLD
+ ctests += tst_tld$(EXEEXT)
+ endif
+Index: libidn-1.15/tests/tst_utf8crash.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ libidn-1.15/tests/tst_utf8crash.c	2015-08-11 14:06:54.088998393 +0000
+@@ -0,0 +1,48 @@
++/* tst_utf8crash.c --- Self tests for malformed UTF-8 regressions.
++ * Copyright (C) 2015 Simon Josefsson
++ *
++ * This file is part of GNU Libidn.
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#ifdef HAVE_CONFIG_H
++# include "config.h"
++#endif
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <stdarg.h>
++#include <string.h>
++
++#include <idna.h>
++#include <idn-free.h>
++
++#include "utils.h"
++
++/* Based on report from Adam Sampson:
++   https://lists.gnu.org/archive/html/help-libidn/2015-07/msg00026.html */
++
++void
++doit (void)
++{
++  const char input[] = "\200bad.com";
++  char *output;
++  int rc;
++
++  rc = idna_to_unicode_8z8z(input, &output, 0);
++  if (rc != IDNA_ICONV_ERROR)
++    fail ("rc %d\n", rc);
++}
+Index: libidn-1.15/tests/Makefile.in
+===================================================================
+--- libidn-1.15.orig/tests/Makefile.in	2015-08-11 14:07:30.611729333 +0000
++++ libidn-1.15/tests/Makefile.in	2015-08-11 15:37:06.134481352 +0000
+@@ -120,6 +120,10 @@
+ tst_badutf8_OBJECTS = tst_badutf8.$(OBJEXT)
+ tst_badutf8_LDADD = $(LDADD)
+ tst_badutf8_DEPENDENCIES = ../lib/libidn.la libutils.la
++tst_utf8crash_SOURCES = tst_utf8crash.c
++tst_utf8crash_OBJECTS = tst_utf8crash.$(OBJEXT)
++tst_utf8crash_LDADD = $(LDADD)
++tst_utf8crash_DEPENDENCIES = ../lib/libidn.la libutils.la
+ tst_idna_SOURCES = tst_idna.c
+ tst_idna_OBJECTS = tst_idna.$(OBJEXT)
+ tst_idna_LDADD = $(LDADD)
+@@ -171,10 +175,11 @@
+ 	$(LDFLAGS) -o $@
+ SOURCES = $(libutils_la_SOURCES) tst_badutf8.c tst_idna.c tst_idna2.c \
+ 	tst_nfkc.c tst_pr29.c tst_punycode.c tst_strerror.c \
+-	tst_stringprep.c tst_tld.c tst_toutf8.c
++	tst_stringprep.c tst_tld.c tst_toutf8.c tst_utf8crash.c
+ DIST_SOURCES = $(libutils_la_SOURCES) tst_badutf8.c tst_idna.c \
+ 	tst_idna2.c tst_nfkc.c tst_pr29.c tst_punycode.c \
+-	tst_strerror.c tst_stringprep.c tst_tld.c tst_toutf8.c
++	tst_strerror.c tst_stringprep.c tst_tld.c tst_toutf8.c \
++	tst_utf8crash.c
+ ETAGS = etags
+ CTAGS = ctags
+ am__tty_colors = \
+@@ -758,7 +763,7 @@
+ ctests = tst_stringprep$(EXEEXT) tst_punycode$(EXEEXT) \
+ 	tst_idna$(EXEEXT) tst_idna2$(EXEEXT) tst_nfkc$(EXEEXT) \
+ 	tst_pr29$(EXEEXT) tst_strerror$(EXEEXT) tst_toutf8$(EXEEXT) \
+-	tst_badutf8$(EXEEXT) $(am__append_1)
++	tst_badutf8$(EXEEXT) tst_utf8crash$(EXEEXT) $(am__append_1)
+ TESTS = $(ctests)	
+ check_PROGRAMS = $(ctests)
+ TESTS_ENVIRONMENT = $(VALGRIND)
+@@ -819,6 +824,9 @@
+ tst_badutf8$(EXEEXT): $(tst_badutf8_OBJECTS) $(tst_badutf8_DEPENDENCIES) 
+ 	@rm -f tst_badutf8$(EXEEXT)
+ 	$(LINK) $(tst_badutf8_OBJECTS) $(tst_badutf8_LDADD) $(LIBS)
++tst_utf8crash$(EXEEXT): $(tst_utf8crash_OBJECTS) $(tst_utf8crash_DEPENDENCIES) 
++	@rm -f tst_utf8crash$(EXEEXT)
++	$(LINK) $(tst_utf8crash_OBJECTS) $(tst_utf8crash_LDADD) $(LIBS)
+ tst_idna$(EXEEXT): $(tst_idna_OBJECTS) $(tst_idna_DEPENDENCIES) 
+ 	@rm -f tst_idna$(EXEEXT)
+ 	$(LINK) $(tst_idna_OBJECTS) $(tst_idna_LDADD) $(LIBS)
+@@ -854,6 +862,7 @@
+ 	-rm -f *.tab.c
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tst_badutf8.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tst_utf8crash.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tst_idna.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tst_idna2.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tst_nfkc.Po@am__quote@

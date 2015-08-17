@@ -1,0 +1,47 @@
+From 58c721ac2dc96bccd737f3f544f3a22a50477bbf Mon Sep 17 00:00:00 2001
+From: Simon Josefsson <simon@josefsson.org>
+Date: Sat, 01 Aug 2015 13:12:10 +0000
+Subject: libidn: Fix crash in idna_to_unicode_8z8z and idna_to_unicode_8zlz.
+Origin: upstream, http://git.savannah.gnu.org/cgit/libidn.git/commit/?id=58c721ac2dc96bccd737f3f544f3a22a50477bbf
+
+---
+Index: libidn-1.15/lib/idna.c
+===================================================================
+--- libidn-1.15.orig/lib/idna.c
++++ libidn-1.15/lib/idna.c
+@@ -729,13 +729,16 @@ idna_to_unicode_8z8z (const char *input,
+   int rc;
+ 
+   rc = idna_to_unicode_8z4z (input, &ucs4, flags);
++  if (rc != IDNA_SUCCESS)
++    return rc;
++
+   *output = stringprep_ucs4_to_utf8 (ucs4, -1, NULL, NULL);
+   free (ucs4);
+ 
+   if (!*output)
+     return IDNA_ICONV_ERROR;
+ 
+-  return rc;
++  return IDNA_SUCCESS;
+ }
+ 
+ /**
+@@ -760,13 +763,16 @@ idna_to_unicode_8zlz (const char *input,
+   int rc;
+ 
+   rc = idna_to_unicode_8z8z (input, &utf8, flags);
++  if (rc != IDNA_SUCCESS)
++    return rc;
++
+   *output = stringprep_utf8_to_locale (utf8);
+   free (utf8);
+ 
+   if (!*output)
+     return IDNA_ICONV_ERROR;
+ 
+-  return rc;
++  return IDNA_SUCCESS;
+ }
+ 
+ /**
