@@ -1,3 +1,13 @@
+libidn (1.29-1+deb8u1) jessie-security; urgency=high
+
+  [ Alessandro Ghedini ]
+  * Fix out-of-bounds read on invalid UTF-8 input as per CVE-2015-2059
+
+  [ Brian May ]
+  * Skip info generation
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Tue, 18 Aug 2015 10:10:07 +0200
+
 libidn (1.29-1) unstable; urgency=low
 
   [ Simon Josefsson ]

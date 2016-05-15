@@ -1,0 +1,3 @@
+01_CVE-2015-2059.patch
+02_CVE-2015-2059-2.patch
+03_skip-makeinfo.patch
