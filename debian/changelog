@@ -1,3 +1,14 @@
+libidn (1.29-1+deb8u2) jessie-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * CVE-2015-8948: Out-of-bounds read due to use of fgets with fixed-size
+    buffer
+  * Add help2man to Build-Depends to fix FTBFS due to doc regeneration
+  * CVE-2016-6261: Out-of-bounds stack read in idna_to_ascii_4i
+  * CVE-2016-6263: Crash when given invalid UTF-8 data on input
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 29 Aug 2016 20:48:49 +0200
+
 libidn (1.29-1+deb8u1) jessie-security; urgency=high
 
   [ Alessandro Ghedini ]

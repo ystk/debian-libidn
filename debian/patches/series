@@ -1,3 +1,9 @@
 01_CVE-2015-2059.patch
 02_CVE-2015-2059-2.patch
 03_skip-makeinfo.patch
+04_CVE-2015-8948-idn-Use-getline-instead-of-fgets-with-fixed-size-buf.patch
+05_CVE-2015-8948-Really-fix-bug-when-reading-00-inputs.patch
+06_CVE-2016-6261-Add-regression-check-for-Hanno-B-ck-s-stack-OOB-issu.patch
+07_CVE-2016-6261-Fix-out-of-bounds-stack-read.-Report-and-patch-by-Ha.patch
+08_CVE-2016-6261-Fix-memory-leak-in-last-fix.patch
+09_CVE-2016-6263-stringprep_utf8_nfkc_normalize-Reject-invalid-UTF8-i.patch

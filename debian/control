@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian Libidn Team <help-libidn@gnu.org>
 Uploaders: Anibal Monsalve Salazar <anibal@debian.org>, Simon Josefsson <simon@josefsson.org>
 Standards-Version: 3.9.5
-Build-Depends: debhelper (>= 9), gcj-jdk [!arm !hppa !hurd-i386], fastjar [!arm !hppa !hurd-i386], dh-autoreconf, gengetopt
+Build-Depends: debhelper (>= 9), gcj-jdk [!arm !hppa !hurd-i386], fastjar [!arm !hppa !hurd-i386], dh-autoreconf, gengetopt, help2man
 Homepage: https://www.gnu.org/software/libidn/
 Vcs-Git: git://gitorious.org/gss/libidn-dpkg.git
 Vcs-Browser: https://gitorious.org/gss/libidn-dpkg
