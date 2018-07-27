@@ -1,3 +1,12 @@
+libidn (1.29-1+deb8u3) jessie-security; urgency=high
+
+  * Fix CVE-2017-14062: An integer overflow vulnerability in libidn's Punycode
+    handling (an encoding used to convert Unicode characters to ASCII) which
+    would have allowed remote attackers to cause a denial of service.
+    Patch taken from wheezy, backported by Chris Lamb (Closes: #873903).
+
+ -- Santiago R.R. <santiagorr@riseup.net>  Thu, 26 Jul 2018 20:36:12 +0200
+
 libidn (1.29-1+deb8u2) jessie-security; urgency=high
 
   * Non-maintainer upload by the Security Team.
